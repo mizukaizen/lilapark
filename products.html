@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products — Lila Park</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:       #5FA86A;
+      --accent-mid:   #8DC096;
+      --accent-light: #C4DFC8;
+      --accent-dim:   rgba(95, 168, 106, 0.10);
+      --accent-hover: #4D9559;
+      --bg:       #FAFAF7;
+      --surface:  #FFFFFF;
+      --warm:     #F3F0E8;
+      --border:   rgba(20, 19, 14, 0.08);
+      --border-h: rgba(20, 19, 14, 0.16);
+      --text-1:   #18180F;
+      --text-2:   #64635A;
+      --text-3:   #AEAC9C;
+    }
+
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg); color: var(--text-1);
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100; height: 58px;
+      background: rgba(250,250,247,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1060px; margin: 0 auto; padding: 0 24px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: dot-pulse 3s ease-in-out infinite; }
+    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+    .nav-name  { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
+    .nav-kr    { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: var(--text-3); padding-left: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-2); transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-1); }
+    .nav-links a.active { font-weight: 600; }
+    .nav-sub {
+      background: var(--accent); color: #fff; border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 20px; cursor: pointer;
+      transition: background .15s;
+    }
+    .nav-sub:hover { background: var(--accent-hover); }
+
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 64px 0 56px;
+      text-align: center;
+    }
+    .page-hero-eye {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+    }
+    .page-hero-title {
+      font-family: 'Fraunces', serif; font-size: 2.8rem;
+      font-weight: 700; line-height: 1.12; color: var(--text-1);
+      margin-bottom: 18px;
+    }
+    .page-hero-title em { font-style: italic; color: var(--accent); }
+    .page-hero-sub {
+      font-size: 0.98rem; color: var(--text-2); line-height: 1.75;
+      max-width: 560px; margin: 0 auto 32px;
+    }
+
+    /* trust badges */
+    .trust-row {
+      display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.78rem; color: var(--text-3); font-weight: 500;
+    }
+    .trust-badge span { font-size: 0.9rem; }
+
+    /* ── FEATURED PRODUCT ── */
+    .featured-section { padding: 0 0 64px; }
+    .featured-card {
+      background: #141410;
+      border-radius: 24px; overflow: hidden;
+      display: grid; grid-template-columns: 1fr 480px;
+      min-height: 420px;
+      position: relative;
+    }
+    .featured-body {
+      padding: 56px 48px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .featured-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(95,168,106,0.15); border: 1px solid rgba(95,168,106,0.35);
+      padding: 5px 12px; border-radius: 20px; margin-bottom: 20px; width: fit-content;
+    }
+    .featured-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .featured-badge span { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+    .featured-title {
+      font-family: 'Fraunces', serif; font-size: 2.2rem;
+      font-weight: 700; line-height: 1.15; color: #fff; margin-bottom: 14px;
+    }
+    .featured-title em { font-style: italic; color: var(--accent); }
+    .featured-desc {
+      font-size: 0.92rem; color: rgba(255,255,255,0.6);
+      line-height: 1.75; margin-bottom: 28px; max-width: 400px;
+    }
+    .featured-includes {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
+    }
+    .feat-tag {
+      font-size: 0.72rem; font-weight: 600;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      padding: 4px 12px; border-radius: 20px; color: rgba(255,255,255,0.65);
+    }
+    .featured-footer {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .featured-price {
+      font-family: 'Fraunces', serif; font-size: 1.8rem;
+      font-weight: 700; color: #fff;
+    }
+    .featured-price-orig {
+      font-size: 1rem; color: rgba(255,255,255,0.35);
+      text-decoration: line-through; margin-left: 6px;
+    }
+    .featured-cta {
+      background: var(--accent); color: #fff; border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 700;
+      padding: 13px 28px; border-radius: 24px; cursor: pointer;
+      transition: background .15s; white-space: nowrap;
+      text-decoration: none; display: inline-block;
+    }
+    .featured-cta:hover { background: var(--accent-hover); }
+    .featured-img-col {
+      position: relative; overflow: hidden;
+    }
+    .featured-img-col img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+      opacity: 0.85;
+    }
+    .featured-img-col::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, #141410 0%, transparent 40%);
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 0 0 32px; flex-wrap: wrap;
+    }
+    .filter-tab {
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 20px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-2); cursor: pointer; transition: all .15s;
+    }
+    .filter-tab:hover { border-color: var(--accent-light); color: var(--accent); }
+    .filter-tab.active {
+      background: var(--accent); border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ── FREE ENTRY BANNER ── */
+    .free-entry-banner {
+      display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: center;
+      background: var(--accent-dim); border: 1.5px solid var(--accent-mid);
+      border-radius: 16px; padding: 32px 36px; margin-bottom: 40px;
+    }
+    .feb-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .feb-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; color: var(--text-1); margin-bottom: 10px; }
+    .feb-desc { font-size: 0.88rem; color: var(--text-2); line-height: 1.65; margin-bottom: 14px; }
+    .feb-includes { display: flex; flex-wrap: wrap; gap: 8px; }
+    .feb-includes span { font-size: 0.72rem; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; color: var(--text-2); }
+    .feb-right { text-align: center; }
+    .feb-price { font-family: 'Fraunces', serif; font-size: 2.4rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .feb-note { font-size: 0.75rem; color: var(--text-3); margin-top: 6px; margin-bottom: 4px; }
+    @media (max-width: 700px) { .free-entry-banner { grid-template-columns: 1fr; } .feb-right { text-align: left; } }
+
+    /* ── PRODUCTS GRID ── */
+    .products-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-bottom: 80px;
+    }
+    .product-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+
+    .product-img-wrap {
+      position: relative; aspect-ratio: 4/3; overflow: hidden;
+    }
+    .product-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .3s; background: #e0dbd0;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.03); }
+    .product-type-badge {
+      position: absolute; top: 14px; left: 14px;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .badge-program { background: var(--accent); color: #fff; }
+    .badge-guide { background: rgba(255,255,255,0.92); color: var(--accent-hover); border: 1px solid var(--accent-light); }
+    .badge-bundle { background: #141410; color: var(--accent); }
+
+    .product-body { padding: 22px 22px 20px; flex: 1; display: flex; flex-direction: column; }
+    .product-domain {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+    }
+    .product-name {
+      font-family: 'Fraunces', serif; font-size: 1.12rem; font-weight: 600;
+      line-height: 1.25; color: var(--text-1); margin-bottom: 10px;
+    }
+    .product-desc {
+      font-size: 0.83rem; color: var(--text-2); line-height: 1.65;
+      margin-bottom: 16px; flex: 1;
+    }
+    .product-includes {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px;
+    }
+    .prod-tag {
+      font-size: 0.68rem; font-weight: 500;
+      background: var(--warm); border: 1px solid var(--border);
+      padding: 3px 9px; border-radius: 8px; color: var(--text-2);
+    }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 16px; border-top: 1px solid var(--border);
+    }
+    .product-price {
+      font-family: 'Fraunces', serif; font-size: 1.25rem;
+      font-weight: 700; color: var(--text-1);
+    }
+    .product-price-note { font-size: 0.72rem; color: var(--text-3); margin-top: 1px; }
+    .product-btn {
+      font-size: 0.8rem; font-weight: 700;
+      padding: 8px 18px; border-radius: 20px; border: none; cursor: pointer;
+      transition: all .15s;
+    }
+    .product-btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .product-btn-primary:hover { background: var(--accent-hover); }
+    .product-btn-outline {
+      background: transparent; color: var(--text-1);
+      border: 1.5px solid var(--border-h);
+    }
+    .product-btn-outline:hover { border-color: var(--accent-light); color: var(--accent); }
+
+    /* ── BUNDLE CALLOUT ── */
+    .bundle-callout {
+      background: var(--warm); border: 1px solid var(--border);
+      border-radius: 20px; padding: 48px 48px;
+      display: grid; grid-template-columns: 1fr auto; gap: 40px;
+      align-items: center; margin-bottom: 80px;
+    }
+    .bundle-eye {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .bundle-title {
+      font-family: 'Fraunces', serif; font-size: 1.8rem;
+      font-weight: 700; line-height: 1.2; color: var(--text-1);
+      margin-bottom: 12px;
+    }
+    .bundle-title em { font-style: italic; color: var(--accent); }
+    .bundle-desc {
+      font-size: 0.9rem; color: var(--text-2); line-height: 1.7;
+      max-width: 480px;
+    }
+    .bundle-right { text-align: center; flex-shrink: 0; }
+    .bundle-price-label { font-size: 0.72rem; color: var(--text-3); margin-bottom: 4px; }
+    .bundle-price-orig {
+      font-size: 0.95rem; color: var(--text-3); text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+    .bundle-price {
+      font-family: 'Fraunces', serif; font-size: 2.6rem;
+      font-weight: 700; color: var(--text-1); line-height: 1;
+      margin-bottom: 8px;
+    }
+    .bundle-save {
+      display: inline-block; background: var(--accent-dim);
+      border: 1px solid var(--accent-light); color: var(--accent-hover);
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 10px; margin-bottom: 16px;
+    }
+    .bundle-cta {
+      display: block; width: 100%;
+      background: var(--accent); color: #fff; border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem; font-weight: 700;
+      padding: 13px 28px; border-radius: 24px; cursor: pointer;
+      transition: background .15s; text-decoration: none; text-align: center;
+    }
+    .bundle-cta:hover { background: var(--accent-hover); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      background: #141410; padding: 72px 0;
+    }
+    .test-header { text-align: center; margin-bottom: 48px; }
+    .test-eye {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .test-title {
+      font-family: 'Fraunces', serif; font-size: 1.7rem;
+      font-weight: 600; color: #fff;
+    }
+    .test-title em { font-style: italic; color: var(--accent); }
+    .test-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .test-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 28px 24px;
+      display: flex; flex-direction: column;
+    }
+    .test-stars { color: var(--accent); font-size: 0.9rem; margin-bottom: 14px; letter-spacing: 2px; }
+    .test-quote {
+      font-family: 'Fraunces', serif; font-size: 0.98rem;
+      font-style: italic; color: rgba(255,255,255,0.8);
+      line-height: 1.65; margin-bottom: 20px; flex: 1;
+    }
+    .test-author { display: flex; align-items: center; gap: 10px; }
+    .test-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(95,168,106,0.2); border: 1px solid rgba(95,168,106,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0;
+    }
+    .test-name { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.75); }
+    .test-product { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
+
+    /* ── GUARANTEE ── */
+    .guarantee-section { padding: 72px 0; }
+    .guarantee-card {
+      background: var(--warm); border: 1px solid var(--border);
+      border-radius: 20px; padding: 48px;
+      display: grid; grid-template-columns: 80px 1fr; gap: 32px; align-items: center;
+    }
+    .guarantee-icon {
+      width: 80px; height: 80px; border-radius: 20px;
+      background: var(--accent-dim); border: 1px solid var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; flex-shrink: 0;
+    }
+    .guarantee-title {
+      font-family: 'Fraunces', serif; font-size: 1.4rem;
+      font-weight: 600; color: var(--text-1); margin-bottom: 10px;
+    }
+    .guarantee-body { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 0 0 80px; }
+    .faq-title {
+      font-family: 'Fraunces', serif; font-size: 1.5rem;
+      font-weight: 600; color: var(--text-1); margin-bottom: 32px;
+    }
+    .faq-list { display: flex; flex-direction: column; gap: 4px; }
+    .faq-item {
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; background: var(--surface);
+    }
+    .faq-q {
+      padding: 18px 22px; font-size: 0.92rem; font-weight: 600;
+      color: var(--text-1); cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-chevron { font-size: 0.8rem; color: var(--text-3); transition: transform .2s; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-a {
+      display: none; padding: 0 22px 18px;
+      font-size: 0.88rem; color: var(--text-2); line-height: 1.75;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section { background: var(--accent); padding: 72px 0; }
+    .nl-inner { max-width: 560px; margin: 0 auto; padding: 0 24px; text-align: center; }
+    .nl-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+    .nl-headline { font-family: 'Fraunces', serif; font-size: 2.0rem; font-weight: 700; line-height: 1.2; color: #fff; margin-bottom: 12px; }
+    .nl-headline em { font-style: italic; }
+    .nl-sub { font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 28px; }
+    .nl-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto 12px; }
+    .nl-input { flex: 1; padding: 12px 16px; border-radius: 20px; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; outline: none; background: rgba(255,255,255,0.95); }
+    .nl-btn { padding: 12px 22px; border-radius: 20px; border: none; background: #18180F; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: opacity .15s; }
+    .nl-btn:hover { opacity: 0.85; }
+    .nl-note { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+
+    /* ── FOOTER ── */
+    .footer { background: #18180F; padding: 36px 0; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-left { display: flex; align-items: center; gap: 6px; }
+    .footer-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: #fff; }
+    .footer-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.45); transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-dot"></div>
+      <span class="nav-name">Lila Park</span>
+      <span class="nav-kr">이라 박</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="article.html">Journal</a></li>
+      <li><a href="products.html" class="active">Products</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-sub">Subscribe →</button>
+  </div>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="page-hero-eye">Resonance Protocols</div>
+    <h2 class="page-hero-title">Stop chasing the next hack.<br><em>Start sleeping like your nervous system designed you to.</em></h2>
+    <p class="page-hero-sub">
+      Every protocol here is built from peer-reviewed circadian science and Korean saenghwal practice — designed for high performers who've read the books, tracked the data, and still can't sleep. The core insight: <strong>consistency beats heroics.</strong> Every time.
+    </p>
+    <div class="trust-row">
+      <div class="trust-badge"><span>🔬</span> Peer-reviewed sources cited</div>
+      <div class="trust-badge"><span>↩️</span> 30-day money-back guarantee</div>
+      <div class="trust-badge"><span>🔒</span> Instant digital access</div>
+      <div class="trust-badge"><span>♾️</span> Lifetime updates included</div>
+    </div>
+    <p style="margin-top:18px; font-size:0.82rem; color:rgba(255,255,255,0.55);">Want everything? <a href="#bundle" style="color:#8DC096; font-weight:600;">Finally Sleep — The Complete Library $197 →</a></p>
+  </div>
+</section>
+
+<!-- ── FEATURED PRODUCT ── -->
+<section class="featured-section">
+  <div class="wrap">
+    <div class="featured-card">
+      <div class="featured-body">
+        <div class="featured-badge">
+          <div class="featured-badge-dot"></div>
+          <span>Most popular · 28-Day Program</span>
+        </div>
+        <h2 class="featured-title">Deep Sleep in <em>28 Days</em></h2>
+        <p class="featured-desc">
+          The evidence-based protocol for high performers who've tried everything. You're not broken — you're over-optimised. The fix isn't another habit: it's circadian timing, Korean evening ritual, and the one principle every sleep researcher agrees on. Consistency beats heroics.
+        </p>
+        <div class="featured-includes">
+          <div class="feat-tag">28 daily protocols</div>
+          <div class="feat-tag">Light & temp guides</div>
+          <div class="feat-tag">Circadian nutrition plan</div>
+          <div class="feat-tag">Sleep staging tracker</div>
+          <div class="feat-tag">Korean evening rituals</div>
+        </div>
+        <div class="featured-footer">
+          <div>
+            <div class="featured-price">$97 <span class="featured-price-orig">$127</span></div>
+          </div>
+          <a href="product-single.html" class="featured-cta">Get instant access →</a>
+        </div>
+      </div>
+      <div class="featured-img-col">
+        <img src="lila-sleep-styled.jpg" alt="Deep Sleep in 28 Days" onerror="this.style.background='#2a2015'" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCTS GRID ── -->
+<section>
+  <div class="wrap">
+
+    <div class="filter-row">
+      <div class="filter-tab active">All</div>
+      <div class="filter-tab">Free</div>
+      <div class="filter-tab">Quick Protocols</div>
+      <div class="filter-tab">Programs</div>
+      <div class="filter-tab">Korean Wellness</div>
+    </div>
+
+    <!-- FREE ENTRY POINT -->
+    <div class="free-entry-banner">
+      <div class="feb-left">
+        <div class="feb-tag">Free · Start here</div>
+        <div class="feb-title">The 3am Protocol</div>
+        <p class="feb-desc">Stop waking in the night — in 7 days. The cortisol-adenosine correction method that most sleep guides completely miss. If you wake between 2–4am, this is where to start.</p>
+        <div class="feb-includes">
+          <span>7-day plan</span><span>Cortisol correction guide</span><span>Evening prep checklist</span>
+        </div>
+      </div>
+      <div class="feb-right">
+        <div class="feb-price">Free</div>
+        <div class="feb-note">Instant PDF · No spam · Unsubscribe anytime</div>
+        <button class="product-btn product-btn-primary" style="width:100%; margin-top:12px;">Get it free →</button>
+      </div>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- Lights Out in 7 — $37 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="lila-kbeauty-styled.jpg" alt="Lights Out in 7" onerror="this.style.background='#c4dfc8';this.style.height='220px'" />
+          <div class="product-type-badge badge-guide">Ritual Guide · 7 Days</div>
+        </div>
+        <div class="product-body">
+          <div class="product-domain">Korean Wellness · Evening Ritual</div>
+          <div class="product-name">Lights Out in 7</div>
+          <p class="product-desc">The Korean jeonyeok evening ritual that replaces melatonin. Ondol warmth sequencing, ssuk steam, jeongseong wind-down — the ancestral practice your nervous system has been waiting for. Fall asleep before 10:30 without willpower.</p>
+          <div class="product-includes">
+            <div class="prod-tag">7-step ritual system</div>
+            <div class="prod-tag">Ssuk & hanbang guide</div>
+            <div class="prod-tag">Jeonyeok wind-down cards</div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price">$37</div>
+              <div class="product-price-note">One-time · Lifetime access</div>
+            </div>
+            <button class="product-btn product-btn-primary">Get it →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sleep Through the Change — $147 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="thumb-breathwork.jpg" alt="Sleep Through the Change" onerror="this.style.background='#c4dfc8';this.style.height='220px'" />
+          <div class="product-type-badge badge-program">6-Week Program</div>
+        </div>
+        <div class="product-body">
+          <div class="product-domain">Hormonal Rest · Perimenopause</div>
+          <div class="product-name">Sleep Through the Change</div>
+          <p class="product-desc">Perimenopause disrupts your entire circadian architecture — and no mainstream protocol was built for that. This is the first hormone-aware, ritual-led sleep program for women 38–52. Not generic advice. Built for what's actually happening in your body.</p>
+          <div class="product-includes">
+            <div class="prod-tag">6-week phased program</div>
+            <div class="prod-tag">Hormonal rhythm guide</div>
+            <div class="prod-tag">Temperature regulation kit</div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price">$147</div>
+              <div class="product-price-note">One-time · Lifetime access</div>
+            </div>
+            <button class="product-btn product-btn-primary">Get it →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resonance Tracking Templates — $27 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="prod-templates.jpg" alt="Resonance Tracking Templates" onerror="this.style.background='#c4dfc8';this.style.height='220px'" />
+          <div class="product-type-badge badge-guide">Toolkit</div>
+        </div>
+        <div class="product-body">
+          <div class="product-domain">Tracking & Planning</div>
+          <div class="product-name">Resonance Tracking Templates</div>
+          <p class="product-desc">Sleep timing tracker, HRV baseline log, circadian nutrition planner, and morning-evening anchor sheets — structured so you can see your patterns in one week, not one month. Notion + Google Sheets versions included.</p>
+          <div class="product-includes">
+            <div class="prod-tag">12 templates</div>
+            <div class="prod-tag">Notion + Sheets</div>
+            <div class="prod-tag">Setup walkthroughs</div>
+          </div>
+          <div class="product-footer">
+            <div>
+              <div class="product-price">$27</div>
+              <div class="product-price-note">One-time · Lifetime access</div>
+            </div>
+            <button class="product-btn product-btn-outline">Get it →</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /products-grid -->
+
+    <!-- BUNDLE CALLOUT -->
+    <div class="bundle-callout" id="bundle">
+      <div>
+        <div class="bundle-eye">Best value · One framework, every stage</div>
+        <h2 class="bundle-title"><em>Finally Sleep</em> — The Complete Library</h2>
+        <p class="bundle-desc">
+          One price. Every protocol. The 3am Protocol (free entry) + Lights Out in 7 + Deep Sleep in 28 Days + Sleep Through the Change + Resonance Tracking Templates. Whether you're 35 or 52, whether you're waking at 3am or just can't wind down — there's a protocol in here that fits where you are right now.
+        </p>
+      </div>
+      <div class="bundle-right">
+        <div class="bundle-price-label">Everything, together</div>
+        <div class="bundle-price-orig">$308 if bought separately</div>
+        <div class="bundle-price">$197</div>
+        <div class="bundle-save">Save $111 · 36% off</div>
+        <a href="product-single.html" class="bundle-cta">Get the complete library →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials-section">
+  <div class="wrap">
+    <div class="test-header">
+      <div class="test-eye">Results</div>
+      <h2 class="test-title">What people are <em>actually saying</em></h2>
+    </div>
+    <div class="test-grid">
+
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-quote">"I've read every sleep book. This is the first thing I've read that gives me the mechanism, not just the rule. I finally understand <em>why</em> consistent wake time matters more than total hours — and my sleep is the best it's been in a decade."</div>
+        <div class="test-author">
+          <div class="test-avatar">🌙</div>
+          <div>
+            <div class="test-name">Camille R.</div>
+            <div class="test-product">The 3am Protocol</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-quote">"Deep Sleep in 28 Days gave me a framework, not a checklist. Week 2 was the turning point — the morning light protocol sounds stupidly simple and I kept dismissing it, but the HRV data doesn't lie. My recovery scores went from 40s to 70s."</div>
+        <div class="test-author">
+          <div class="test-avatar">☀️</div>
+          <div>
+            <div class="test-name">James T.</div>
+            <div class="test-product">Deep Sleep in 28 Days</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-quote">"My glucose was spiking after every meal and I had no idea. The CGM protocol in Metabolic Foundations was genuinely eye-opening. More useful than three years of general 'eat better' advice. The food-order section alone was worth the price."</div>
+        <div class="test-author">
+          <div class="test-avatar">🔬</div>
+          <div>
+            <div class="test-name">Preethi S.</div>
+            <div class="test-product">Metabolic Foundations</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── GUARANTEE ── -->
+<section class="guarantee-section">
+  <div class="wrap">
+    <div class="guarantee-card">
+      <div class="guarantee-icon">↩️</div>
+      <div>
+        <div class="guarantee-title">30-Day No-Questions Money-Back Guarantee</div>
+        <p class="guarantee-body">
+          Every product comes with a full 30-day refund. If you read the material, apply the protocols for at least two weeks, and don't feel it was worth the investment — email hello@lilapark.ai and you'll get a full refund, same day. No forms, no hoops. Evidence-based content should earn your trust, not demand it upfront.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq-section">
+  <div class="wrap" style="max-width: 720px;">
+    <h2 class="faq-title">Common questions</h2>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Is this AI-generated content? <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">Yes — and that's disclosed clearly because it matters. Lila Park is an AI wellness educator built on peer-reviewed research. Every claim in these guides is backed by a primary source citation you can verify. The advantage of AI is consistency and depth: Lila synthesises hundreds of papers without fatigue, financial incentives, or confirmation bias. The limitation is that she's not your doctor and can't give you personalised medical advice. She'll always tell you when something needs a professional.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          How is this different from free wellness content? <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">Free wellness content is typically optimised for engagement, not accuracy. It extrapolates headlines from studies, removes nuance, and rarely distinguishes between strong and weak evidence. Lila's guides are built differently: every claim is traceable to a primary source, evidence quality is explicitly graded, and uncertainty is flagged rather than hidden. You're also getting structured protocols, not just information — the difference between understanding a concept and knowing what to do tomorrow morning.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Do I get lifetime access and updates? <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">Yes to both. You get permanent access to the current version, and all future updates to that product are included automatically. When new research strengthens or contradicts a recommendation, the guide gets updated — and you get the updated version without paying again. This is particularly important in a field like sleep and metabolic science, where the evidence base shifts meaningfully every two to three years.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Can I use these alongside my doctor's advice? <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">Yes — and Lila actively encourages this. These guides are designed to help you understand the evidence so you can have better, more specific conversations with your actual medical team. They're not a replacement for professional medical care. If you have any chronic conditions, medication interactions to consider, or specific clinical concerns, please involve your doctor before making significant changes to your sleep, diet, or exercise protocols.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter-section">
+  <div class="nl-inner">
+    <div class="nl-eyebrow">Free weekly reading</div>
+    <h2 class="nl-headline">Get the newsletter<br>every <em>Sunday morning</em></h2>
+    <p class="nl-sub">Sleep, food, energy, and Korean wellness wisdom — now with citations. Free, always.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="your@email.com" />
+      <button class="nl-btn">Subscribe free</button>
+    </div>
+    <div class="nl-note">Free · Unsubscribe anytime · No spam, ever</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-name">Lila Park</div>
+      <div class="footer-kr">· 이라 박</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="article.html">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Lila Park. Made with 💛</div>
+  </div>
+</footer>
+
+</body>
+</html>

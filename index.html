@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<!--
+╔═══════════════════════════════════════════════════════════════╗
+║  PERSONA TEMPLATE — swap these variables per persona          ║
+╠═══════════════════════════════════════════════════════════════╣
+║  --accent:       #5FA86A   (sage green — Lila)                ║
+║  --accent-dim:   rgba(95,168,106,0.10)                        ║
+║  --accent-light: #C4DFC8                                      ║
+║  hero-photo:     wellness lifestyle photo URL                 ║
+║  about-photo:    forest/nature photo URL                      ║
+║  persona-name:   "Lila Park"                                  ║
+║  tagline:        "AI circadian wellness guide..."             ║
+║  topics:         "sleep, food, and getting your energy back"  ║
+║  subscriber-ct:  "2,400+"                                     ║
+╚═══════════════════════════════════════════════════════════════╝
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lila Park — Wellness, Food & Energy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── PERSONA TOKENS (change per persona) ── */
+    :root {
+      --accent:       #5FA86A;
+      --accent-mid:   #8DC096;
+      --accent-light: #C4DFC8;
+      --accent-dim:   rgba(95, 168, 106, 0.10);
+      --accent-hover: #4D9559;
+    }
+
+    /* ── BASE ── */
+    :root {
+      --bg:       #FAFAF7;
+      --surface:  #FFFFFF;
+      --warm:     #F3F0E8;
+      --border:   rgba(20, 19, 14, 0.08);
+      --border-h: rgba(20, 19, 14, 0.16);
+      --text-1:   #18180F;
+      --text-2:   #64635A;
+      --text-3:   #AEAC9C;
+    }
+
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg); color: var(--text-1);
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100; height: 58px;
+      background: rgba(250,250,247,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1060px; margin: 0 auto; padding: 0 24px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .nav-dot   {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); animation: dot-pulse 3s ease-in-out infinite;
+    }
+    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+    .nav-name  { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
+    .nav-kr    { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: var(--text-3); padding-left: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-2); transition: color .15s; }
+    .nav-links a:hover { color: var(--text-1); }
+    .nav-sub {
+      background: var(--accent); color: #fff; border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 20px; cursor: pointer;
+      transition: background .15s;
+    }
+    .nav-sub:hover { background: var(--accent-hover); }
+
+    /* ── HERO — contained portrait card ── */
+    .hero-outer {
+      max-width: 1060px; margin: 36px auto 0; padding: 0 24px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 42% 58%;
+      border-radius: 20px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+    }
+    .hero-photo {
+      position: relative; overflow: hidden;
+      background: #1a1209;
+      min-height: 480px;   /* floor height; stretches to match subscribe panel */
+    }
+    .hero-photo img {
+      width: 100%; height: 100%;
+      position: absolute; inset: 0;
+      object-fit: cover;
+      object-position: center 22%;
+    }
+    .hero-photo-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(8,8,4,0.28) 0%, transparent 25%),
+        linear-gradient(to top,    rgba(8,8,4,0.62) 0%, transparent 42%);
+    }
+    .hero-leaf { display: none; }
+    @keyframes leaf-sway {
+      0%   { transform: rotate(-5deg); }
+      100% { transform: rotate(7deg) scale(1.05); }
+    }
+    /* name overlay — bottom-left */
+    .hero-photo-top {
+      position: absolute; bottom: 32px; left: 32px; right: 16px;
+    }
+    .hero-caption-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.13); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 5px 12px; border-radius: 16px; margin-bottom: 12px;
+    }
+    .hero-caption-tag span { font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: 0.06em; text-transform: uppercase; }
+    .hero-caption-tag .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #7CFC9A; animation: dot-pulse 2s ease-in-out infinite; }
+    .hero-photo-name {
+      font-family: 'Fraunces', serif; font-size: 2.8rem;
+      font-weight: 700; color: #fff; line-height: 1.0; margin-bottom: 8px;
+    }
+    .hero-photo-sub { font-size: 0.86rem; color: rgba(255,255,255,0.72); font-weight: 500; }
+    /* subscribe panel — right column, height matches image */
+    .hero-subscribe {
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      padding: 52px 48px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero-sub-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .hero-sub-headline {
+      font-family: 'Fraunces', serif; font-size: 1.65rem;
+      font-weight: 600; line-height: 1.25; color: var(--text-1); margin-bottom: 12px;
+    }
+    .hero-sub-headline em { font-style: italic; color: var(--accent); }
+    .hero-sub-body {
+      font-size: 0.88rem; color: var(--text-2); line-height: 1.65;
+      margin-bottom: 20px; max-width: 360px;
+    }
+    /* subscribe form */
+    .subscribe-form { margin-bottom: 20px; }
+    .sub-input-row { display: flex; gap: 8px; margin-bottom: 10px; }
+    .sub-input {
+      flex: 1; padding: 12px 16px; border-radius: 10px;
+      border: 1.5px solid var(--border-h); background: var(--surface);
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem;
+      color: var(--text-1); outline: none; transition: border-color .15s;
+    }
+    .sub-input:focus { border-color: var(--accent); }
+    .sub-btn {
+      background: var(--accent); color: #fff; border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem; font-weight: 600;
+      padding: 12px 20px; border-radius: 10px; cursor: pointer;
+      white-space: nowrap; transition: background .15s;
+    }
+    .sub-btn:hover { background: var(--accent-hover); }
+    .sub-note { font-size: 0.72rem; color: var(--text-3); }
+    /* topics chips */
+    .hero-topics { margin-bottom: 20px; }
+    .hero-topics-label { font-size: 0.72rem; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+    .topic-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .topic-chip {
+      font-size: 0.75rem; font-weight: 500; padding: 5px 12px; border-radius: 10px;
+      background: var(--warm); border: 1px solid var(--border); color: var(--text-2);
+      display: flex; align-items: center; gap: 6px;
+    }
+    /* social proof */
+    .hero-proof {
+      display: flex; align-items: center; gap: 14px;
+      padding-top: 16px; border-top: 1px solid var(--border);
+    }
+    .proof-avi-stack { display: flex; }
+    .proof-avi {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 2px solid var(--bg); background: var(--warm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; margin-left: -8px;
+    }
+    .proof-avi:first-child { margin-left: 0; }
+    .proof-text { font-size: 0.8rem; color: var(--text-2); }
+    .proof-text strong { color: var(--text-1); }
+
+    /* ── POSITIONING HOOK ── */
+    .position-hook {
+      background: #141410;
+      padding: 56px 0;
+    }
+    .hook-inner {
+      max-width: 820px; margin: 0 auto; padding: 0 24px; text-align: center;
+    }
+    .hook-quote {
+      font-family: 'Fraunces', serif; font-size: 1.35rem; font-weight: 400;
+      font-style: italic; color: rgba(255,255,255,0.88); line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .hook-quote em { color: var(--accent); font-style: normal; }
+    .hook-attr {
+      font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip { background: var(--warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; padding: 52px 0; }
+    .about-photo {
+      width: 220px; height: 220px; border-radius: 50%;
+      overflow: hidden; border: 4px solid var(--surface);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10); flex-shrink: 0;
+      background: var(--accent-dim);
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .about-origin {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .origin-pill {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 10px; color: var(--text-2); font-weight: 500;
+    }
+    .origin-arr { color: var(--text-3); }
+    .about-bio {
+      font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400;
+      font-style: italic; color: var(--text-1); line-height: 1.65; margin-bottom: 16px;
+    }
+    .about-creds { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+    .cred-chip {
+      font-size: 0.73rem; font-weight: 500; padding: 4px 11px; border-radius: 9px;
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+    }
+    .about-more { font-size: 0.82rem; font-weight: 600; color: var(--accent); }
+    @media (max-width: 600px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { width: 140px; height: 140px; }
+    }
+
+    /* ── SLEEP STATS SECTION ── */
+    .sleep-stats-section { background: var(--bg); padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stats-header { text-align: center; max-width: 680px; margin: 0 auto 52px; }
+    .stats-eye { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .stats-title { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 600; line-height: 1.2; color: var(--text-1); margin-bottom: 14px; }
+    .stats-title em { font-style: italic; color: var(--accent); }
+    .stats-sub { font-size: 0.9rem; color: var(--text-2); line-height: 1.65; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px 24px;
+    }
+    .stat-card-dark { background: #141410; border-color: #141410; }
+    .stat-card-dark .stat-number { color: var(--accent); }
+    .stat-card-dark .stat-label { color: rgba(255,255,255,0.72); }
+    .stat-card-dark .stat-source { color: rgba(255,255,255,0.3); }
+    .stat-number { font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 700; color: var(--text-1); line-height: 1; margin-bottom: 10px; }
+    .stat-label { font-size: 0.82rem; color: var(--text-2); line-height: 1.6; margin-bottom: 12px; }
+    .stat-source { font-size: 0.68rem; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; }
+    .stats-cta-line { text-align: center; font-size: 0.9rem; color: var(--text-2); line-height: 1.65; }
+    .stats-cta-link { color: var(--accent); font-weight: 600; }
+    @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr; } }
+
+    /* ── PROTOCOLS STRIP ── */
+    .protocols-strip { padding: 56px 0; border-top: 1px solid var(--border); background: var(--surface); }
+    .ps-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .ps-eye { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
+    .ps-see-all { font-size: 0.82rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+    .ps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .ps-card { display: block; padding: 20px 22px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; transition: border-color 0.15s; }
+    .ps-card:hover { border-color: var(--accent-mid); }
+    .ps-card-featured { border-color: var(--accent-mid); background: var(--accent-dim); }
+    .ps-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .ps-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: var(--text-1); line-height: 1.3; margin-bottom: 6px; }
+    .ps-desc { font-size: 0.8rem; color: var(--text-2); line-height: 1.55; }
+    @media (max-width: 700px) { .ps-grid { grid-template-columns: 1fr; } }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 72px 0; }
+    .section + .section { border-top: 1px solid var(--border); }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; }
+    .sec-header-left {}
+    .sec-eye {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+    }
+    .sec-title {
+      font-family: 'Fraunces', serif; font-size: 1.65rem;
+      font-weight: 600; line-height: 1.2; color: var(--text-1);
+    }
+    .sec-title em { font-style: italic; color: var(--accent); }
+    .sec-link { font-size: 0.82rem; font-weight: 600; color: var(--accent); white-space: nowrap; padding-bottom: 2px; }
+
+    /* ── ABOUT (homepage teaser) ── */
+    .about-strip { background: var(--warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; padding: 52px 0; }
+    .about-photo {
+      width: 220px; height: 220px; border-radius: 50%;
+      overflow: hidden; border: 4px solid var(--surface);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10); flex-shrink: 0;
+      background: var(--accent-dim);
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .about-origin {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .origin-pill {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 10px; color: var(--text-2); font-weight: 500;
+    }
+    .origin-arr { color: var(--text-3); }
+    .about-bio {
+      font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 400;
+      font-style: italic; color: var(--text-1); line-height: 1.65; margin-bottom: 16px;
+    }
+    .about-creds { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+    .cred-chip {
+      font-size: 0.73rem; font-weight: 500; padding: 4px 11px; border-radius: 9px;
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+    }
+    .about-more { font-size: 0.82rem; font-weight: 600; color: var(--accent); }
+
+    /* ── ARTICLES ── */
+    .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .article-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      display: flex; flex-direction: column;
+    }
+    .article-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.08); }
+    .art-thumb {
+      height: 196px; overflow: hidden; position: relative;
+      background: var(--warm);
+    }
+    .art-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .article-card:hover .art-thumb img { transform: scale(1.04); }
+    .art-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.28) 0%, transparent 55%);
+    }
+    /* fallback gradients */
+    .at-sage  { background: linear-gradient(140deg, #C4DFC8, #6BAA77); }
+    .at-peach { background: linear-gradient(140deg, #F5CEC0, #E07E5C); }
+    .at-lav   { background: linear-gradient(140deg, #DDD8EE, #9B8EC4); }
+    .art-cat-badge {
+      position: absolute; top: 12px; left: 12px; z-index: 2;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      background: rgba(255,255,255,0.90); padding: 3px 9px; border-radius: 7px; color: var(--text-1);
+    }
+    .art-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+    .art-meta { font-size: 0.7rem; color: var(--text-3); margin-bottom: 7px; }
+    .art-title {
+      font-family: 'Fraunces', serif; font-size: 1rem;
+      font-weight: 600; line-height: 1.4; margin-bottom: 8px; color: var(--text-1);
+    }
+    .art-excerpt { font-size: 0.8rem; color: var(--text-2); line-height: 1.6; margin-bottom: 14px; flex: 1; }
+    .art-footer { display: flex; align-items: center; justify-content: space-between; }
+    .art-read-link { font-size: 0.78rem; font-weight: 600; color: var(--accent); }
+    /* product reference */
+    .art-product-ref {
+      font-size: 0.7rem; color: var(--text-3);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .art-product-ref a { color: var(--accent); font-weight: 600; }
+
+    /* ── INLINE PRODUCT PROMO CARD ── */
+    .promo-card {
+      background: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: 16px; overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      display: flex; flex-direction: column;
+      box-shadow: 0 4px 24px rgba(95,168,106,0.18);
+    }
+    .promo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 3px rgba(95,168,106,0.35), 0 16px 48px rgba(95,168,106,0.30);
+    }
+    .promo-thumb {
+      height: 196px; position: relative; overflow: hidden;
+      background: #1e1a10;
+    }
+    .promo-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      transition: transform .4s ease;
+    }
+    .promo-card:hover .promo-thumb img { transform: scale(1.04); }
+    /* subtle bottom vignette only — let the photo breathe */
+    .promo-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 55%,
+        rgba(0,0,0,0.22) 100%
+      );
+    }
+    /* frosted "From Lila" badge */
+    .promo-from-badge {
+      position: absolute; top: 12px; left: 12px; z-index: 2;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      background: rgba(255,255,255,0.20); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.40);
+      color: #fff; padding: 3px 10px; border-radius: 7px;
+    }
+    /* solid gold badge — high contrast */
+    .promo-badge-pop {
+      position: absolute; top: 12px; right: 12px; z-index: 2;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      background: #C89B2A; color: #fff; border: none;
+      padding: 3px 9px; border-radius: 7px;
+    }
+    /* green body — all white text */
+    .promo-body { padding: 16px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+    .promo-type {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      color: rgba(255,255,255,0.60); margin-bottom: 6px;
+    }
+    .promo-name {
+      font-family: 'Fraunces', serif; font-size: 1.02rem; font-weight: 600;
+      line-height: 1.3; margin-bottom: 8px; color: #fff;
+    }
+    .promo-desc {
+      font-size: 0.78rem; color: rgba(255,255,255,0.75);
+      line-height: 1.6; margin-bottom: 14px; flex: 1;
+    }
+    /* star rating social proof */
+    .promo-social {
+      font-size: 0.72rem; color: rgba(255,255,255,0.65);
+      margin-bottom: 14px; display: flex; align-items: center; gap: 5px;
+    }
+    .promo-stars { color: #FFD166; letter-spacing: 1px; }
+    .promo-social strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+    .promo-footer { display: flex; align-items: center; justify-content: space-between; }
+    .promo-price {
+      font-family: 'Fraunces', serif; font-size: 1.25rem;
+      font-weight: 700; color: #fff;
+    }
+    /* inverted CTA — white pill, green text */
+    .promo-btn {
+      background: #fff; color: var(--accent-hover); border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      padding: 9px 20px; border-radius: 20px; cursor: pointer; transition: all .18s;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.14);
+      white-space: nowrap;
+    }
+    .promo-btn:hover { background: rgba(255,255,255,0.90); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
+
+    /* ── CONTENT→PRODUCT BRIDGE ── */
+    .bridge-strip {
+      background: var(--accent-dim); border: 1px solid var(--accent-light);
+      border-radius: 14px; padding: 16px 22px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 32px; gap: 16px; flex-wrap: wrap;
+    }
+    .bridge-text { font-size: 0.85rem; color: var(--text-1); }
+    .bridge-text strong { font-weight: 600; }
+    .bridge-cta {
+      background: var(--accent); color: #fff; border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 9px 18px; border-radius: 10px; cursor: pointer;
+      white-space: nowrap; transition: background .15s;
+    }
+    .bridge-cta:hover { background: var(--accent-hover); }
+
+    /* ── PRODUCTS (Gumroad-style) ── */
+    .products-section { background: var(--warm); }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .product-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      display: flex; flex-direction: column;
+    }
+    .product-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.08); }
+    /* product thumbnail */
+    .prod-thumb {
+      height: 160px; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; position: relative; overflow: hidden;
+    }
+    .pt-sage   { background: linear-gradient(135deg, #E8F4EA, #C4DFC8); }
+    .pt-peach  { background: linear-gradient(135deg, #FCE8DF, #F5C4B0); }
+    .pt-lav    { background: linear-gradient(135deg, #EDE8F8, #D8CFEE); }
+    .pt-gold   { background: linear-gradient(135deg, #FDF3DC, #F0D89C); }
+    .pt-warm   { background: linear-gradient(135deg, #F5F0E8, #E8E0CC); }
+    /* featured badge on thumb */
+    .prod-thumb-badge {
+      position: absolute; top: 10px; right: 10px;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 7px;
+    }
+    .ptb-pop  { background: rgba(212,168,71,0.18); color: #8a6000; border: 1px solid rgba(212,168,71,0.3); }
+    .ptb-free { background: rgba(95,168,106,0.15); color: #2d6b38; border: 1px solid rgba(95,168,106,0.3); }
+    .prod-body { padding: 16px 18px 18px; flex: 1; display: flex; flex-direction: column; }
+    .prod-type { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
+    .prod-name { font-family: 'Fraunces', serif; font-size: 0.98rem; font-weight: 600; margin-bottom: 6px; line-height: 1.3; }
+    .prod-desc { font-size: 0.78rem; color: var(--text-2); line-height: 1.55; flex: 1; margin-bottom: 14px; }
+    .prod-footer { display: flex; align-items: center; justify-content: space-between; }
+    .prod-price {
+      font-family: 'Fraunces', serif; font-size: 1.1rem;
+      font-weight: 700; color: var(--text-1);
+    }
+    .prod-price.free { color: var(--accent); }
+    .prod-btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      padding: 7px 14px; border-radius: 9px; cursor: pointer; transition: all .15s;
+    }
+    .pb-filled { background: var(--accent); color: #fff; border: none; }
+    .pb-filled:hover { background: var(--accent-hover); }
+    .pb-outline { background: transparent; border: 1.5px solid var(--border-h); color: var(--text-1); }
+    .pb-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── NEWSLETTER (full-width, clean) ── */
+    .newsletter-section {
+      background: var(--accent);
+      position: relative; overflow: hidden;
+    }
+    /* botanical background */
+    .nl-botanical {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      opacity: 0.08; pointer-events: none;
+    }
+    .nl-botanical-l { left: -40px; width: 220px; }
+    .nl-botanical-r { right: -40px; width: 220px; transform: translateY(-50%) scaleX(-1); }
+    .nl-inner {
+      max-width: 560px; margin: 0 auto; padding: 64px 24px;
+      text-align: center; position: relative;
+    }
+    .nl-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 14px;
+    }
+    .nl-headline {
+      font-family: 'Fraunces', serif; font-size: 1.9rem;
+      font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.2;
+    }
+    .nl-sub {
+      font-size: 0.9rem; color: rgba(255,255,255,0.75); margin-bottom: 28px; line-height: 1.65;
+    }
+    .nl-form { display: flex; gap: 8px; max-width: 400px; margin: 0 auto 14px; }
+    .nl-input {
+      flex: 1; padding: 12px 16px; border-radius: 10px;
+      border: none; background: rgba(255,255,255,0.92);
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem;
+      color: var(--text-1); outline: none;
+    }
+    .nl-btn {
+      background: var(--text-1); color: #fff; border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem; font-weight: 600;
+      padding: 12px 20px; border-radius: 10px; cursor: pointer;
+      white-space: nowrap; transition: opacity .15s;
+    }
+    .nl-btn:hover { opacity: 0.82; }
+    .nl-note { font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 32px 0; border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      max-width: 1060px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+    }
+    .footer-left { display: flex; align-items: center; gap: 8px; }
+    .footer-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: var(--text-2); }
+    .footer-kr   { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.78rem; color: var(--text-3); }
+    .footer-links { display: flex; gap: 20px; list-style: none; }
+    .footer-links a { font-size: 0.78rem; color: var(--text-3); transition: color .15s; }
+    .footer-links a:hover { color: var(--text-2); }
+    .footer-copy { font-size: 0.72rem; color: var(--text-3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-photo { aspect-ratio: 4 / 3; } /* landscape crop on mobile — shows face */
+      .hero-subscribe { padding: 36px 32px; border-left: none; border-top: 1px solid var(--border); }
+      .articles-grid { grid-template-columns: 1fr 1fr; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .hero-outer { padding: 0 16px; }
+      .hero { border-radius: 14px; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .hero-photo-name { font-size: 2.2rem; }
+      .nl-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-dot"></div>
+      <span class="nav-name">Lila Park</span>
+      <span class="nav-kr">· 이라 박</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="article.html">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-sub">Subscribe →</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero-outer">
+<section class="hero">
+  <!-- Photo side -->
+  <div class="hero-photo">
+    <img src="lila-ghibli-l.jpg" alt="Lila Park" />
+    <div class="hero-photo-overlay"></div>
+
+    <!-- Botanical leaf -->
+    <svg class="hero-leaf" viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M45 3C26 18,5 40,8 66C11 89,27 110,45 125C63 110,79 89,82 66C85 40,64 18,45 3Z" fill="white"/>
+      <line x1="45" y1="3"  x2="45" y2="125" stroke="rgba(95,168,106,0.5)" stroke-width="1.5"/>
+      <line x1="45" y1="30" x2="16" y2="58"  stroke="rgba(95,168,106,0.3)" stroke-width="1"/>
+      <line x1="45" y1="30" x2="74" y2="58"  stroke="rgba(95,168,106,0.3)" stroke-width="1"/>
+      <line x1="45" y1="60" x2="13" y2="84"  stroke="rgba(95,168,106,0.25)" stroke-width="0.8"/>
+      <line x1="45" y1="60" x2="77" y2="84"  stroke="rgba(95,168,106,0.25)" stroke-width="0.8"/>
+    </svg>
+
+    <!-- Name — TOP of image, always above fold -->
+    <div class="hero-photo-top">
+      <div class="hero-caption-tag">
+        <div class="live-dot"></div>
+        <span>Resonance Method</span>
+      </div>
+      <div class="hero-photo-name">Lila Park</div>
+      <div class="hero-photo-sub">Circadian wellness guide · Seoul → San Francisco</div>
+    </div>
+
+  </div>
+
+  <!-- Subscribe side -->
+  <div class="hero-subscribe">
+    <div class="hero-sub-eyebrow">Free 7-day protocol</div>
+    <h1 class="hero-sub-headline">
+      You don't have a mood problem.<br>You have a <em>sleep problem.</em>
+    </h1>
+    <p class="hero-sub-body">
+      You've read the books. Tracked the data. Tried the magnesium and the mouth tape. And you're still waking at 3am. The protocols miss one thing: circadian <em>timing</em> beats sleep duration. Lila teaches it through Korean saenghwal — the daily rhythm tradition that science is only now catching up to.
+    </p>
+
+    <div class="hero-topics">
+      <div class="hero-topics-label">What consistency unlocks</div>
+      <div class="topic-chips">
+        <div class="topic-chip">🧠 Mood &amp; memory</div>
+        <div class="topic-chip">🛌 3am waking</div>
+        <div class="topic-chip">🌿 Korean evening ritual</div>
+        <div class="topic-chip">⚡ Energy &amp; focus</div>
+      </div>
+    </div>
+
+    <div class="subscribe-form">
+      <div class="sub-input-row">
+        <input class="sub-input" type="email" placeholder="your@email.com" />
+        <button class="sub-btn">Get the free protocol →</button>
+      </div>
+      <div class="sub-note">The 3am Protocol — free PDF · No spam · Unsubscribe anytime</div>
+    </div>
+
+    <div class="hero-proof">
+      <div class="proof-avi-stack">
+        <div class="proof-avi">😊</div>
+        <div class="proof-avi">🙌</div>
+        <div class="proof-avi">💪</div>
+        <div class="proof-avi">✨</div>
+      </div>
+      <div class="proof-text">
+        <strong>2,400+ people</strong> · 87% report better sleep in their first week
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ── ARTICLES ── -->
+<section class="section" id="articles" style="padding-top: 48px;">
+  <div class="wrap">
+    <div class="sec-header">
+      <div class="sec-header-left">
+        <div class="sec-eye">Journal</div>
+        <h2 class="sec-title">Consistency beats heroics.<br><em>Here's the evidence.</em></h2>
+      </div>
+      <a href="#" class="sec-link">All articles →</a>
+    </div>
+
+    <div class="articles-grid">
+
+      <!-- Row 1 — pure articles -->
+
+      <!-- Article 1 -->
+      <div class="article-card">
+        <div class="art-thumb at-sage">
+          <img src="thumb-sleep-new.jpg" alt="Sleep" />
+          <div class="art-thumb-overlay"></div>
+          <span class="art-cat-badge">Sleep</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">Jan 2026 · 5 min read</div>
+          <h3 class="art-title">Why You're Exhausted Even After 8 Hours (And What to Actually Do About It)</h3>
+          <p class="art-excerpt">Spoiler: it's not about the hours. Dr. Matthew Walker changed how I think about sleep quality — here's what it means for you 💤</p>
+          <div class="art-footer">
+            <a href="#" class="art-read-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="article-card">
+        <div class="art-thumb at-peach">
+          <img src="thumb-nutrition-new.jpg" alt="Nutrition" />
+          <div class="art-thumb-overlay"></div>
+          <span class="art-cat-badge">Nutrition</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">Feb 2026 · 8 min read</div>
+          <h3 class="art-title">I Made Kimchi Fried Rice Healthy Without Ruining It 🤤</h3>
+          <p class="art-excerpt">Fermented foods, healthy fats, zero guilt. How ancient Korean food wisdom lines up perfectly with modern gut health science.</p>
+          <div class="art-footer">
+            <a href="#" class="art-read-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="article-card">
+        <div class="art-thumb at-lav">
+          <img src="thumb-mindset-new.jpg" alt="Mindset" />
+          <div class="art-thumb-overlay"></div>
+          <span class="art-cat-badge">Mindset</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">Mar 2026 · 6 min read</div>
+          <h3 class="art-title">The 5-Minute Morning Habit That Changed My Whole Day</h3>
+          <p class="art-excerpt">Breathwork before your phone. Sounds simple. The science behind why it actually works — and why I can't stop talking about it 🌅</p>
+          <div class="art-footer">
+            <a href="#" class="art-read-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 4 -->
+      <div class="article-card">
+        <div class="art-thumb">
+          <img src="thumb-movement.jpg" alt="Movement" />
+          <div class="art-thumb-overlay"></div>
+          <span class="art-cat-badge">Movement</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">Feb 2026 · 7 min read</div>
+          <h3 class="art-title">You Don't Need the Gym — You Need to Move Like a Korean Grandma</h3>
+          <p class="art-excerpt">The Korean concept of "saenghwal movement" — daily life activity that keeps you lean, mobile, and sane. No lycra required 💃</p>
+          <div class="art-footer">
+            <a href="#" class="art-read-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 5 -->
+      <div class="article-card">
+        <div class="art-thumb">
+          <img src="thumb-energy.jpg" alt="Energy" />
+          <div class="art-thumb-overlay"></div>
+          <span class="art-cat-badge">Energy</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">Jan 2026 · 5 min read</div>
+          <h3 class="art-title">The 3pm Crash Isn't Normal — Here's What's Actually Happening</h3>
+          <p class="art-excerpt">Blood sugar, cortisol, and the circadian dip — I break down the science and the three fixes my patients use to sail through afternoons ⚡</p>
+          <div class="art-footer">
+            <a href="#" class="art-read-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 6 -->
+      <div class="article-card">
+        <div class="art-thumb">
+          <img src="thumb-gut.jpg" alt="Gut Health" />
+          <div class="art-thumb-overlay"></div>
+          <span class="art-cat-badge">Gut Health</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">Dec 2025 · 9 min read</div>
+          <h3 class="art-title">Your Gut Is Your Second Brain (And Koreans Have Known This for 2,000 Years)</h3>
+          <p class="art-excerpt">Why fermented foods like kimchi and doenjang are the original psychobiotics — and how to eat them without turning your kitchen into a science lab 🧪</p>
+          <div class="art-footer">
+            <a href="#" class="art-read-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 7 -->
+      <div class="article-card">
+        <div class="art-thumb">
+          <img src="thumb-kwellness.jpg" alt="K-Wellness" />
+          <div class="art-thumb-overlay"></div>
+          <span class="art-cat-badge">K-Wellness</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">Nov 2025 · 6 min read</div>
+          <h3 class="art-title">Nunchi: The Korean Art of Reading the Room (And Why It's a Health Practice)</h3>
+          <p class="art-excerpt">The social awareness skill my halmeoni taught me that turns out to be one of the best stress-regulation tools in existence. Science agrees 🌸</p>
+          <div class="art-footer">
+            <a href="#" class="art-read-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 8 -->
+      <div class="article-card">
+        <div class="art-thumb">
+          <img src="thumb-hormones.jpg" alt="Hormones" />
+          <div class="art-thumb-overlay"></div>
+          <span class="art-cat-badge">Hormones</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">Oct 2025 · 8 min read</div>
+          <h3 class="art-title">Perimenopause Ruined My Sleep — Until I Did These 4 Things</h3>
+          <p class="art-excerpt">The real talk nobody gives you about hormones, sleep architecture, and what actually helps when 3am becomes your new witching hour 🌙</p>
+          <div class="art-footer">
+            <a href="#" class="art-read-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 9 -->
+      <div class="article-card">
+        <div class="art-thumb">
+          <img src="thumb-breathwork.jpg" alt="Breathwork" />
+          <div class="art-thumb-overlay"></div>
+          <span class="art-cat-badge">Breathwork</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">Sep 2025 · 4 min read</div>
+          <h3 class="art-title">4-7-8 Breathing Is Fine. This Is Better.</h3>
+          <p class="art-excerpt">How I combine a Korean meditation technique called "Danjon Hoheup" with modern HRV science to regulate my nervous system in under 3 minutes 🧘</p>
+          <div class="art-footer">
+            <a href="#" class="art-read-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROTOCOLS STRIP ── -->
+<section class="protocols-strip">
+  <div class="wrap">
+    <div class="ps-header">
+      <div class="ps-eye">28-day protocols &amp; guides</div>
+      <a href="products.html" class="ps-see-all">Browse all →</a>
+    </div>
+    <div class="ps-grid">
+      <a href="products.html" class="ps-card">
+        <div class="ps-tag">Free</div>
+        <div class="ps-name">The 3am Protocol</div>
+        <div class="ps-desc">Stop waking in the night — in 7 days. Free PDF.</div>
+      </a>
+      <a href="product-single.html" class="ps-card ps-card-featured">
+        <div class="ps-tag">$97 · Most popular</div>
+        <div class="ps-name">Deep Sleep in 28 Days</div>
+        <div class="ps-desc">The complete circadian reset for high performers.</div>
+      </a>
+      <a href="products.html#bundle" class="ps-card">
+        <div class="ps-tag">$197 · Full library</div>
+        <div class="ps-name">Finally Sleep — The Complete Library</div>
+        <div class="ps-desc">Every protocol, every guide. One price.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter-section">
+  <!-- botanical branches -->
+  <svg class="nl-botanical nl-botanical-l" viewBox="0 0 220 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="110" y1="340" x2="110" y2="20" stroke="white" stroke-width="2"/>
+    <path d="M110 280C88 258,54 252,48 268C42 284,70 294,110 280Z" fill="white"/>
+    <path d="M110 280C132 258,166 252,172 268C178 284,150 294,110 280Z" fill="white"/>
+    <path d="M110 220C86 196,50 190,44 207C38 224,68 233,110 220Z" fill="white"/>
+    <path d="M110 220C134 196,170 190,176 207C182 224,152 233,110 220Z" fill="white"/>
+    <path d="M110 158C90 136,58 131,53 147C48 163,75 171,110 158Z" fill="white"/>
+    <path d="M110 158C130 136,162 131,167 147C172 163,145 171,110 158Z" fill="white"/>
+    <path d="M110 98C93 80,66 75,62 89C58 103,81 110,110 98Z" fill="white"/>
+    <path d="M110 98C127 80,154 75,158 89C162 103,139 110,110 98Z" fill="white"/>
+  </svg>
+  <svg class="nl-botanical nl-botanical-r" viewBox="0 0 220 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="110" y1="340" x2="110" y2="20" stroke="white" stroke-width="2"/>
+    <path d="M110 280C88 258,54 252,48 268C42 284,70 294,110 280Z" fill="white"/>
+    <path d="M110 280C132 258,166 252,172 268C178 284,150 294,110 280Z" fill="white"/>
+    <path d="M110 220C86 196,50 190,44 207C38 224,68 233,110 220Z" fill="white"/>
+    <path d="M110 220C134 196,170 190,176 207C182 224,152 233,110 220Z" fill="white"/>
+    <path d="M110 158C90 136,58 131,53 147C48 163,75 171,110 158Z" fill="white"/>
+    <path d="M110 158C130 136,162 131,167 147C172 163,145 171,110 158Z" fill="white"/>
+    <path d="M110 98C93 80,66 75,62 89C58 103,81 110,110 98Z" fill="white"/>
+    <path d="M110 98C127 80,154 75,158 89C162 103,139 110,110 98Z" fill="white"/>
+  </svg>
+
+  <div class="nl-inner">
+    <div class="nl-eyebrow">Free · Every Sunday</div>
+    <div class="nl-headline">한 장의 종이도<br>함께 들면 가볍다</div>
+    <div class="nl-sub">One peer-reviewed sleep insight — made practical. How Korean wisdom and circadian biology actually connect. Delivered Sunday morning. No spam. Unsubscribe anytime.</div>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="your@email.com" />
+      <button class="nl-btn">Subscribe</button>
+    </div>
+    <div class="nl-note">2,400+ readers · Free · Unsubscribe anytime</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-name">Lila Park</div>
+      <div class="footer-kr">· 이라 박</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#">Journal</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Lila Park. Made with 💛</div>
+  </div>
+</footer>
+
+</body>
+</html>
