@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The 3pm Crash Isn't Normal — It's a Timing Problem — Lila Park</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --accent: #5FA86A; --accent-mid: #8DC096; --accent-light: #C4DFC8; --accent-dim: rgba(95, 168, 106, 0.10); --accent-hover: #4D9559; --bg: #FAFAF7; --surface: #FFFFFF; --warm: #F3F0E8; --border: rgba(20, 19, 14, 0.08); --text-1: #18180F; --text-2: #64635A; --text-3: #AEAC9C; }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-1); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .nav { position: sticky; top: 0; z-index: 100; height: 58px; background: rgba(250,250,247,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: dot-pulse 3s ease-in-out infinite; }
+    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+    .nav-name { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
+    .nav-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: var(--text-3); padding-left: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-2); transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-1); }
+    .nav-links a.active { font-weight: 600; }
+    .nav-sub { background: var(--accent); color: #fff; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 20px; cursor: pointer; transition: background .15s; }
+    .nav-sub:hover { background: var(--accent-hover); }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    .breadcrumb { padding: 0 0 20px; font-size: 0.78rem; color: var(--text-3); }
+    .breadcrumb a { color: var(--text-3); transition: color .15s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { margin: 0 6px; }
+    .article-header { padding: 32px 0 0; }
+    .article-cat { display: inline-flex; align-items: center; gap: 7px; background: var(--accent-dim); border: 1px solid var(--accent-light); padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-hover); }
+    .article-title { font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 700; line-height: 1.12; color: var(--text-1); margin-bottom: 20px; }
+    .article-title em { font-style: italic; color: var(--accent); }
+    .article-deck { font-family: 'Fraunces', serif; font-size: 1.18rem; font-weight: 400; font-style: italic; line-height: 1.7; color: var(--text-2); margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .article-byline { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
+    .byline-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent-light); overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .byline-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .byline-name { font-size: 0.88rem; font-weight: 600; color: var(--text-1); margin-bottom: 2px; }
+    .byline-meta { font-size: 0.75rem; color: var(--text-3); }
+    .byline-dot { margin: 0 5px; }
+    .byline-share { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .share-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; cursor: pointer; transition: border-color .15s, background .15s; }
+    .share-btn:hover { border-color: var(--accent-light); background: var(--accent-dim); }
+    .article-hero-img { width: 100%; aspect-ratio: 16/7; object-fit: cover; border-radius: 16px; margin-bottom: 48px; background: #1a1209; }
+    .article-body { padding-bottom: 64px; }
+    .article-body p { font-size: 1rem; color: var(--text-2); line-height: 1.85; margin-bottom: 24px; }
+    .article-body h2 { font-family: 'Fraunces', serif; font-size: 1.55rem; font-weight: 700; color: var(--text-1); margin: 48px 0 16px; line-height: 1.2; }
+    .article-body h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; color: var(--text-1); margin: 32px 0 12px; line-height: 1.3; }
+    .article-body ul, .article-body ol { padding-left: 1.4em; margin-bottom: 24px; }
+    .article-body li { font-size: 1rem; color: var(--text-2); line-height: 1.8; margin-bottom: 6px; }
+    .article-body strong { color: var(--text-1); font-weight: 600; }
+    .article-body em { font-style: italic; }
+    .article-body a { color: var(--accent); border-bottom: 1px solid var(--accent-light); transition: border-color .15s; }
+    .article-body a:hover { border-color: var(--accent); }
+    .pull-quote { border-left: 3px solid var(--accent); padding: 16px 0 16px 28px; margin: 40px 0; }
+    .pull-quote p { font-family: 'Fraunces', serif; font-size: 1.3rem; font-style: italic; color: var(--text-1); line-height: 1.6; margin: 0; }
+    .stat-callout { background: var(--warm); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin: 40px 0; display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
+    .stat-callout-item { text-align: center; flex: 1; min-width: 120px; }
+    .stat-num { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 0.78rem; color: var(--text-2); line-height: 1.5; }
+    .info-box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; margin: 40px 0; }
+    .info-box-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .info-box p { font-size: 0.9rem; margin-bottom: 10px; }
+    .info-box p:last-child { margin-bottom: 0; }
+    .article-lead-magnet { background: #141410; border-radius: 16px; padding: 32px 36px; margin: 48px 0; display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+    .alm-left { flex: 1; min-width: 200px; }
+    .alm-eye { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .alm-title { font-family: 'Fraunces', serif; font-size: 1.35rem; font-weight: 600; color: #fff; line-height: 1.25; margin-bottom: 8px; }
+    .alm-sub { font-size: 0.84rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+    .alm-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+    .alm-btn { background: var(--accent); color: #fff; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 600; padding: 14px 28px; border-radius: 12px; cursor: pointer; white-space: nowrap; transition: background .15s; text-decoration: none; display: inline-block; }
+    .alm-btn:hover { background: var(--accent-hover); }
+    .alm-note { font-size: 0.7rem; color: rgba(255,255,255,0.35); }
+    .cite { font-size: 0.78rem; color: var(--text-3); font-style: italic; display: block; margin-top: -16px; margin-bottom: 24px; padding-left: 2px; }
+    .article-img { width: 100%; border-radius: 12px; margin: 40px 0; background: #e0dbd0; aspect-ratio: 16/9; object-fit: cover; }
+    .article-img-caption { font-size: 0.75rem; color: var(--text-3); text-align: center; margin-top: -28px; margin-bottom: 40px; font-style: italic; }
+    .article-tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 32px 0; border-top: 1px solid var(--border); margin-bottom: 16px; }
+    .tag-pill { font-size: 0.75rem; font-weight: 500; background: var(--surface); border: 1px solid var(--border); padding: 5px 14px; border-radius: 20px; color: var(--text-2); transition: border-color .15s, color .15s; cursor: pointer; }
+    .tag-pill:hover { border-color: var(--accent-light); color: var(--accent); }
+    .article-layout { max-width: 1060px; margin: 0 auto; padding: 56px 24px 0; display: grid; grid-template-columns: 1fr 300px; gap: 64px; align-items: start; }
+    .article-sidebar { position: sticky; top: 80px; padding-bottom: 64px; }
+    .toc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 24px; }
+    .toc-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: 10px; }
+    .toc-list a { font-size: 0.84rem; color: var(--text-2); transition: color .15s; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+    .toc-list a:hover { color: var(--accent); }
+    .toc-num { color: var(--accent); font-weight: 700; flex-shrink: 0; font-size: 0.75rem; }
+    .sidebar-cta { background: var(--accent); border-radius: 16px; padding: 28px 24px; color: #fff; margin-bottom: 24px; }
+    .sidebar-cta-eye { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; }
+    .sidebar-cta-title { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; line-height: 1.3; margin-bottom: 10px; }
+    .sidebar-cta-sub { font-size: 0.8rem; opacity: 0.8; line-height: 1.6; margin-bottom: 20px; }
+    .sidebar-cta-btn { display: block; text-align: center; background: #fff; color: var(--accent); font-size: 0.82rem; font-weight: 700; padding: 10px 0; border-radius: 20px; transition: opacity .15s; }
+    .sidebar-cta-btn:hover { opacity: 0.9; }
+    .sidebar-related-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 14px; }
+    .related-mini { display: flex; flex-direction: column; gap: 14px; }
+    .related-mini-item { display: flex; gap: 12px; align-items: flex-start; }
+    .related-mini-img { width: 60px; height: 60px; border-radius: 8px; flex-shrink: 0; object-fit: cover; background: #e0dbd0; }
+    .related-mini-text { flex: 1; }
+    .related-mini-cat { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 4px; }
+    .related-mini-title { font-size: 0.82rem; font-weight: 600; color: var(--text-1); line-height: 1.35; }
+    .related-mini-title a:hover { color: var(--accent); }
+    .related-section { background: var(--warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 0; }
+    .related-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; }
+    .related-header h2 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; }
+    .related-header a { font-size: 0.82rem; color: var(--accent); font-weight: 600; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+    .related-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.07); }
+    .related-card-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: #e0dbd0; }
+    .related-card-body { padding: 20px; }
+    .related-card-cat { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 8px; }
+    .related-card-title { font-family: 'Fraunces', serif; font-size: 1.02rem; font-weight: 600; line-height: 1.3; color: var(--text-1); margin-bottom: 8px; }
+    .related-card-title a:hover { color: var(--accent); }
+    .related-card-meta { font-size: 0.72rem; color: var(--text-3); }
+    .newsletter-section { background: var(--accent); padding: 72px 0; }
+    .nl-inner { max-width: 560px; margin: 0 auto; padding: 0 24px; text-align: center; }
+    .nl-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+    .nl-headline { font-family: 'Fraunces', serif; font-size: 2.0rem; font-weight: 700; line-height: 1.2; color: #fff; margin-bottom: 12px; }
+    .nl-headline em { font-style: italic; }
+    .nl-sub { font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 28px; }
+    .nl-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto 12px; }
+    .nl-input { flex: 1; padding: 12px 16px; border-radius: 20px; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; outline: none; background: rgba(255,255,255,0.95); }
+    .nl-btn { padding: 12px 22px; border-radius: 20px; border: none; background: #18180F; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: opacity .15s; }
+    .nl-btn:hover { opacity: 0.85; }
+    .nl-note { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+    .footer { background: #18180F; padding: 36px 0; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-left { display: flex; align-items: center; gap: 6px; }
+    .footer-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: #fff; }
+    .footer-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.45); transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .read-progress { position: fixed; top: 58px; left: 0; z-index: 99; height: 2px; background: var(--accent); width: 0%; transition: width .1s linear; }
+  </style>
+</head>
+<body>
+
+<div class="read-progress" id="progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-dot"></div>
+      <span class="nav-name">Lila Park</span>
+      <span class="nav-kr">이라 박</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="journal.html" class="active">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-sub">Subscribe →</button>
+  </div>
+</nav>
+
+<div class="article-layout">
+
+  <main>
+
+    <div class="breadcrumb wrap-article" style="max-width:unset; padding:0;">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <a href="journal.html">Journal</a>
+      <span>›</span>
+      <span>Energy</span>
+    </div>
+
+    <header class="article-header">
+      <div class="article-cat">⚡ Energy</div>
+      <h1 class="article-title" id="top">
+        The 3pm Crash<br>
+        Isn't Normal<br>
+        It's a Timing Problem
+      </h1>
+      <p class="article-deck">
+        That wall you hit at 3pm isn't weakness or a bad diet. It's your circadian system running a process at the wrong time. Here's the mechanism and the fix.
+      </p>
+
+      <div class="article-byline">
+        <div class="byline-avatar">🌿</div>
+        <div>
+          <div class="byline-name">Lila Park · 이라 박</div>
+          <div class="byline-meta">Feb 10, 2026 <span class="byline-dot">·</span> 6 min read</div>
+        </div>
+        <div class="byline-share">
+          <div class="share-btn" title="Share">↗</div>
+          <div class="share-btn" title="Save">♡</div>
+        </div>
+      </div>
+    </header>
+
+    <img src="thumb-energy.jpg" class="article-hero-img" alt="Energy and circadian rhythms" onerror="this.style.background='#2a2015';this.style.height='360px'" />
+
+    <article class="article-body" id="article-body">
+
+      <p>
+        Most people hit a wall between 1 and 3pm. An energy crash so complete that coffee doesn't touch it. The narrative around this is usually dietary: you didn't eat enough protein, you had too many carbs, your blood sugar crashed. But the blood sugar explanation doesn't quite fit the timeline.
+      </p>
+
+      <p>
+        What's actually happening is circadian. Your body has a natural trough in alertness at this time. It's not pathological. It's a feature, not a bug. Understanding this changes everything about how you respond to it.
+      </p>
+
+      <div class="stat-callout">
+        <div class="stat-callout-item">
+          <div class="stat-num">1-3pm</div>
+          <div class="stat-label">natural circadian trough in alertness</div>
+        </div>
+        <div class="stat-callout-item">
+          <div class="stat-num">10-20 min</div>
+          <div class="stat-label">duration of strategic nap needed to reset alertness</div>
+        </div>
+      </div>
+      <span class="cite">Kleitman (1982), Sleep-Wakefulness Cycles · Poincaré & Dement (1967), Science</span>
+
+      <h2 id="mechanism">The Circadian Trough: What's Happening</h2>
+
+      <p>
+        Your body runs on a biphasic alertness rhythm. There's a major peak in the morning (when cortisol rises). There's a secondary trough in the afternoon (when adenosine accumulates, core body temperature begins to drop, and melatonin production ramps up ahead of nighttime). The 3pm crash is the second half of this pattern expressing itself.
+      </p>
+
+      <p>
+        Adenosine is the sleep-pressure molecule. It accumulates throughout the day. By early afternoon, it's reached a significant threshold. Your brain is essentially saying: "We've been awake for 7–8 hours. Time for rest." This is the correct signal. Most of human history responded to this signal with a 20–30 minute midday rest.
+      </p>
+
+      <div class="pull-quote">
+        <p>"The 3pm crash is your body's tide going out. Fighting it with caffeine is like pushing against the ocean. You don't fix it with force — you work with it."</p>
+      </div>
+
+      <p>
+        The Korean and Japanese understanding of this is encoded in their languages. 낮잠 (najam) in Korean — the post-lunch nap — isn't an indulgence. It's recognition of a biological rhythm. The Japanese inemuri (居眠り) — sleeping in place, often at work — is a cultural acknowledgement that the body has a legitimate need for rest at this time.
+      </p>
+
+      <h2 id="lunch-timing">Why Lunch Timing Matters More Than You Think</h2>
+
+      <p>
+        Eating at 12–1pm shifts the circadian trough slightly earlier. Eating at 1–2pm shifts it later. Most people's instinct is to eat at noon, which means their trough arrives right as they're trying to work through the afternoon. This is the biological mistake behind the crash.
+      </p>
+
+      <p>
+        The timing of meals doesn't just affect digestion — it's a circadian anchor. Your digestive system has its own circadian clock. Eating earlier in the afternoon actually deepens the trough because your body is managing both digestion and the natural afternoon dip.
+      </p>
+
+      <div class="info-box">
+        <div class="info-box-title">Your Trough Solutions — In Order of Effectiveness</div>
+        <p><strong>1. The strategic nap (most effective):</strong> 10–20 minutes at 1–2pm. This resets adenosine and allows you 2–3 hours of restored alertness afterward. The neuroscience is solid. One 15-minute nap produces the same alertness restoration as an hour of sleep at the wrong time.</p>
+        <p><strong>2. Delayed caffeine (second best):</strong> Don't drink coffee at 1pm. Save it for 3pm, 90 minutes after your trough window. Caffeine blocks adenosine, but only works if you use it strategically. Timing > quantity.</p>
+        <p><strong>3. Movement (works, but requires consistency):</strong> 5 minutes of walking at 2:30pm before the trough deepens. This increases alertness through arousal, not chemically. It works but requires discipline to execute when exhausted.</p>
+      </div>
+
+      <!-- INLINE LEAD MAGNET CTA -->
+      <div class="article-lead-magnet">
+        <div class="alm-left">
+          <div class="alm-eye">Energy Timing Protocol</div>
+          <div class="alm-title">The 3am Protocol</div>
+          <div class="alm-sub">Circadian timing for energy management. The 3pm crash fix, plus daily timing windows for every system.</div>
+        </div>
+        <div class="alm-right">
+          <a href="product-single.html" class="alm-btn">Get the protocol →</a>
+          <div class="alm-note">$17 · Instant download</div>
+        </div>
+      </div>
+
+      <h2 id="honest">The Honest Caveat</h2>
+
+      <p>
+        This works if you're willing to either nap (which requires workspace culture change) or strategically time caffeine. Most workplaces don't support the first. The second requires planning. Neither is medically necessary — the crash isn't dangerous. But if you're experiencing it daily, this is why it happens and how to respond.
+      </p>
+
+      <p>
+        Fighting the trough with more caffeine earlier in the day just deepens the crash when it arrives. The body's rhythm is stronger than your willpower. Working with it is the only sustainable approach.
+      </p>
+
+      <div class="article-tags">
+        <div class="tag-pill">Circadian Biology</div>
+        <div class="tag-pill">Energy Management</div>
+        <div class="tag-pill">Adenosine</div>
+        <div class="tag-pill">Napping</div>
+        <div class="tag-pill">Afternoon Dip</div>
+        <div class="tag-pill">Najam</div>
+      </div>
+
+    </article>
+  </main>
+
+  <aside class="article-sidebar">
+
+    <div class="toc-card">
+      <div class="toc-title">In this article</div>
+      <ul class="toc-list">
+        <li><a href="#mechanism"><span class="toc-num">01</span> The circadian trough</a></li>
+        <li><a href="#lunch-timing"><span class="toc-num">02</span> Why lunch timing matters</a></li>
+        <li><a href="#honest"><span class="toc-num">03</span> Solutions</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-cta">
+      <div class="sidebar-cta-eye">Energy Protocol</div>
+      <div class="sidebar-cta-title">The 3am Protocol</div>
+      <div class="sidebar-cta-sub">Circadian timing for energy. The 3pm crash fix and daily energy windows.</div>
+      <a href="product-single.html" class="sidebar-cta-btn">$17 · Get it →</a>
+    </div>
+
+    <div class="sidebar-related-title">Related reading</div>
+    <div class="related-mini">
+      <div class="related-mini-item">
+        <img src="lila-article-morning.jpg" class="related-mini-img" alt="Morning light" onerror="this.style.background='#c4dfc8'" />
+        <div class="related-mini-text">
+          <div class="related-mini-cat">Circadian Biology</div>
+          <div class="related-mini-title"><a href="morning-habit-5-minutes.html">The 5-Minute Morning Habit</a></div>
+        </div>
+      </div>
+      <div class="related-mini-item">
+        <img src="lila-sleep-styled.jpg" class="related-mini-img" alt="Sleep debt" onerror="this.style.background='#c4dfc8'" />
+        <div class="related-mini-text">
+          <div class="related-mini-cat">Sleep Science</div>
+          <div class="related-mini-title"><a href="article.html">Why You Can't Catch Up on Sleep</a></div>
+        </div>
+      </div>
+      <div class="related-mini-item">
+        <img src="thumb-breathwork.jpg" class="related-mini-img" alt="Breathwork" onerror="this.style.background='#c4dfc8'" />
+        <div class="related-mini-text">
+          <div class="related-mini-cat">Nervous System</div>
+          <div class="related-mini-title"><a href="breathwork-better-than-478.html">The Better Breathing Method</a></div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<section class="related-section">
+  <div class="wrap">
+    <div class="related-header">
+      <h2>Keep reading</h2>
+      <a href="journal.html">All articles →</a>
+    </div>
+    <div class="related-grid">
+      <div class="related-card">
+        <img src="lila-article-morning.jpg" class="related-card-img" alt="Morning" onerror="this.style.background='#c4dfc8';this.style.height='180px'" />
+        <div class="related-card-body">
+          <div class="related-card-cat">Circadian Biology</div>
+          <div class="related-card-title"><a href="morning-habit-5-minutes.html">The 5-Minute Morning Habit</a></div>
+          <div class="related-card-meta">Feb 24, 2026 · 5 min read</div>
+        </div>
+      </div>
+      <div class="related-card">
+        <img src="thumb-sleep-new.jpg" class="related-card-img" alt="Sleep" onerror="this.style.background='#c4dfc8';this.style.height='180px'" />
+        <div class="related-card-body">
+          <div class="related-card-cat">Sleep Science</div>
+          <div class="related-card-title"><a href="exhausted-after-8-hours.html">Why You're Exhausted After 8 Hours</a></div>
+          <div class="related-card-meta">March 10, 2026 · 8 min read</div>
+        </div>
+      </div>
+      <div class="related-card">
+        <img src="thumb-movement.jpg" class="related-card-img" alt="Movement" onerror="this.style.background='#c4dfc8';this.style.height='180px'" />
+        <div class="related-card-body">
+          <div class="related-card-cat">Movement</div>
+          <div class="related-card-title"><a href="move-like-korean-grandma.html">Move Like a Korean Grandma</a></div>
+          <div class="related-card-meta">Feb 17, 2026 · 7 min read</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter-section">
+  <div class="nl-inner">
+    <div class="nl-eyebrow">Read with 2,400+ people</div>
+    <h2 class="nl-headline">Get the newsletter<br>every <em>Sunday morning</em></h2>
+    <p class="nl-sub">Circadian science + Korean wellness. Evidence-based. Practical. Free.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="your@email.com" />
+      <button class="nl-btn" onclick="beehiivSubscribe(this)">Subscribe</button>
+    </div>
+    <div class="nl-note">Free · Unsubscribe anytime</div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-name">Lila Park</div>
+      <div class="footer-kr">· 이라 박</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Lila Park. Made with 💛</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const article = document.getElementById('article-body');
+    if (!article) return;
+    const articleTop = article.offsetTop;
+    const articleH = article.offsetHeight;
+    const scrolled = window.scrollY - articleTop;
+    const pct = Math.min(Math.max(scrolled / articleH, 0), 1);
+    document.getElementById('progress').style.width = (pct * 100) + '%';
+  });
+</script>
+
+<script>
+  function beehiivSubscribe(inputEl) {
+    const email = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row')
+                        ?.querySelector('input[type="email"]')?.value?.trim()
+                 || inputEl.closest('form')?.querySelector('input[type="email"]')?.value?.trim()
+                 || '';
+    const url = email
+      ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
+      : 'https://the3amletters.beehiiv.com/subscribe';
+    window.open(url, '_blank');
+  }
+</script>
+</body>
+</html>

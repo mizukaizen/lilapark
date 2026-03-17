@@ -570,7 +570,7 @@
       <span class="nav-kr">· 이라 박</span>
     </a>
     <ul class="nav-links">
-      <li><a href="article.html">Journal</a></li>
+      <li><a href="journal.html">Journal</a></li>
       <li><a href="products.html">Products</a></li>
       <li><a href="about.html" class="active">About</a></li>
     </ul>
@@ -996,7 +996,7 @@
     <p class="nl-sub">One peer-reviewed sleep insight — made practical. How Korean saenghwal wisdom and circadian biology actually connect. Every Sunday. Free, always. No spam.</p>
     <div class="nl-form">
       <input class="nl-input" type="email" placeholder="your@email.com" />
-      <button class="nl-btn">Subscribe</button>
+      <button class="nl-btn" onclick="beehiivSubscribe(this)">Subscribe</button>
     </div>
     <div class="nl-note">Free · Unsubscribe anytime · No spam, ever</div>
   </div>
@@ -1010,7 +1010,7 @@
       <div class="footer-kr">· 이라 박</div>
     </div>
     <ul class="footer-links">
-      <li><a href="article.html">Journal</a></li>
+      <li><a href="journal.html">Journal</a></li>
       <li><a href="products.html">Products</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="#">Privacy</a></li>
@@ -1019,5 +1019,19 @@
   </div>
 </footer>
 
+
+  <script>
+    // Beehiiv subscribe handler — interim until native embed wired
+    function beehiivSubscribe(inputEl) {
+      const email = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row')
+                          ?.querySelector('input[type="email"]')?.value?.trim()
+                   || inputEl.closest('form')?.querySelector('input[type="email"]')?.value?.trim()
+                   || '';
+      const url = email
+        ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
+        : 'https://the3amletters.beehiiv.com/subscribe';
+      window.open(url, '_blank');
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Journal — Lila Park</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:       #5FA86A;
+      --accent-mid:   #8DC096;
+      --accent-light: #C4DFC8;
+      --accent-dim:   rgba(95, 168, 106, 0.10);
+      --accent-hover: #4D9559;
+      --bg:       #FAFAF7;
+      --surface:  #FFFFFF;
+      --warm:     #F3F0E8;
+      --border:   rgba(20, 19, 14, 0.08);
+      --border-h: rgba(20, 19, 14, 0.16);
+      --text-1:   #18180F;
+      --text-2:   #64635A;
+      --text-3:   #AEAC9C;
+    }
+
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg); color: var(--text-1);
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100; height: 58px;
+      background: rgba(250,250,247,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1060px; margin: 0 auto; padding: 0 24px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: dot-pulse 3s ease-in-out infinite; }
+    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+    .nav-name  { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
+    .nav-kr    { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: var(--text-3); padding-left: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-2); transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-1); }
+    .nav-links a.active { font-weight: 600; }
+    .nav-sub {
+      background: var(--accent); color: #fff; border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 20px; cursor: pointer;
+      transition: background .15s;
+    }
+    .nav-sub:hover { background: var(--accent-hover); }
+
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 80px 0;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Fraunces', serif; font-size: 3.2rem;
+      font-weight: 700; line-height: 1.1; color: var(--text-1);
+      margin-bottom: 16px;
+    }
+    .hero-subtitle {
+      font-family: 'Fraunces', serif; font-size: 1.2rem;
+      font-style: italic; color: var(--text-2); margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .hero-badges {
+      display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+      font-size: 0.82rem; color: var(--text-3);
+    }
+    .badge { display: flex; align-items: center; gap: 6px; }
+    .badge-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+
+    /* ── FILTER TABS ── */
+    .filter-tabs {
+      display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-tab {
+      font-size: 0.85rem; font-weight: 500;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 8px 18px; border-radius: 20px; color: var(--text-2);
+      cursor: pointer; transition: all .15s;
+    }
+    .filter-tab:hover { border-color: var(--accent-light); color: var(--text-1); }
+    .filter-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* ── ARTICLES GRID ── */
+    .articles-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+      padding: 64px 0;
+    }
+    @media (max-width: 900px) {
+      .articles-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+    @media (max-width: 600px) {
+      .articles-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+
+    .article-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      display: flex; flex-direction: column;
+    }
+    .article-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.08); }
+
+    .article-card-img {
+      width: 100%; aspect-ratio: 16/10; object-fit: cover;
+      background: #e0dbd0;
+    }
+
+    .article-card-body {
+      padding: 24px;
+      display: flex; flex-direction: column; flex: 1;
+    }
+
+    .article-card-cat {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .article-card-title {
+      font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600;
+      line-height: 1.35; color: var(--text-1); margin-bottom: 12px;
+      text-decoration: none; transition: color .15s;
+    }
+    .article-card-title a { color: var(--text-1); }
+    .article-card-title a:hover { color: var(--accent); }
+
+    .article-card-deck {
+      font-size: 0.92rem; color: var(--text-2); line-height: 1.6;
+      margin-bottom: 16px; flex: 1;
+    }
+
+    .article-card-meta {
+      font-size: 0.75rem; color: var(--text-3);
+    }
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section {
+      background: var(--accent);
+      padding: 72px 0;
+    }
+    .nl-inner {
+      max-width: 560px; margin: 0 auto; padding: 0 24px;
+      text-align: center;
+    }
+    .nl-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+    }
+    .nl-headline {
+      font-family: 'Fraunces', serif; font-size: 2.0rem;
+      font-weight: 700; line-height: 1.2; color: #fff;
+      margin-bottom: 12px;
+    }
+    .nl-headline em { font-style: italic; }
+    .nl-sub {
+      font-size: 0.92rem; color: rgba(255,255,255,0.75);
+      line-height: 1.7; margin-bottom: 28px;
+    }
+    .nl-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto 12px; }
+    .nl-input {
+      flex: 1; padding: 12px 16px; border-radius: 20px;
+      border: none; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem; outline: none;
+      background: rgba(255,255,255,0.95);
+    }
+    .nl-btn {
+      padding: 12px 22px; border-radius: 20px; border: none;
+      background: #18180F; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      white-space: nowrap; transition: opacity .15s;
+    }
+    .nl-btn:hover { opacity: 0.85; }
+    .nl-note { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #18180F; padding: 36px 0;
+    }
+    .footer-inner {
+      max-width: 1060px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap;
+    }
+    .footer-left { display: flex; align-items: center; gap: 6px; }
+    .footer-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: #fff; }
+    .footer-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.45); transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-dot"></div>
+      <span class="nav-name">Lila Park</span>
+      <span class="nav-kr">이라 박</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="journal.html" class="active">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-sub">Subscribe →</button>
+  </div>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">The Journal</div>
+    <h1 class="hero-title">Sleep. Food. Energy.<br>Korean Wellness.</h1>
+    <p class="hero-subtitle">Evidence-based. Korean-anchored. Practical. Updated weekly.</p>
+    <div class="hero-badges">
+      <div class="badge"><span class="badge-dot"></span> 10 articles</div>
+      <div class="badge"><span class="badge-dot"></span> Peer-reviewed sources</div>
+      <div class="badge"><span class="badge-dot"></span> Free to read</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FILTER TABS ── -->
+<section class="wrap">
+  <div class="filter-tabs">
+    <div class="filter-tab active">All</div>
+    <div class="filter-tab">Sleep</div>
+    <div class="filter-tab">Food</div>
+    <div class="filter-tab">Korean Wellness</div>
+    <div class="filter-tab">Energy</div>
+    <div class="filter-tab">Nervous System</div>
+  </div>
+</section>
+
+<!-- ── ARTICLES GRID ── -->
+<section class="wrap">
+  <div class="articles-grid">
+
+    <!-- 1. article.html -->
+    <div class="article-card">
+      <img src="lila-sleep-styled.jpg" class="article-card-img" alt="Sleep science" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Sleep Science</div>
+        <h2 class="article-card-title"><a href="article.html">Why You Can't Catch Up on Sleep (And What Actually Works)</a></h2>
+        <p class="article-card-deck">The science of sleep debt is more unforgiving than you've been told — but there's a precise recovery window that most people miss entirely.</p>
+        <div class="article-card-meta">Lila Park · March 14, 2026 · 9 min read</div>
+      </div>
+    </div>
+
+    <!-- 2. exhausted-after-8-hours.html -->
+    <div class="article-card">
+      <img src="thumb-sleep-new.jpg" class="article-card-img" alt="Sleep architecture" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Sleep Science</div>
+        <h2 class="article-card-title"><a href="exhausted-after-8-hours.html">Why You're Exhausted Even After 8 Hours</a></h2>
+        <p class="article-card-deck">You're sleeping the right amount but waking up wrecked. The problem isn't duration — it's what's happening inside those 8 hours.</p>
+        <div class="article-card-meta">Lila Park · March 10, 2026 · 8 min read</div>
+      </div>
+    </div>
+
+    <!-- 3. kimchi-fried-rice-healthy.html -->
+    <div class="article-card">
+      <img src="thumb-nutrition-new.jpg" class="article-card-img" alt="Kimchi fried rice" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Korean Food</div>
+        <h2 class="article-card-title"><a href="kimchi-fried-rice-healthy.html">I Made Kimchi Fried Rice Healthy Without Ruining It</a></h2>
+        <p class="article-card-deck">Traditional kimchi fried rice is already more nutritious than most wellness food. Here's what I changed — and what I deliberately left alone.</p>
+        <div class="article-card-meta">Lila Park · March 3, 2026 · 6 min read</div>
+      </div>
+    </div>
+
+    <!-- 4. morning-habit-5-minutes.html -->
+    <div class="article-card">
+      <img src="lila-article-morning.jpg" class="article-card-img" alt="Morning protocol" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Circadian Biology</div>
+        <h2 class="article-card-title"><a href="morning-habit-5-minutes.html">The 5-Minute Morning Habit That Changed My Whole Day</a></h2>
+        <p class="article-card-deck">I spent years optimising my morning for productivity. The change that actually worked took five minutes and cost nothing.</p>
+        <div class="article-card-meta">Lila Park · Feb 24, 2026 · 5 min read</div>
+      </div>
+    </div>
+
+    <!-- 5. move-like-korean-grandma.html -->
+    <div class="article-card">
+      <img src="thumb-movement.jpg" class="article-card-img" alt="Movement" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Movement</div>
+        <h2 class="article-card-title"><a href="move-like-korean-grandma.html">You Don't Need the Gym — You Need to Move Like a Korean Grandma</a></h2>
+        <p class="article-card-deck">Korean grandmothers are among the most physically capable older adults in the world. Their secret isn't exercise — it's movement woven into life.</p>
+        <div class="article-card-meta">Lila Park · Feb 17, 2026 · 7 min read</div>
+      </div>
+    </div>
+
+    <!-- 6. 3pm-crash-not-normal.html -->
+    <div class="article-card">
+      <img src="thumb-energy.jpg" class="article-card-img" alt="Energy and circadian rhythm" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Energy</div>
+        <h2 class="article-card-title"><a href="3pm-crash-not-normal.html">The 3pm Crash Isn't Normal — It's a Timing Problem</a></h2>
+        <p class="article-card-deck">That wall you hit at 3pm isn't weakness. It's your circadian system running a process at the wrong time.</p>
+        <div class="article-card-meta">Lila Park · Feb 10, 2026 · 6 min read</div>
+      </div>
+    </div>
+
+    <!-- 7. gut-second-brain.html -->
+    <div class="article-card">
+      <img src="thumb-gut.jpg" class="article-card-img" alt="Gut-brain axis" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Gut Health</div>
+        <h2 class="article-card-title"><a href="gut-second-brain.html">Your Gut Is Your Second Brain — But Not in the Way Influencers Mean</a></h2>
+        <p class="article-card-deck">The gut-brain connection is real and well-evidenced. It's also one of the most mangled concepts in wellness content.</p>
+        <div class="article-card-meta">Lila Park · Feb 3, 2026 · 9 min read</div>
+      </div>
+    </div>
+
+    <!-- 8. nunchi-korean-art.html -->
+    <div class="article-card">
+      <img src="thumb-kwellness.jpg" class="article-card-img" alt="Nunchi and social awareness" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Korean Wellness</div>
+        <h2 class="article-card-title"><a href="nunchi-korean-art.html">Nunchi: The Korean Art of Reading the Room</a></h2>
+        <p class="article-card-deck">눈치 (nunchi) is usually translated as social awareness. In Korean culture it's closer to a full-body attunement — and I think of it as a nervous system practice.</p>
+        <div class="article-card-meta">Lila Park · Jan 27, 2026 · 7 min read</div>
+      </div>
+    </div>
+
+    <!-- 9. perimenopause-sleep.html -->
+    <div class="article-card">
+      <img src="thumb-hormones.jpg" class="article-card-img" alt="Perimenopause and sleep" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Sleep Science</div>
+        <h2 class="article-card-title"><a href="perimenopause-sleep.html">Perimenopause Ruined My Sleep. Here's What Actually Helped.</a></h2>
+        <p class="article-card-deck">The honest picture is more complicated than either the dismissive medical mainstream or the supplement industry will tell you.</p>
+        <div class="article-card-meta">Lila Park · Jan 20, 2026 · 10 min read</div>
+      </div>
+    </div>
+
+    <!-- 10. breathwork-better-than-478.html -->
+    <div class="article-card">
+      <img src="thumb-breathwork.jpg" class="article-card-img" alt="Breathwork and nervous system" onerror="this.style.background='#c4dfc8'" />
+      <div class="article-card-body">
+        <div class="article-card-cat">Nervous System</div>
+        <h2 class="article-card-title"><a href="breathwork-better-than-478.html">4-7-8 Breathing Is Fine. This Is Better.</a></h2>
+        <p class="article-card-deck">There's a more precise method — less memorable as a ratio, more effective as a nervous system intervention.</p>
+        <div class="article-card-meta">Lila Park · Jan 13, 2026 · 6 min read</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter-section">
+  <div class="nl-inner">
+    <div class="nl-eyebrow">Read with 2,400+ people</div>
+    <h2 class="nl-headline">Get the newsletter<br>every <em>Sunday morning</em></h2>
+    <p class="nl-sub">One peer-reviewed sleep insight — made practical. How Korean saenghwal wisdom and circadian biology actually connect. Every Sunday. Free, always. No spam.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="your@email.com" />
+      <button class="nl-btn" onclick="beehiivSubscribe(this)">Subscribe</button>
+    </div>
+    <div class="nl-note">Free · Unsubscribe anytime · No spam, ever</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-name">Lila Park</div>
+      <div class="footer-kr">· 이라 박</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Lila Park. Made with 💛</div>
+  </div>
+</footer>
+
+<script>
+  function beehiivSubscribe(inputEl) {
+    const email = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row')
+                        ?.querySelector('input[type="email"]')?.value?.trim()
+                 || inputEl.closest('form')?.querySelector('input[type="email"]')?.value?.trim()
+                 || '';
+    const url = email
+      ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
+      : 'https://the3amletters.beehiiv.com/subscribe';
+    window.open(url, '_blank');
+  }
+</script>
+</body>
+</html>

@@ -225,6 +225,9 @@
     .badge-program { background: var(--accent); color: #fff; }
     .badge-guide { background: rgba(255,255,255,0.92); color: var(--accent-hover); border: 1px solid var(--accent-light); }
     .badge-bundle { background: #141410; color: var(--accent); }
+    .badge-soon { background: rgba(20,19,14,0.08); color: var(--text-2); border: 1px solid var(--border); }
+    .product-btn-disabled { background: var(--warm); color: var(--text-3); cursor: default; border: 1px solid var(--border); }
+    .product-btn-disabled:hover { background: var(--warm); }
 
     .product-body { padding: 22px 22px 20px; flex: 1; display: flex; flex-direction: column; }
     .product-domain {
@@ -438,7 +441,7 @@
       <span class="nav-kr">이라 박</span>
     </a>
     <ul class="nav-links">
-      <li><a href="article.html">Journal</a></li>
+      <li><a href="journal.html">Journal</a></li>
       <li><a href="products.html" class="active">Products</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
@@ -471,7 +474,7 @@
       <div class="featured-body">
         <div class="featured-badge">
           <div class="featured-badge-dot"></div>
-          <span>Most popular · 28-Day Program</span>
+          <span>Coming soon · 28-Day Program</span>
         </div>
         <h2 class="featured-title">Deep Sleep in <em>28 Days</em></h2>
         <p class="featured-desc">
@@ -486,9 +489,9 @@
         </div>
         <div class="featured-footer">
           <div>
-            <div class="featured-price">$97 <span class="featured-price-orig">$127</span></div>
+            <div class="featured-price" style="font-size:1.2rem; color:rgba(255,255,255,0.5);">Coming soon</div>
           </div>
-          <a href="product-single.html" class="featured-cta">Get instant access →</a>
+          <span class="featured-cta" style="background:rgba(255,255,255,0.15); cursor:default;">Notify me →</span>
         </div>
       </div>
       <div class="featured-img-col">
@@ -510,20 +513,20 @@
       <div class="filter-tab">Korean Wellness</div>
     </div>
 
-    <!-- FREE ENTRY POINT -->
+    <!-- ENTRY PRODUCT -->
     <div class="free-entry-banner">
       <div class="feb-left">
-        <div class="feb-tag">Free · Start here</div>
+        <div class="feb-tag">Start here · Most popular</div>
         <div class="feb-title">The 3am Protocol</div>
         <p class="feb-desc">Stop waking in the night — in 7 days. The cortisol-adenosine correction method that most sleep guides completely miss. If you wake between 2–4am, this is where to start.</p>
         <div class="feb-includes">
-          <span>7-day plan</span><span>Cortisol correction guide</span><span>Evening prep checklist</span>
+          <span>20-page PDF</span><span>7-day plan</span><span>Cortisol correction guide</span><span>Evening prep checklist</span>
         </div>
       </div>
       <div class="feb-right">
-        <div class="feb-price">Free</div>
-        <div class="feb-note">Instant PDF · No spam · Unsubscribe anytime</div>
-        <button class="product-btn product-btn-primary" style="width:100%; margin-top:12px;">Get it free →</button>
+        <div class="feb-price">$17</div>
+        <div class="feb-note">One-time · Instant PDF download</div>
+        <a href="product-single.html" class="product-btn product-btn-primary" style="width:100%; margin-top:12px; display:block; text-align:center;">Get the protocol →</a>
       </div>
     </div>
 
@@ -533,7 +536,7 @@
       <div class="product-card">
         <div class="product-img-wrap">
           <img src="lila-kbeauty-styled.jpg" alt="Lights Out in 7" onerror="this.style.background='#c4dfc8';this.style.height='220px'" />
-          <div class="product-type-badge badge-guide">Ritual Guide · 7 Days</div>
+          <div class="product-type-badge badge-soon">Coming soon</div>
         </div>
         <div class="product-body">
           <div class="product-domain">Korean Wellness · Evening Ritual</div>
@@ -549,7 +552,7 @@
               <div class="product-price">$37</div>
               <div class="product-price-note">One-time · Lifetime access</div>
             </div>
-            <button class="product-btn product-btn-primary">Get it →</button>
+            <button class="product-btn product-btn-disabled" disabled>Coming soon</button>
           </div>
         </div>
       </div>
@@ -558,7 +561,7 @@
       <div class="product-card">
         <div class="product-img-wrap">
           <img src="thumb-breathwork.jpg" alt="Sleep Through the Change" onerror="this.style.background='#c4dfc8';this.style.height='220px'" />
-          <div class="product-type-badge badge-program">6-Week Program</div>
+          <div class="product-type-badge badge-soon">Coming soon</div>
         </div>
         <div class="product-body">
           <div class="product-domain">Hormonal Rest · Perimenopause</div>
@@ -574,7 +577,7 @@
               <div class="product-price">$147</div>
               <div class="product-price-note">One-time · Lifetime access</div>
             </div>
-            <button class="product-btn product-btn-primary">Get it →</button>
+            <button class="product-btn product-btn-disabled" disabled>Coming soon</button>
           </div>
         </div>
       </div>
@@ -583,7 +586,7 @@
       <div class="product-card">
         <div class="product-img-wrap">
           <img src="prod-templates.jpg" alt="Resonance Tracking Templates" onerror="this.style.background='#c4dfc8';this.style.height='220px'" />
-          <div class="product-type-badge badge-guide">Toolkit</div>
+          <div class="product-type-badge badge-soon">Coming soon</div>
         </div>
         <div class="product-body">
           <div class="product-domain">Tracking & Planning</div>
@@ -599,7 +602,7 @@
               <div class="product-price">$27</div>
               <div class="product-price-note">One-time · Lifetime access</div>
             </div>
-            <button class="product-btn product-btn-outline">Get it →</button>
+            <button class="product-btn product-btn-disabled" disabled>Coming soon</button>
           </div>
         </div>
       </div>
@@ -618,9 +621,9 @@
       <div class="bundle-right">
         <div class="bundle-price-label">Everything, together</div>
         <div class="bundle-price-orig">$308 if bought separately</div>
-        <div class="bundle-price">$197</div>
-        <div class="bundle-save">Save $111 · 36% off</div>
-        <a href="product-single.html" class="bundle-cta">Get the complete library →</a>
+        <div class="bundle-price" style="font-size:1.8rem; color:var(--text-3);">Coming soon</div>
+        <div class="bundle-save">Save $111 · 36% off when live</div>
+        <span class="bundle-cta" style="background:var(--accent-light); color:var(--accent-hover); cursor:default;">Notify me when available</span>
       </div>
     </div>
 
@@ -746,7 +749,7 @@
       <div class="footer-kr">· 이라 박</div>
     </div>
     <ul class="footer-links">
-      <li><a href="article.html">Journal</a></li>
+      <li><a href="journal.html">Journal</a></li>
       <li><a href="products.html">Products</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="#">Privacy</a></li>
@@ -755,5 +758,19 @@
   </div>
 </footer>
 
+
+  <script>
+    // Beehiiv subscribe handler — interim until native embed wired
+    function beehiivSubscribe(inputEl) {
+      const email = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row')
+                          ?.querySelector('input[type="email"]')?.value?.trim()
+                   || inputEl.closest('form')?.querySelector('input[type="email"]')?.value?.trim()
+                   || '';
+      const url = email
+        ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
+        : 'https://the3amletters.beehiiv.com/subscribe';
+      window.open(url, '_blank');
+    }
+  </script>
 </body>
 </html>

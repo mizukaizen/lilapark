@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You Don't Need the Gym — Move Like a Korean Grandma — Lila Park</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --accent: #5FA86A; --accent-mid: #8DC096; --accent-light: #C4DFC8; --accent-dim: rgba(95, 168, 106, 0.10); --accent-hover: #4D9559; --bg: #FAFAF7; --surface: #FFFFFF; --warm: #F3F0E8; --border: rgba(20, 19, 14, 0.08); --text-1: #18180F; --text-2: #64635A; --text-3: #AEAC9C; }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-1); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .nav { position: sticky; top: 0; z-index: 100; height: 58px; background: rgba(250,250,247,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: dot-pulse 3s ease-in-out infinite; }
+    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+    .nav-name { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
+    .nav-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: var(--text-3); padding-left: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-2); transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-1); }
+    .nav-links a.active { font-weight: 600; }
+    .nav-sub { background: var(--accent); color: #fff; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 20px; cursor: pointer; transition: background .15s; }
+    .nav-sub:hover { background: var(--accent-hover); }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    .breadcrumb { padding: 0 0 20px; font-size: 0.78rem; color: var(--text-3); }
+    .breadcrumb a { color: var(--text-3); transition: color .15s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { margin: 0 6px; }
+    .article-header { padding: 32px 0 0; }
+    .article-cat { display: inline-flex; align-items: center; gap: 7px; background: var(--accent-dim); border: 1px solid var(--accent-light); padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-hover); }
+    .article-title { font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 700; line-height: 1.12; color: var(--text-1); margin-bottom: 20px; }
+    .article-title em { font-style: italic; color: var(--accent); }
+    .article-deck { font-family: 'Fraunces', serif; font-size: 1.18rem; font-weight: 400; font-style: italic; line-height: 1.7; color: var(--text-2); margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .article-byline { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
+    .byline-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent-light); overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .byline-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .byline-name { font-size: 0.88rem; font-weight: 600; color: var(--text-1); margin-bottom: 2px; }
+    .byline-meta { font-size: 0.75rem; color: var(--text-3); }
+    .byline-dot { margin: 0 5px; }
+    .byline-share { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .share-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; cursor: pointer; transition: border-color .15s, background .15s; }
+    .share-btn:hover { border-color: var(--accent-light); background: var(--accent-dim); }
+    .article-hero-img { width: 100%; aspect-ratio: 16/7; object-fit: cover; border-radius: 16px; margin-bottom: 48px; background: #1a1209; }
+    .article-body { padding-bottom: 64px; }
+    .article-body p { font-size: 1rem; color: var(--text-2); line-height: 1.85; margin-bottom: 24px; }
+    .article-body h2 { font-family: 'Fraunces', serif; font-size: 1.55rem; font-weight: 700; color: var(--text-1); margin: 48px 0 16px; line-height: 1.2; }
+    .article-body h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; color: var(--text-1); margin: 32px 0 12px; line-height: 1.3; }
+    .article-body ul, .article-body ol { padding-left: 1.4em; margin-bottom: 24px; }
+    .article-body li { font-size: 1rem; color: var(--text-2); line-height: 1.8; margin-bottom: 6px; }
+    .article-body strong { color: var(--text-1); font-weight: 600; }
+    .article-body em { font-style: italic; }
+    .article-body a { color: var(--accent); border-bottom: 1px solid var(--accent-light); transition: border-color .15s; }
+    .article-body a:hover { border-color: var(--accent); }
+    .pull-quote { border-left: 3px solid var(--accent); padding: 16px 0 16px 28px; margin: 40px 0; }
+    .pull-quote p { font-family: 'Fraunces', serif; font-size: 1.3rem; font-style: italic; color: var(--text-1); line-height: 1.6; margin: 0; }
+    .stat-callout { background: var(--warm); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin: 40px 0; display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
+    .stat-callout-item { text-align: center; flex: 1; min-width: 120px; }
+    .stat-num { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 0.78rem; color: var(--text-2); line-height: 1.5; }
+    .info-box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; margin: 40px 0; }
+    .info-box-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .info-box p { font-size: 0.9rem; margin-bottom: 10px; }
+    .info-box p:last-child { margin-bottom: 0; }
+    .article-lead-magnet { background: #141410; border-radius: 16px; padding: 32px 36px; margin: 48px 0; display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+    .alm-left { flex: 1; min-width: 200px; }
+    .alm-eye { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .alm-title { font-family: 'Fraunces', serif; font-size: 1.35rem; font-weight: 600; color: #fff; line-height: 1.25; margin-bottom: 8px; }
+    .alm-sub { font-size: 0.84rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+    .alm-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+    .alm-btn { background: var(--accent); color: #fff; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 600; padding: 14px 28px; border-radius: 12px; cursor: pointer; white-space: nowrap; transition: background .15s; text-decoration: none; display: inline-block; }
+    .alm-btn:hover { background: var(--accent-hover); }
+    .alm-note { font-size: 0.7rem; color: rgba(255,255,255,0.35); }
+    .cite { font-size: 0.78rem; color: var(--text-3); font-style: italic; display: block; margin-top: -16px; margin-bottom: 24px; padding-left: 2px; }
+    .article-img { width: 100%; border-radius: 12px; margin: 40px 0; background: #e0dbd0; aspect-ratio: 16/9; object-fit: cover; }
+    .article-img-caption { font-size: 0.75rem; color: var(--text-3); text-align: center; margin-top: -28px; margin-bottom: 40px; font-style: italic; }
+    .article-tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 32px 0; border-top: 1px solid var(--border); margin-bottom: 16px; }
+    .tag-pill { font-size: 0.75rem; font-weight: 500; background: var(--surface); border: 1px solid var(--border); padding: 5px 14px; border-radius: 20px; color: var(--text-2); transition: border-color .15s, color .15s; cursor: pointer; }
+    .tag-pill:hover { border-color: var(--accent-light); color: var(--accent); }
+    .article-layout { max-width: 1060px; margin: 0 auto; padding: 56px 24px 0; display: grid; grid-template-columns: 1fr 300px; gap: 64px; align-items: start; }
+    .article-sidebar { position: sticky; top: 80px; padding-bottom: 64px; }
+    .toc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 24px; }
+    .toc-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: 10px; }
+    .toc-list a { font-size: 0.84rem; color: var(--text-2); transition: color .15s; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+    .toc-list a:hover { color: var(--accent); }
+    .toc-num { color: var(--accent); font-weight: 700; flex-shrink: 0; font-size: 0.75rem; }
+    .sidebar-cta { background: var(--accent); border-radius: 16px; padding: 28px 24px; color: #fff; margin-bottom: 24px; }
+    .sidebar-cta-eye { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; }
+    .sidebar-cta-title { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; line-height: 1.3; margin-bottom: 10px; }
+    .sidebar-cta-sub { font-size: 0.8rem; opacity: 0.8; line-height: 1.6; margin-bottom: 20px; }
+    .sidebar-cta-btn { display: block; text-align: center; background: #fff; color: var(--accent); font-size: 0.82rem; font-weight: 700; padding: 10px 0; border-radius: 20px; transition: opacity .15s; }
+    .sidebar-cta-btn:hover { opacity: 0.9; }
+    .sidebar-related-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 14px; }
+    .related-mini { display: flex; flex-direction: column; gap: 14px; }
+    .related-mini-item { display: flex; gap: 12px; align-items: flex-start; }
+    .related-mini-img { width: 60px; height: 60px; border-radius: 8px; flex-shrink: 0; object-fit: cover; background: #e0dbd0; }
+    .related-mini-text { flex: 1; }
+    .related-mini-cat { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 4px; }
+    .related-mini-title { font-size: 0.82rem; font-weight: 600; color: var(--text-1); line-height: 1.35; }
+    .related-mini-title a:hover { color: var(--accent); }
+    .related-section { background: var(--warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 0; }
+    .related-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; }
+    .related-header h2 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; }
+    .related-header a { font-size: 0.82rem; color: var(--accent); font-weight: 600; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+    .related-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.07); }
+    .related-card-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: #e0dbd0; }
+    .related-card-body { padding: 20px; }
+    .related-card-cat { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 8px; }
+    .related-card-title { font-family: 'Fraunces', serif; font-size: 1.02rem; font-weight: 600; line-height: 1.3; color: var(--text-1); margin-bottom: 8px; }
+    .related-card-title a:hover { color: var(--accent); }
+    .related-card-meta { font-size: 0.72rem; color: var(--text-3); }
+    .newsletter-section { background: var(--accent); padding: 72px 0; }
+    .nl-inner { max-width: 560px; margin: 0 auto; padding: 0 24px; text-align: center; }
+    .nl-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+    .nl-headline { font-family: 'Fraunces', serif; font-size: 2.0rem; font-weight: 700; line-height: 1.2; color: #fff; margin-bottom: 12px; }
+    .nl-headline em { font-style: italic; }
+    .nl-sub { font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 28px; }
+    .nl-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto 12px; }
+    .nl-input { flex: 1; padding: 12px 16px; border-radius: 20px; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; outline: none; background: rgba(255,255,255,0.95); }
+    .nl-btn { padding: 12px 22px; border-radius: 20px; border: none; background: #18180F; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: opacity .15s; }
+    .nl-btn:hover { opacity: 0.85; }
+    .nl-note { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+    .footer { background: #18180F; padding: 36px 0; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-left { display: flex; align-items: center; gap: 6px; }
+    .footer-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: #fff; }
+    .footer-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.45); transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .read-progress { position: fixed; top: 58px; left: 0; z-index: 99; height: 2px; background: var(--accent); width: 0%; transition: width .1s linear; }
+  </style>
+</head>
+<body>
+
+<div class="read-progress" id="progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-dot"></div>
+      <span class="nav-name">Lila Park</span>
+      <span class="nav-kr">이라 박</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="journal.html" class="active">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-sub">Subscribe →</button>
+  </div>
+</nav>
+
+<div class="article-layout">
+
+  <main>
+
+    <div class="breadcrumb wrap-article" style="max-width:unset; padding:0;">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <a href="journal.html">Journal</a>
+      <span>›</span>
+      <span>Movement</span>
+    </div>
+
+    <header class="article-header">
+      <div class="article-cat">🌿 Movement</div>
+      <h1 class="article-title" id="top">
+        You Don't Need the Gym<br>
+        You Need to Move Like<br>a Korean Grandma
+      </h1>
+      <p class="article-deck">
+        Korean grandmothers (halmeoni) are among the most physically capable older adults in the world. Their secret isn't exercise — it's movement woven into life. Here's what the research says about why this works.
+      </p>
+
+      <div class="article-byline">
+        <div class="byline-avatar">🌿</div>
+        <div>
+          <div class="byline-name">Lila Park · 이라 박</div>
+          <div class="byline-meta">Feb 17, 2026 <span class="byline-dot">·</span> 7 min read</div>
+        </div>
+        <div class="byline-share">
+          <div class="share-btn" title="Share">↗</div>
+          <div class="share-btn" title="Save">♡</div>
+        </div>
+      </div>
+    </header>
+
+    <img src="thumb-movement.jpg" class="article-hero-img" alt="Movement and wellness" onerror="this.style.background='#2a2015';this.style.height='360px'" />
+
+    <article class="article-body" id="article-body">
+
+      <p>
+        The research on longevity and health is increasingly consistent on one point: it's not the structured exercise that matters most. It's the ambient movement throughout the day. The walking. The squatting. The standing. The physical task-ness of living without a machine to sit in.
+      </p>
+
+      <p>
+        This is called NEAT — Non-Exercise Activity Thermogenesis. It's the calories and adaptations your body accrues from just moving through the world, independent of formal exercise. And according to the research, NEAT can account for as much as 2000 kilocalorie variation between people, even when total activity level is controlled.
+      </p>
+
+      <div class="stat-callout">
+        <div class="stat-callout-item">
+          <div class="stat-num">2000 kcal</div>
+          <div class="stat-label">daily variation in NEAT between individuals</div>
+        </div>
+        <div class="stat-callout-item">
+          <div class="stat-num">1.5 hrs</div>
+          <div class="stat-label">less sedentary time per day in cultures with high NEAT</div>
+        </div>
+      </div>
+      <span class="cite">Levine et al. (2005), Obesity · Freedson et al. (2009), Medicine & Science in Sports & Exercise</span>
+
+      <h2 id="neat">What is NEAT Actually?</h2>
+
+      <p>
+        The analogy: NEAT is like background music versus a concert. You can go to one concert a week and think you're "exercising." But the background music playing in your life 16 hours a day is doing more metabolic work. Your body doesn't distinguish between "intentional exercise" and "moving because you're living." Movement is movement.
+      </p>
+
+      <p>
+        A Korean halmeoni doesn't go to a gym. But her day contains: squatting to cook, walking to the market, carrying groceries, sitting on the floor, standing while doing dishes, moving between rooms. None of this is labeled "exercise." All of it is demanding that her muscles work, her cardiovascular system respond, her metabolic rate stay elevated.
+      </p>
+
+      <div class="pull-quote">
+        <p>"The body doesn't care if movement is intentional or incidental. It only cares that movement happens. The halmeoni model works because movement is constant, not heroic."</p>
+      </div>
+
+      <p>
+        The Korean concept here is 걷기 (geodki) — walking, but with cultural weight. Walking as a practice, as a connection to place and community, not as a fitness metric. This is different from the Western frame of "I need to get my steps in." It's ambient motion, necessary motion, motion embedded in the texture of life.
+      </p>
+
+      <h2 id="pattern">The Halmeoni Pattern</h2>
+
+      <h3>Squatting, Not Sitting</h3>
+      <p>
+        Deep squatting to cook, clean, garden — this is profound strength training. Your quads, glutes, and stabiliser muscles are under load for sustained periods. Over decades, this produces remarkable lower-body strength and mobility. Western bodies have lost the capacity to squat because we've engineered squatting out of our lives.
+      </p>
+
+      <h3>Walking to Purpose</h3>
+      <p>
+        Every errand involves walking. The market is walked to, not driven to. This is not "cardio sessions," it's constant low-level aerobic work, interspersed throughout the day. Cardiovascular adaptation happens through consistent stimulus, not intensity. The halmeoni's heart is in exceptional shape because it's been moderately challenged for hours every day for decades.
+      </p>
+
+      <h3>Floor-Sitting</h3>
+      <p>
+        Sitting on the floor at a low table requires hip mobility, core engagement, and spine stability that a chair doesn't demand. The transition between standing and floor sitting multiple times a day is a daily functional movement practice.
+      </p>
+
+      <h3>Load-Carrying</h3>
+      <p>
+        Groceries, water, firewood, vegetables — the body is regularly under load. This is not gym-isolated strength. It's functional strength that transfers directly to real life. Your core, back, and legs get stronger because they're regularly asked to hold and move weight.
+      </p>
+
+      <div class="info-box">
+        <div class="info-box-title">The One-Change Experiment</div>
+        <p><strong>Take one thing you do sitting.</strong> Work at a desk, eating, watching TV — pick one. Now do it standing, or squatting, or moving.</p>
+        <p><strong>Walk to one errand you'd normally drive.</strong> Even just one trip per week. Your body registers this as ambient movement over time.</p>
+        <p>These are not gym-level interventions. They're the NEAT interventions that actually produce change, because they're sustainable and repeated.</p>
+      </div>
+
+      <!-- INLINE LEAD MAGNET CTA -->
+      <div class="article-lead-magnet">
+        <div class="alm-left">
+          <div class="alm-eye">Movement Protocol</div>
+          <div class="alm-title">The 3am Protocol</div>
+          <div class="alm-sub">How to build NEAT into your day without going to the gym. Movement embedded in life, not separate from it.</div>
+        </div>
+        <div class="alm-right">
+          <a href="product-single.html" class="alm-btn">Get the protocol →</a>
+          <div class="alm-note">$17 · Instant download</div>
+        </div>
+      </div>
+
+      <h2 id="why-works">Why This Model Actually Works</h2>
+
+      <p>
+        The gym model works if you're exceptionally disciplined and consistent. Most people aren't, and that's not weakness — the gym model requires you to generate motivation for something that has no immediate life-payoff. You're not really trying to "work out," you're trying to earn health points that you'll theoretically benefit from later.
+      </p>
+
+      <p>
+        The NEAT model works because movement is incidental to living. You're not trying to exercise. You're trying to get somewhere, or accomplish something. The exercise is a byproduct. This is psychologically sustainable in a way the intentional model rarely is.
+      </p>
+
+      <p>
+        The halmeoni approach is also biomechanically wise. Constant low-level demand produces adaptation without the overuse injury risk that comes from concentrated high-intensity sessions. Your body learns to be strong and mobile because it's asked to be strong and mobile most of the time.
+      </p>
+
+      <div class="article-tags">
+        <div class="tag-pill">Movement Science</div>
+        <div class="tag-pill">NEAT</div>
+        <div class="tag-pill">Functional Fitness</div>
+        <div class="tag-pill">Longevity</div>
+        <div class="tag-pill">Korean Wellness</div>
+        <div class="tag-pill">Geodki</div>
+      </div>
+
+    </article>
+  </main>
+
+  <aside class="article-sidebar">
+
+    <div class="toc-card">
+      <div class="toc-title">In this article</div>
+      <ul class="toc-list">
+        <li><a href="#neat"><span class="toc-num">01</span> What NEAT is</a></li>
+        <li><a href="#pattern"><span class="toc-num">02</span> The halmeoni pattern</a></li>
+        <li><a href="#why-works"><span class="toc-num">03</span> Why it works</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-cta">
+      <div class="sidebar-cta-eye">Movement Protocol</div>
+      <div class="sidebar-cta-title">The 3am Protocol</div>
+      <div class="sidebar-cta-sub">Build NEAT into your day. Movement embedded in life, not separate from it.</div>
+      <a href="product-single.html" class="sidebar-cta-btn">$17 · Get it →</a>
+    </div>
+
+    <div class="sidebar-related-title">Related reading</div>
+    <div class="related-mini">
+      <div class="related-mini-item">
+        <img src="lila-article-morning.jpg" class="related-mini-img" alt="Morning" onerror="this.style.background='#c4dfc8'" />
+        <div class="related-mini-text">
+          <div class="related-mini-cat">Circadian Biology</div>
+          <div class="related-mini-title"><a href="morning-habit-5-minutes.html">The 5-Minute Morning Habit</a></div>
+        </div>
+      </div>
+      <div class="related-mini-item">
+        <img src="thumb-energy.jpg" class="related-mini-img" alt="Energy" onerror="this.style.background='#c4dfc8'" />
+        <div class="related-mini-text">
+          <div class="related-mini-cat">Energy</div>
+          <div class="related-mini-title"><a href="3pm-crash-not-normal.html">The 3pm Crash Isn't Normal</a></div>
+        </div>
+      </div>
+      <div class="related-mini-item">
+        <img src="thumb-kwellness.jpg" class="related-mini-img" alt="Korean wellness" onerror="this.style.background='#c4dfc8'" />
+        <div class="related-mini-text">
+          <div class="related-mini-cat">Korean Wellness</div>
+          <div class="related-mini-title"><a href="nunchi-korean-art.html">Nunchi: The Korean Art</a></div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<section class="related-section">
+  <div class="wrap">
+    <div class="related-header">
+      <h2>Keep reading</h2>
+      <a href="journal.html">All articles →</a>
+    </div>
+    <div class="related-grid">
+      <div class="related-card">
+        <img src="lila-article-morning.jpg" class="related-card-img" alt="Morning" onerror="this.style.background='#c4dfc8';this.style.height='180px'" />
+        <div class="related-card-body">
+          <div class="related-card-cat">Circadian Biology</div>
+          <div class="related-card-title"><a href="morning-habit-5-minutes.html">The 5-Minute Morning Habit</a></div>
+          <div class="related-card-meta">Feb 24, 2026 · 5 min read</div>
+        </div>
+      </div>
+      <div class="related-card">
+        <img src="thumb-nutrition-new.jpg" class="related-card-img" alt="Food" onerror="this.style.background='#c4dfc8';this.style.height='180px'" />
+        <div class="related-card-body">
+          <div class="related-card-cat">Korean Food</div>
+          <div class="related-card-title"><a href="kimchi-fried-rice-healthy.html">Kimchi Fried Rice Healthy</a></div>
+          <div class="related-card-meta">March 3, 2026 · 6 min read</div>
+        </div>
+      </div>
+      <div class="related-card">
+        <img src="thumb-kwellness.jpg" class="related-card-img" alt="Korean wellness" onerror="this.style.background='#c4dfc8';this.style.height='180px'" />
+        <div class="related-card-body">
+          <div class="related-card-cat">Korean Wellness</div>
+          <div class="related-card-title"><a href="nunchi-korean-art.html">Nunchi: The Korean Art</a></div>
+          <div class="related-card-meta">Jan 27, 2026 · 7 min read</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter-section">
+  <div class="nl-inner">
+    <div class="nl-eyebrow">Read with 2,400+ people</div>
+    <h2 class="nl-headline">Get the newsletter<br>every <em>Sunday morning</em></h2>
+    <p class="nl-sub">Evidence-backed wellness through Korean tradition. Science meets culture. Every Sunday. Free.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="your@email.com" />
+      <button class="nl-btn" onclick="beehiivSubscribe(this)">Subscribe</button>
+    </div>
+    <div class="nl-note">Free · Unsubscribe anytime</div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-name">Lila Park</div>
+      <div class="footer-kr">· 이라 박</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Lila Park. Made with 💛</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const article = document.getElementById('article-body');
+    if (!article) return;
+    const articleTop = article.offsetTop;
+    const articleH = article.offsetHeight;
+    const scrolled = window.scrollY - articleTop;
+    const pct = Math.min(Math.max(scrolled / articleH, 0), 1);
+    document.getElementById('progress').style.width = (pct * 100) + '%';
+  });
+</script>
+
+<script>
+  function beehiivSubscribe(inputEl) {
+    const email = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row')
+                        ?.querySelector('input[type="email"]')?.value?.trim()
+                 || inputEl.closest('form')?.querySelector('input[type="email"]')?.value?.trim()
+                 || '';
+    const url = email
+      ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
+      : 'https://the3amletters.beehiiv.com/subscribe';
+    window.open(url, '_blank');
+  }
+</script>
+</body>
+</html>
