@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>html{opacity:0}</style>
+  <style>html{opacity:0}
+    /* ── Stable scrollbar — prevents flash between pages ── */
+    html { overflow-y: scroll; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(95,168,106,0.25); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(95,168,106,0.5); }
+    </style>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nunchi: The Korean Art of Reading the Room — Lila Park</title>
