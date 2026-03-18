@@ -1135,8 +1135,10 @@
         return;
       }
       var fd = new FormData();
-      fd.append('email', email);
-      fetch('https://the3amletters.beehiiv.com/subscribe', { method: 'POST', mode: 'no-cors', body: fd }).catch(function(){});
+      fd.append('form_id', '2a23d822-bfed-4c59-9d87-cd5eac674bdd');
+      fd.append('form[email]', email);
+      fd.append('referrer', document.referrer || '');
+      fetch('https://subscribe-forms.beehiiv.com/api/submit', { method: 'POST', body: fd }).catch(function(){});
       if (input) input.value = '';
       var btn = inputEl;
       btn.textContent = "✓ You're in — check your inbox!";
@@ -1155,7 +1157,7 @@
       }
       var fd = new FormData();
       fd.append('email', email);
-      fetch('https://the3amletters.beehiiv.com/subscribe', { method: 'POST', mode: 'no-cors', body: fd }).catch(function(){});
+      fetch('https://subscribe-forms.beehiiv.com/api/submit', { method: 'POST', body: fd }).catch(function(){});
       if (input) input.value = '';
       var btn = document.querySelector('.sub-btn');
       if (btn) {
