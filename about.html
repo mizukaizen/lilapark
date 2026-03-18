@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
   <style>body{opacity:0}
-    /* ── Stable scrollbar — prevents flash between pages ── */
+    /* ── Scrollbar — hidden on mobile, minimal on desktop ── */
     html { overflow-y: scroll; }
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(95,168,106,0.25); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(95,168,106,0.5); }
+    @media (min-width: 768px) {
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(95,168,106,0.25); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(95,168,106,0.5); }
+    }
     </style>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />

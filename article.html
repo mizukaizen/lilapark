@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
   <style>body{opacity:0}
-    /* ── Stable scrollbar — prevents flash between pages ── */
+    /* ── Scrollbar — hidden on mobile, minimal on desktop ── */
     html { overflow-y: scroll; }
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(95,168,106,0.25); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(95,168,106,0.5); }
+    @media (min-width: 768px) {
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(95,168,106,0.25); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(95,168,106,0.5); }
+    }
     </style>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
@@ -468,12 +470,7 @@
     .footer-links a:hover { color: rgba(255,255,255,0.8); }
     .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
 
-    /* progress bar */
-    .read-progress {
-      position: fixed; top: 0; left: 0; z-index: 99;
-      height: 2px; background: var(--accent);
-      width: 0%; transition: width .1s linear;
-    }
+    
 
     /* ── PAGE TRANSITIONS ── */
     body.page-exit {
@@ -596,7 +593,13 @@
 </head>
 <body>
 
-<div class="read-progress" id="progress"></div>
+<div class="scroll-chip" id="scroll-chip">
+  <svg class="chip-ring" viewBox="0 0 20 20">
+    <circle class="track" cx="10" cy="10" r="8"/>
+    <circle class="fill" id="chip-fill" cx="10" cy="10" r="8"/>
+  </svg>
+  <span id="chip-pct">0%</span>
+</div>
 
 <!-- ── NAV ── -->
 <nav class="nav">
@@ -933,7 +936,16 @@
     const articleH = article.offsetHeight;
     const scrolled = window.scrollY - articleTop;
     const pct = Math.min(Math.max(scrolled / articleH, 0), 1);
-    document.getElementById('progress').style.width = (pct * 100) + '%';
+    const chip = document.getElementById('scroll-chip');
+    const fill = document.getElementById('chip-fill');
+    const pctLabel = document.getElementById('chip-pct');
+    const circ = 2 * Math.PI * 8;
+    fill.style.strokeDashoffset = circ;
+    const p = Math.round(pct * 100);
+    pctLabel.textContent = p + '%';
+    fill.style.strokeDashoffset = circ * (1 - pct);
+    if (pct > 0.04 && pct < 0.97) { chip.classList.add('visible'); }
+    else { chip.classList.remove('visible'); }
   });
 </script>
 
