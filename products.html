@@ -872,16 +872,26 @@
 
 
   <script>
-    // Beehiiv subscribe handler — interim until native embed wired
+        // Seamless subscribe — Beehiiv in background, on-page success state
     function beehiivSubscribe(inputEl) {
-      const email = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row')
-                          ?.querySelector('input[type="email"]')?.value?.trim()
-                   || inputEl.closest('form')?.querySelector('input[type="email"]')?.value?.trim()
-                   || '';
-      const url = email
-        ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
-        : 'https://the3amletters.beehiiv.com/subscribe';
-      window.open(url, '_blank');
+      var form = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row, form, .nl-inner');
+      var input = form ? form.querySelector('input[type="email"]') : null;
+      var email = (input ? input.value.trim() : '') || '';
+      if (!email || !email.includes('@')) {
+        if (input) { input.focus(); input.style.outline = '2px solid #e57373'; setTimeout(function(){ input.style.outline = ''; }, 1500); }
+        return;
+      }
+      var fd = new FormData();
+      fd.append('email', email);
+      fetch('https://the3amletters.beehiiv.com/subscribe', { method: 'POST', mode: 'no-cors', body: fd }).catch(function(){});
+      if (input) input.value = '';
+      var btn = inputEl;
+      btn.textContent = '✓ You're in — check your inbox!';
+      btn.disabled = true;
+      btn.style.background = '#5fa86a';
+      btn.style.color = '#fff';
+      btn.style.opacity = '1';
+      setTimeout(function(){ btn.textContent = 'Subscribe'; btn.disabled = false; btn.style.background = ''; btn.style.color = ''; }, 5000);
     }
   </script>
 <script>
