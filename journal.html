@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>html{opacity:0}
+  <style>body{opacity:0}
     /* ── Stable scrollbar — prevents flash between pages ── */
     html { overflow-y: scroll; }
     ::-webkit-scrollbar { width: 5px; }
@@ -252,7 +252,75 @@
       text-decoration: none; color: inherit;
     }
     a.article-card:hover .article-card-title { color: var(--accent); }
-  </style>
+  
+    /* ── HAMBURGER NAV ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 4px;
+      flex-shrink: 0;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-1);
+      border-radius: 2px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 860px) {
+      .nav-hamburger { display: flex; }
+      .nav-sub { display: none !important; }
+      .nav-links {
+        position: absolute !important;
+        top: 58px !important;
+        left: 0 !important; right: 0 !important;
+        background: rgba(250,250,247,0.98) !important;
+        backdrop-filter: blur(16px) !important;
+        border-bottom: 1px solid var(--border) !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 6px 24px 16px !important;
+        gap: 0 !important;
+        z-index: 99 !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.07) !important;
+        display: none !important;
+      }
+      .nav-links.nav-open { display: flex !important; }
+      .nav-links li { padding: 12px 0; border-bottom: 1px solid var(--border); width: 100%; }
+      .nav-links li:last-child { border-bottom: none; }
+      .nav-links a { font-size: 0.95rem !important; color: var(--text-1) !important; }
+    }
+
+    /* ── COMMON SMALL SCREEN FIXES ── */
+    @media (max-width: 600px) {
+      .nl-form { flex-direction: column; }
+      .nl-input, .nl-btn { width: 100%; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-links { flex-wrap: wrap; gap: 12px; }
+      .wrap { padding: 0 16px; }
+      .bridge-strip { flex-direction: column; gap: 12px; }
+      .sub-input-row { flex-direction: column; }
+      .sub-btn { width: 100%; }
+    }
+    /* ── JOURNAL PAGE RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .hero-title { font-size: 2.1rem; }
+      .filter-tabs { flex-wrap: wrap; gap: 6px; padding-bottom: 4px; }
+      .filter-tab { font-size: 0.78rem; padding: 6px 12px; }
+      .section { padding: 48px 0; }
+    }
+    </style>
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -477,7 +545,7 @@
 
   // PAGE TRANSITIONS — double RAF ensures opacity:0 is painted before fade-in starts
   (function() {
-    var el = document.documentElement;
+    var el = document.body;
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
         el.style.transition = 'opacity 0.35s ease-out';
@@ -493,10 +561,37 @@
     var href = link.getAttribute('href');
     if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || link.target === '_blank') return;
     e.preventDefault();
-    document.documentElement.style.transition = 'opacity 0.22s ease';
-    document.documentElement.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.22s ease';
+    document.body.style.opacity = '0';
     setTimeout(function() { window.location.href = href; }, 230);
   });
+</script>
+<script>
+  (function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (!navLinks) return;
+    var btn = document.createElement('button');
+    btn.className = 'nav-hamburger';
+    btn.setAttribute('aria-label', 'Open menu');
+    btn.innerHTML = '<span></span><span></span><span></span>';
+    var navInner = document.querySelector('.nav-inner');
+    if (navInner) navInner.appendChild(btn);
+    btn.addEventListener('click', function() {
+      var open = navLinks.classList.toggle('nav-open');
+      btn.classList.toggle('is-open', open);
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav')) {
+        navLinks.classList.remove('nav-open');
+        btn.classList.remove('is-open');
+      }
+    });
+    navLinks.addEventListener('click', function() {
+      navLinks.classList.remove('nav-open');
+      btn.classList.remove('is-open');
+    });
+  })();
 </script>
 </body>
 </html>
