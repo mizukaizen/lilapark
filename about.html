@@ -1040,5 +1040,26 @@
       window.open(url, '_blank');
     }
   </script>
+<script>
+  (function() {
+    var el = document.documentElement;
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        el.style.transition = 'opacity 0.35s ease-out';
+        el.style.opacity = '1';
+      });
+    });
+  })();
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || link.target === '_blank') return;
+    e.preventDefault();
+    document.documentElement.style.transition = 'opacity 0.22s ease';
+    document.documentElement.style.opacity = '0';
+    setTimeout(function() { window.location.href = href; }, 230);
+  });
+</script>
 </body>
 </html>
