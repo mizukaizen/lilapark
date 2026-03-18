@@ -428,6 +428,18 @@
       height: 2px; background: var(--accent);
       width: 0%; transition: width .1s linear;
     }
+
+    /* ── PAGE TRANSITIONS ── */
+    @keyframes page-enter {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body { animation: page-enter 0.4s ease-out both; }
+    body.page-exit {
+      opacity: 0; transform: translateY(-6px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      animation: none;
+    }
   </style>
 </head>
 <body>
@@ -569,7 +581,7 @@
           <div class="alm-sub">The exact protocol for moving from light sleep into deep, restorative cycles. Step-by-step — and the science behind why this works.</div>
         </div>
         <div class="alm-right">
-          <a href="product-single.html" class="alm-btn">Get the protocol →</a>
+          <a href="https://buy.polar.sh/polar_cl_2e2c3cf6-16e2-4ab7-afb0-501371d0d6ab" target="_blank" rel="noopener" class="alm-btn">Get the protocol →</a>
           <div class="alm-note">$17 · Instant download</div>
         </div>
       </div>
@@ -610,7 +622,7 @@
       <div class="sidebar-cta-eye">Sleep Architecture Protocol</div>
       <div class="sidebar-cta-title">The 3am Protocol</div>
       <div class="sidebar-cta-sub">Move from light sleep into deep, restorative cycles. The exact protocol — and the mechanisms behind why it works.</div>
-      <a href="product-single.html" class="sidebar-cta-btn">$17 · Get it →</a>
+      <a href="https://buy.polar.sh/polar_cl_2e2c3cf6-16e2-4ab7-afb0-501371d0d6ab" target="_blank" rel="noopener" class="sidebar-cta-btn">$17 · Get it →</a>
     </div>
 
     <div class="sidebar-related-title">Related reading</div>

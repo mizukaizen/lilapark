@@ -524,6 +524,18 @@
       .guarantee-card { padding: 36px 24px; }
       .final-cta-title { font-size: 2.2rem; }
     }
+
+    /* ── PAGE TRANSITIONS ── */
+    @keyframes page-enter {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body { animation: page-enter 0.4s ease-out both; }
+    body.page-exit {
+      opacity: 0; transform: translateY(-6px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      animation: none;
+    }
   </style>
 </head>
 <body>
@@ -537,7 +549,7 @@
         <span class="nav-kr">박리라</span>
       </a>
       <ul class="nav-links">
-        <li><a href="article.html">Journal</a></li>
+        <li><a href="journal.html">Journal</a></li>
         <li><a href="products.html" class="active">Products</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
@@ -1140,5 +1152,19 @@
     });
   </script>
 
+
+  <script>
+    // Beehiiv subscribe handler — interim until native embed wired
+    function beehiivSubscribe(inputEl) {
+      const email = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row')
+                          ?.querySelector('input[type="email"]')?.value?.trim()
+                   || inputEl.closest('form')?.querySelector('input[type="email"]')?.value?.trim()
+                   || '';
+      const url = email
+        ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
+        : 'https://the3amletters.beehiiv.com/subscribe';
+      window.open(url, '_blank');
+    }
+  </script>
 </body>
 </html>

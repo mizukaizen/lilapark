@@ -557,6 +557,18 @@
       .nl-form { flex-direction: column; }
       .press-logos { gap: 24px; }
     }
+
+    /* ── PAGE TRANSITIONS ── */
+    @keyframes page-enter {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body { animation: page-enter 0.4s ease-out both; }
+    body.page-exit {
+      opacity: 0; transform: translateY(-6px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      animation: none;
+    }
   </style>
 </head>
 <body>

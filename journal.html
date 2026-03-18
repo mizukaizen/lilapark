@@ -217,6 +217,23 @@
     .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.45); transition: color .15s; }
     .footer-links a:hover { color: rgba(255,255,255,0.8); }
     .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+
+    /* ── PAGE TRANSITIONS ── */
+    @keyframes page-enter {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body { animation: page-enter 0.4s ease-out both; }
+    body.page-exit {
+      opacity: 0; transform: translateY(-6px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      animation: none;
+    }
+    a.article-card {
+      display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+    }
+    a.article-card:hover .article-card-title { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -255,12 +272,12 @@
 <!-- ── FILTER TABS ── -->
 <section class="wrap">
   <div class="filter-tabs">
-    <div class="filter-tab active">All</div>
-    <div class="filter-tab">Sleep</div>
-    <div class="filter-tab">Food</div>
-    <div class="filter-tab">Korean Wellness</div>
-    <div class="filter-tab">Energy</div>
-    <div class="filter-tab">Nervous System</div>
+    <button class="filter-tab active" data-cat="">All</button>
+    <button class="filter-tab" data-cat="sleep">Sleep</button>
+    <button class="filter-tab" data-cat="food">Food</button>
+    <button class="filter-tab" data-cat="korean-wellness">Korean Wellness</button>
+    <button class="filter-tab" data-cat="energy">Energy</button>
+    <button class="filter-tab" data-cat="nervous-system">Nervous System</button>
   </div>
 </section>
 
@@ -269,114 +286,114 @@
   <div class="articles-grid">
 
     <!-- 1. article.html -->
-    <div class="article-card">
+    <a href="article.html" class="article-card" data-cat="sleep">
       <img src="lila-sleep-styled.jpg" class="article-card-img" alt="Sleep science" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Sleep Science</div>
-        <h2 class="article-card-title"><a href="article.html">Why You Can't Catch Up on Sleep (And What Actually Works)</a></h2>
+        <h2 class="article-card-title">Why You Can't Catch Up on Sleep (And What Actually Works)</h2>
         <p class="article-card-deck">The science of sleep debt is more unforgiving than you've been told — but there's a precise recovery window that most people miss entirely.</p>
         <div class="article-card-meta">Lila Park · March 14, 2026 · 9 min read</div>
       </div>
-    </div>
+    </a>
 
     <!-- 2. exhausted-after-8-hours.html -->
-    <div class="article-card">
+    <a href="exhausted-after-8-hours.html" class="article-card" data-cat="sleep">
       <img src="thumb-sleep-new.jpg" class="article-card-img" alt="Sleep architecture" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Sleep Science</div>
-        <h2 class="article-card-title"><a href="exhausted-after-8-hours.html">Why You're Exhausted Even After 8 Hours</a></h2>
+        <h2 class="article-card-title">Why You're Exhausted Even After 8 Hours</h2>
         <p class="article-card-deck">You're sleeping the right amount but waking up wrecked. The problem isn't duration — it's what's happening inside those 8 hours.</p>
         <div class="article-card-meta">Lila Park · March 10, 2026 · 8 min read</div>
       </div>
-    </div>
+    </a>
 
     <!-- 3. kimchi-fried-rice-healthy.html -->
-    <div class="article-card">
+    <a href="kimchi-fried-rice-healthy.html" class="article-card" data-cat="food">
       <img src="thumb-nutrition-new.jpg" class="article-card-img" alt="Kimchi fried rice" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Korean Food</div>
-        <h2 class="article-card-title"><a href="kimchi-fried-rice-healthy.html">I Made Kimchi Fried Rice Healthy Without Ruining It</a></h2>
+        <h2 class="article-card-title">I Made Kimchi Fried Rice Healthy Without Ruining It</h2>
         <p class="article-card-deck">Traditional kimchi fried rice is already more nutritious than most wellness food. Here's what I changed — and what I deliberately left alone.</p>
         <div class="article-card-meta">Lila Park · March 3, 2026 · 6 min read</div>
       </div>
-    </div>
+    </a>
 
     <!-- 4. morning-habit-5-minutes.html -->
-    <div class="article-card">
+    <a href="morning-habit-5-minutes.html" class="article-card" data-cat="energy">
       <img src="lila-article-morning.jpg" class="article-card-img" alt="Morning protocol" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Circadian Biology</div>
-        <h2 class="article-card-title"><a href="morning-habit-5-minutes.html">The 5-Minute Morning Habit That Changed My Whole Day</a></h2>
+        <h2 class="article-card-title">The 5-Minute Morning Habit That Changed My Whole Day</h2>
         <p class="article-card-deck">I spent years optimising my morning for productivity. The change that actually worked took five minutes and cost nothing.</p>
         <div class="article-card-meta">Lila Park · Feb 24, 2026 · 5 min read</div>
       </div>
-    </div>
+    </a>
 
     <!-- 5. move-like-korean-grandma.html -->
-    <div class="article-card">
+    <a href="move-like-korean-grandma.html" class="article-card" data-cat="korean-wellness">
       <img src="thumb-movement.jpg" class="article-card-img" alt="Movement" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Movement</div>
-        <h2 class="article-card-title"><a href="move-like-korean-grandma.html">You Don't Need the Gym — You Need to Move Like a Korean Grandma</a></h2>
+        <h2 class="article-card-title">You Don't Need the Gym — You Need to Move Like a Korean Grandma</h2>
         <p class="article-card-deck">Korean grandmothers are among the most physically capable older adults in the world. Their secret isn't exercise — it's movement woven into life.</p>
         <div class="article-card-meta">Lila Park · Feb 17, 2026 · 7 min read</div>
       </div>
-    </div>
+    </a>
 
     <!-- 6. 3pm-crash-not-normal.html -->
-    <div class="article-card">
+    <a href="3pm-crash-not-normal.html" class="article-card" data-cat="energy">
       <img src="thumb-energy.jpg" class="article-card-img" alt="Energy and circadian rhythm" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Energy</div>
-        <h2 class="article-card-title"><a href="3pm-crash-not-normal.html">The 3pm Crash Isn't Normal — It's a Timing Problem</a></h2>
+        <h2 class="article-card-title">The 3pm Crash Isn't Normal — It's a Timing Problem</h2>
         <p class="article-card-deck">That wall you hit at 3pm isn't weakness. It's your circadian system running a process at the wrong time.</p>
         <div class="article-card-meta">Lila Park · Feb 10, 2026 · 6 min read</div>
       </div>
-    </div>
+    </a>
 
     <!-- 7. gut-second-brain.html -->
-    <div class="article-card">
+    <a href="gut-second-brain.html" class="article-card" data-cat="nervous-system">
       <img src="thumb-gut.jpg" class="article-card-img" alt="Gut-brain axis" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Gut Health</div>
-        <h2 class="article-card-title"><a href="gut-second-brain.html">Your Gut Is Your Second Brain — But Not in the Way Influencers Mean</a></h2>
+        <h2 class="article-card-title">Your Gut Is Your Second Brain — But Not in the Way Influencers Mean</h2>
         <p class="article-card-deck">The gut-brain connection is real and well-evidenced. It's also one of the most mangled concepts in wellness content.</p>
         <div class="article-card-meta">Lila Park · Feb 3, 2026 · 9 min read</div>
       </div>
-    </div>
+    </a>
 
     <!-- 8. nunchi-korean-art.html -->
-    <div class="article-card">
+    <a href="nunchi-korean-art.html" class="article-card" data-cat="korean-wellness">
       <img src="thumb-kwellness.jpg" class="article-card-img" alt="Nunchi and social awareness" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Korean Wellness</div>
-        <h2 class="article-card-title"><a href="nunchi-korean-art.html">Nunchi: The Korean Art of Reading the Room</a></h2>
+        <h2 class="article-card-title">Nunchi: The Korean Art of Reading the Room</h2>
         <p class="article-card-deck">눈치 (nunchi) is usually translated as social awareness. In Korean culture it's closer to a full-body attunement — and I think of it as a nervous system practice.</p>
         <div class="article-card-meta">Lila Park · Jan 27, 2026 · 7 min read</div>
       </div>
-    </div>
+    </a>
 
     <!-- 9. perimenopause-sleep.html -->
-    <div class="article-card">
+    <a href="perimenopause-sleep.html" class="article-card" data-cat="sleep">
       <img src="thumb-hormones.jpg" class="article-card-img" alt="Perimenopause and sleep" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Sleep Science</div>
-        <h2 class="article-card-title"><a href="perimenopause-sleep.html">Perimenopause Ruined My Sleep. Here's What Actually Helped.</a></h2>
+        <h2 class="article-card-title">Perimenopause Ruined My Sleep. Here's What Actually Helped.</h2>
         <p class="article-card-deck">The honest picture is more complicated than either the dismissive medical mainstream or the supplement industry will tell you.</p>
         <div class="article-card-meta">Lila Park · Jan 20, 2026 · 10 min read</div>
       </div>
-    </div>
+    </a>
 
     <!-- 10. breathwork-better-than-478.html -->
-    <div class="article-card">
+    <a href="breathwork-better-than-478.html" class="article-card" data-cat="nervous-system">
       <img src="thumb-breathwork.jpg" class="article-card-img" alt="Breathwork and nervous system" onerror="this.style.background='#c4dfc8'" />
       <div class="article-card-body">
         <div class="article-card-cat">Nervous System</div>
-        <h2 class="article-card-title"><a href="breathwork-better-than-478.html">4-7-8 Breathing Is Fine. This Is Better.</a></h2>
+        <h2 class="article-card-title">4-7-8 Breathing Is Fine. This Is Better.</h2>
         <p class="article-card-deck">There's a more precise method — less memorable as a ratio, more effective as a nervous system intervention.</p>
         <div class="article-card-meta">Lila Park · Jan 13, 2026 · 6 min read</div>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
@@ -413,16 +430,37 @@
 </footer>
 
 <script>
-  function beehiivSubscribe(inputEl) {
-    const email = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row')
-                        ?.querySelector('input[type="email"]')?.value?.trim()
-                 || inputEl.closest('form')?.querySelector('input[type="email"]')?.value?.trim()
-                 || '';
+  // FILTER TABS
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      document.querySelectorAll('.article-card').forEach(card => {
+        card.style.display = (!cat || card.dataset.cat === cat) ? '' : 'none';
+      });
+    });
+  });
+
+  // BEEHIIV SUBSCRIBE
+  function beehiivSubscribe(btn) {
+    const email = btn.closest('.nl-form')?.querySelector('input[type="email"]')?.value?.trim() || '';
     const url = email
       ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
       : 'https://the3amletters.beehiiv.com/subscribe';
     window.open(url, '_blank');
   }
+
+  // PAGE EXIT TRANSITION
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || link.target === '_blank') return;
+    e.preventDefault();
+    document.body.classList.add('page-exit');
+    setTimeout(() => { window.location.href = href; }, 300);
+  });
 </script>
 </body>
 </html>

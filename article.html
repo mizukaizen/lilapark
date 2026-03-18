@@ -428,6 +428,18 @@
       height: 2px; background: var(--accent);
       width: 0%; transition: width .1s linear;
     }
+
+    /* ── PAGE TRANSITIONS ── */
+    @keyframes page-enter {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body { animation: page-enter 0.4s ease-out both; }
+    body.page-exit {
+      opacity: 0; transform: translateY(-6px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      animation: none;
+    }
   </style>
 </head>
 <body>
@@ -659,7 +671,7 @@
       <div class="sidebar-cta-eye">Free 7-Day Protocol</div>
       <div class="sidebar-cta-title">The 3am Protocol</div>
       <div class="sidebar-cta-sub">Stop waking in the night — in 7 days. The cortisol-adenosine correction method, free as a PDF. No email required to start.</div>
-      <a href="product-single.html" class="sidebar-cta-btn">Get the free protocol →</a>
+      <a href="https://buy.polar.sh/polar_cl_2e2c3cf6-16e2-4ab7-afb0-501371d0d6ab" target="_blank" rel="noopener" class="sidebar-cta-btn">Get the free protocol →</a>
     </div>
 
     <!-- related mini -->
