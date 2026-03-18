@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>html{opacity:0}</style>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perimenopause Ruined My Sleep. Here's What Actually Helped. — Lila Park</title>
@@ -431,14 +432,13 @@
 
     /* ── PAGE TRANSITIONS ── */
     @keyframes page-enter {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
-    body { animation: page-enter 0.4s ease-out both; }
+    html { animation: page-enter 0.35s ease-out both; }
     body.page-exit {
       opacity: 0; transform: translateY(-6px);
-      transition: opacity 0.28s ease, transform 0.28s ease;
-      animation: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
   </style>
 </head>
