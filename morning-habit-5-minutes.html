@@ -281,6 +281,21 @@
       .article-body { padding-bottom: 40px; }
       .article-byline { flex-wrap: wrap; gap: 10px; }
     }
+    
+    /* ── ARTICLE LAYOUT — MOBILE SIDEBAR FIX ── */
+    @media (max-width: 860px) {
+      .article-layout {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+        padding: 40px 20px 0 !important;
+      }
+      .article-sidebar { display: none; } /* related section at bottom handles this */
+    }
+    @media (max-width: 600px) {
+      .article-layout { padding: 28px 16px 0 !important; }
+      .article-body p { font-size: 0.97rem; line-height: 1.8; }
+      .article-body li { font-size: 0.97rem; }
+    }
     </style>
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
