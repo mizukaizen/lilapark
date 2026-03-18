@@ -708,7 +708,8 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-photo { aspect-ratio: 4 / 3; } /* landscape crop on mobile — shows face */
+      .hero-photo { aspect-ratio: 4 / 3; }
+      .hero-photo img { object-position: right 62%; } /* pull crop down to show her face */
       .hero-subscribe { padding: 36px 32px; border-left: none; border-top: 1px solid var(--border); }
       .articles-grid { grid-template-columns: 1fr 1fr; }
       .products-grid { grid-template-columns: 1fr 1fr; }
