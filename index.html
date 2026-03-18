@@ -708,8 +708,8 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-photo { aspect-ratio: 3 / 2; }
-      .hero-photo img { object-position: center 35%; } /* mobile crop — show face + clothing + environment */
+      .hero-photo { aspect-ratio: 4 / 5; }
+      .hero-photo img { object-position: center 30%; } /* portrait container — shows face, kimono, environment */
       .hero-subscribe { padding: 36px 32px; border-left: none; border-top: 1px solid var(--border); }
       .articles-grid { grid-template-columns: 1fr 1fr; }
       .products-grid { grid-template-columns: 1fr 1fr; }
@@ -831,10 +831,7 @@
 <section class="hero">
   <!-- Photo side -->
   <div class="hero-photo">
-    <picture>
-      <source media="(max-width: 860px)" srcset="lila-ghibli-mobile.jpg">
-      <img src="lila-ghibli-l.jpg" alt="Lila Park" />
-    </picture>
+    <img src="lila-ghibli-l.jpg" alt="Lila Park" />
     <div class="hero-photo-overlay"></div>
 
     <!-- Botanical leaf -->
