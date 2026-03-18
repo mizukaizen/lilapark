@@ -220,14 +220,9 @@
     .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
 
     /* ── PAGE TRANSITIONS ── */
-    @keyframes page-enter {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    html { animation: page-enter 0.35s ease-out both; }
     body.page-exit {
-      opacity: 0; transform: translateY(-6px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      opacity: 0;
+      transition: opacity 0.25s ease;
     }
     a.article-card {
       display: flex; flex-direction: column;
@@ -451,15 +446,27 @@
     window.open(url, '_blank');
   }
 
-  // PAGE EXIT TRANSITION
+  // PAGE TRANSITIONS — double RAF ensures opacity:0 is painted before fade-in starts
+  (function() {
+    var el = document.documentElement;
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        el.style.transition = 'opacity 0.35s ease-out';
+        el.style.opacity = '1';
+      });
+    });
+  })();
+
+  // PAGE EXIT
   document.addEventListener('click', function(e) {
-    const link = e.target.closest('a[href]');
+    var link = e.target.closest('a[href]');
     if (!link) return;
-    const href = link.getAttribute('href');
+    var href = link.getAttribute('href');
     if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || link.target === '_blank') return;
     e.preventDefault();
-    document.body.classList.add('page-exit');
-    setTimeout(() => { window.location.href = href; }, 300);
+    document.documentElement.style.transition = 'opacity 0.22s ease';
+    document.documentElement.style.opacity = '0';
+    setTimeout(function() { window.location.href = href; }, 230);
   });
 </script>
 </body>

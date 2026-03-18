@@ -527,14 +527,9 @@
     }
 
     /* ── PAGE TRANSITIONS ── */
-    @keyframes page-enter {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    html { animation: page-enter 0.35s ease-out both; }
     body.page-exit {
-      opacity: 0; transform: translateY(-6px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      opacity: 0;
+      transition: opacity 0.25s ease;
     }
   </style>
 </head>
