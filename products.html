@@ -533,6 +533,11 @@
     @media (max-width: 480px) {
       .products-grid { grid-template-columns: 1fr; }
       .trust-badges { flex-wrap: wrap; gap: 8px; }
+      .trust-row {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 10px 8px; max-width: 300px; margin: 0 auto; text-align: left;
+      }
+      .trust-badge { justify-content: flex-start; }
     }
     </style>
     <!-- Favicon -->
@@ -575,7 +580,7 @@
       <div class="trust-badge"><span>🔒</span> Instant digital access</div>
       <div class="trust-badge"><span>♾️</span> Lifetime updates included</div>
     </div>
-    <p style="margin-top:18px; font-size:0.82rem; color:rgba(255,255,255,0.55);">Want everything? <a href="#bundle" style="color:#8DC096; font-weight:600;">Finally Sleep — The Complete Library $197 →</a></p>
+    <p style="margin-top:24px; font-size:0.82rem; color:var(--text-3);">Want everything? <a href="#bundle" style="display:inline-block; margin-top:6px; padding:8px 16px; background:var(--accent-dim); border:1px solid var(--accent-light); border-radius:20px; color:var(--accent); font-weight:600; font-size:0.82rem; text-decoration:none;">Finally Sleep — The Complete Library $197 →</a></p>
   </div>
 </section>
 
