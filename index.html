@@ -105,7 +105,7 @@
       width: 100%; height: 100%;
       position: absolute; inset: 0;
       object-fit: cover;
-      object-position: center 22%;
+      object-position: center 15%;
     }
     .hero-photo-overlay {
       position: absolute; inset: 0;
@@ -665,7 +665,7 @@
 
   <!-- Subscribe side -->
   <div class="hero-subscribe">
-    <div class="hero-sub-eyebrow">Free 7-day protocol</div>
+    <div class="hero-sub-eyebrow">Free sleep cheat sheet</div>
     <h1 class="hero-sub-headline">
       You don't have a mood problem.<br>You have a <em>sleep problem.</em>
     </h1>
@@ -685,10 +685,10 @@
 
     <div class="subscribe-form">
       <div class="sub-input-row">
-        <input class="sub-input" type="email" placeholder="your@email.com" />
-        <a href="https://buy.polar.sh/polar_cl_2e2c3cf6-16e2-4ab7-afb0-501371d0d6ab" target="_blank" rel="noopener" class="sub-btn">Get the protocol — $17 →</a>
+        <input class="sub-input" type="email" id="hero-email" placeholder="your@email.com" />
+        <button class="sub-btn" onclick="beehiivSubscribeHero()">Get the free cheat sheet →</button>
       </div>
-      <div class="sub-note">The 3am Protocol · 20-page PDF · Instant download</div>
+      <div class="sub-note">Sleep Better Tonight cheat sheet · Free PDF · No spam · Unsubscribe anytime</div>
     </div>
 
     <div class="hero-proof">
@@ -968,6 +968,14 @@
                           ?.querySelector('input[type="email"]')?.value?.trim()
                    || inputEl.closest('form')?.querySelector('input[type="email"]')?.value?.trim()
                    || '';
+      const url = email
+        ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
+        : 'https://the3amletters.beehiiv.com/subscribe';
+      window.open(url, '_blank');
+    }
+    function beehiivSubscribeHero() {
+      const input = document.getElementById('hero-email');
+      const email = input ? input.value.trim() : '';
       const url = email
         ? 'https://the3amletters.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
         : 'https://the3amletters.beehiiv.com/subscribe';
