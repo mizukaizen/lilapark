@@ -619,48 +619,18 @@
       .alm-note { text-align: center; }
     }
     
-    .aff-callout {
-      background: var(--warm);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: 12px;
-      padding: 20px 22px;
-      margin: 32px 0;
-    }
-    .aff-callout-title {
-      font-family: 'Fraunces', serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-1);
-      margin-bottom: 14px;
-    }
-    .aff-callout-items {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    @media (max-width: 480px) { .aff-callout-items { grid-template-columns: 1fr; } }
-    .aff-callout-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 0.78rem;
-      transition: border-color .15s;
-      text-decoration: none;
-    }
-    .aff-callout-item:hover { border-color: var(--accent-light); }
-    .aff-callout-name { font-weight: 600; color: var(--text-1); }
-    .aff-callout-cta { font-size: 0.72rem; color: var(--accent-hover); font-weight: 700; }
-    .aff-callout-disclosure {
-      font-size: 0.65rem;
-      color: var(--text-3);
-      margin: 0;
-    }
+    .aff-callout { background: var(--warm); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 20px 22px; margin: 32px 0; }
+    .aff-callout-title { font-size: 0.85rem; font-weight: 700; color: var(--text-1); margin-bottom: 14px; }
+    .aff-callout-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+    .aff-callout-item { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; transition: box-shadow 0.2s; }
+    .aff-callout-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+    .aff-callout-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .aff-callout-info { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px; }
+    .aff-callout-name { font-weight: 700; font-size: 0.82rem; color: var(--text-1); }
+    .aff-callout-desc { font-size: 0.74rem; color: var(--text-2); }
+    .aff-callout-cta { font-size: 0.74rem; color: var(--accent-hover); font-weight: 700; margin-top: 6px; }
+    .aff-callout-disclosure { font-size: 0.7rem; color: var(--text-3); margin: 0; }
+    @media (max-width: 600px) { .aff-callout-items { grid-template-columns: 1fr; } }
     </style>
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -808,21 +778,34 @@
 <div class="aff-callout">
   <div class="aff-callout-title">🛒 Products mentioned in this article</div>
   <div class="aff-callout-items">
-    <a class="aff-callout-item" href="https://www.amazon.com/s?k=magnesium+glycinate+400mg&tag=lilapark-20" target="_blank" rel="nofollow sponsored">
-      <span class="aff-callout-name">magnesium glycinate</span>
-      <span class="aff-callout-cta">View on Amazon →</span>
+        <a class="aff-callout-item" href="https://www.amazon.com/s?k=magnesium+glycinate+400mg&tag=lilapark-20" target="_blank" rel="nofollow sponsored">
+      <div class="aff-callout-info">
+        <span class="aff-callout-name">Magnesium Glycinate</span>
+        <span class="aff-callout-desc">Sleep-supporting magnesium</span>
+        <span class="aff-callout-cta">View on Amazon →</span>
+      </div>
     </a>
-    <a class="aff-callout-item" href="https://www.amazon.com/s?k=melatonin+5mg+sleep&tag=lilapark-20" target="_blank" rel="nofollow sponsored">
-      <span class="aff-callout-name">melatonin</span>
-      <span class="aff-callout-cta">View on Amazon →</span>
+        <a class="aff-callout-item" href="https://www.amazon.com/s?k=melatonin+5mg+sleep&tag=lilapark-20" target="_blank" rel="nofollow sponsored">
+      <img src="prod-melatonin.jpg" alt="Melatonin 5mg" class="aff-callout-img">
+      <div class="aff-callout-info">
+        <span class="aff-callout-name">Melatonin 5mg</span>
+        <span class="aff-callout-desc">Sleep onset support</span>
+        <span class="aff-callout-cta">View on Amazon →</span>
+      </div>
     </a>
-    <a class="aff-callout-item" href="https://www.amazon.com/s?k=vitamin+d3+supplement+5000iu&tag=lilapark-20" target="_blank" rel="nofollow sponsored">
-      <span class="aff-callout-name">vitamin D</span>
-      <span class="aff-callout-cta">View on Amazon →</span>
+        <a class="aff-callout-item" href="https://www.amazon.com/s?k=vitamin+d3+supplement+5000iu&tag=lilapark-20" target="_blank" rel="nofollow sponsored">
+      <div class="aff-callout-info">
+        <span class="aff-callout-name">Vitamin D3</span>
+        <span class="aff-callout-desc">Essential vitamin D</span>
+        <span class="aff-callout-cta">View on Amazon →</span>
+      </div>
     </a>
-    <a class="aff-callout-item" href="https://www.amazon.com/s?k=black+sesame+seeds+organic&tag=lilapark-20" target="_blank" rel="nofollow sponsored">
-      <span class="aff-callout-name">black sesame</span>
-      <span class="aff-callout-cta">View on Amazon →</span>
+        <a class="aff-callout-item" href="https://www.amazon.com/s?k=black+sesame+seeds+organic&tag=lilapark-20" target="_blank" rel="nofollow sponsored">
+      <div class="aff-callout-info">
+        <span class="aff-callout-name">Black Sesame</span>
+        <span class="aff-callout-desc">Traditional Korean superfood</span>
+        <span class="aff-callout-cta">View on Amazon →</span>
+      </div>
     </a>
   </div>
   <p class="aff-callout-disclosure">Amazon Associate links — I earn a small commission at no extra cost to you.</p>
