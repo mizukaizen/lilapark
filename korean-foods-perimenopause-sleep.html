@@ -604,6 +604,49 @@
       }
       .alm-note { text-align: center; }
     }
+    
+    .aff-callout {
+      background: var(--warm);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin: 32px 0;
+    }
+    .aff-callout-title {
+      font-family: 'Fraunces', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 14px;
+    }
+    .aff-callout-items {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 480px) { .aff-callout-items { grid-template-columns: 1fr; } }
+    .aff-callout-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      transition: border-color .15s;
+      text-decoration: none;
+    }
+    .aff-callout-item:hover { border-color: var(--accent-light); }
+    .aff-callout-name { font-weight: 600; color: var(--text-1); }
+    .aff-callout-cta { font-size: 0.72rem; color: var(--accent-hover); font-weight: 700; }
+    .aff-callout-disclosure {
+      font-size: 0.65rem;
+      color: var(--text-3);
+      margin: 0;
+    }
     </style>
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
