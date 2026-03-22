@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>body{opacity:0}
+    /* ── Scrollbar — hidden on mobile, minimal on desktop ── */
+    html { overflow-y: scroll; }
+    @media (min-width: 768px) {
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(95,168,106,0.25); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(95,168,106,0.5); }
+    }
+    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Privacy Policy | Lila Park</title>
+  <!-- SEO -->
+  <meta name="description" content="Privacy policy for lilapark.xyz — how we handle data, analytics, and affiliate relationships." />
+  <link rel="canonical" href="https://lilapark.xyz/privacy.html" />
+  <meta name="author" content="Lila Park" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lilapark.xyz/privacy.html" />
+  <meta property="og:title" content="Privacy Policy | Lila Park" />
+  <meta property="og:description" content="How Lila Park handles your data, analytics, and affiliate relationships." />
+  <meta property="og:image" content="https://lilapark.xyz/og-image.jpg" />
+  <meta property="og:site_name" content="Lila Park" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Privacy Policy | Lila Park" />
+  <meta name="twitter:description" content="How Lila Park handles your data, analytics, and affiliate relationships." />
+  <meta name="twitter:image" content="https://lilapark.xyz/og-image.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent:       #5FA86A;
+      --accent-mid:   #8DC096;
+      --accent-light: #C4DFC8;
+      --accent-dim:   rgba(95, 168, 106, 0.10);
+      --accent-hover: #4D9559;
+      --bg:       #FAFAF7;
+      --surface:  #FFFFFF;
+      --warm:     #F3F0E8;
+      --border:   rgba(20, 19, 14, 0.08);
+      --border-h: rgba(20, 19, 14, 0.16);
+      --text-1:   #18180F;
+      --text-2:   #64635A;
+      --text-3:   #AEAC9C;
+    }
+
+    html { font-size: 15px; scroll-behavior: smooth; scrollbar-gutter: stable; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-1); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ── NAV ── */
+    .nav { position: sticky; top: 0; z-index: 100; height: 58px; background: rgba(250,250,247,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: dot-pulse 3s ease-in-out infinite; }
+    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+    .nav-name { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
+    .nav-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: var(--text-3); padding-left: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-2); transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-1); }
+    .nav-links a.active { font-weight: 600; }
+    .nav-sub { background: var(--accent); color: #fff; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 20px; cursor: pointer; transition: background .15s; }
+    .nav-sub:hover { background: var(--accent-hover); }
+
+    /* ── PAGE CONTENT ── */
+    .page-wrap {
+      max-width: 720px; margin: 0 auto; padding: 64px 24px 96px;
+    }
+
+    .page-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 16px;
+    }
+    .page-title {
+      font-family: 'Fraunces', serif; font-size: 2.4rem; font-weight: 700;
+      line-height: 1.15; color: var(--text-1); margin-bottom: 12px;
+    }
+    .page-meta {
+      font-size: 0.8rem; color: var(--text-3); margin-bottom: 48px;
+      padding-bottom: 32px; border-bottom: 1px solid var(--border);
+    }
+
+    .policy-section { margin-bottom: 40px; }
+    .policy-section h2 {
+      font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 600;
+      color: var(--text-1); margin-bottom: 14px; line-height: 1.3;
+    }
+    .policy-section p {
+      font-size: 0.97rem; color: var(--text-2); line-height: 1.85; margin-bottom: 12px;
+    }
+    .policy-section p:last-child { margin-bottom: 0; }
+    .policy-section a { color: var(--accent); border-bottom: 1px solid var(--accent-light); transition: border-color .15s; }
+    .policy-section a:hover { border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    .footer { background: #18180F; padding: 36px 0; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-left { display: flex; align-items: center; gap: 6px; }
+    .footer-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: #fff; }
+    .footer-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.45); transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+
+    /* ── PAGE TRANSITIONS ── */
+    body.page-exit { opacity: 0; transition: opacity 0.25s ease; }
+
+    /* ── HAMBURGER NAV ── */
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px 4px; flex-shrink: 0; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text-1); border-radius: 2px; transition: transform 0.2s ease, opacity 0.2s ease; transform-origin: center; }
+    .nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 860px) {
+      .nav-hamburger { display: flex; }
+      .nav-sub { display: none !important; }
+      .nav-links { position: absolute !important; top: 58px !important; left: 0 !important; right: 0 !important; background: rgba(250,250,247,0.98) !important; backdrop-filter: blur(16px) !important; border-bottom: 1px solid var(--border) !important; flex-direction: column !important; align-items: flex-start !important; padding: 6px 24px 16px !important; gap: 0 !important; z-index: 99 !important; box-shadow: 0 8px 24px rgba(0,0,0,0.07) !important; display: none !important; }
+      .nav-links.nav-open { display: flex !important; }
+      .nav-links li { border-bottom: 1px solid var(--border); width: 100%; }
+      .nav-links li:last-child { border-bottom: none; }
+      .nav-links a { display: block; width: 100%; padding: 12px 0; font-size: 0.95rem !important; color: var(--text-1) !important; }
+    }
+    @media (max-width: 600px) {
+      .page-wrap { padding: 40px 16px 72px; }
+      .page-title { font-size: 1.8rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-links { flex-wrap: wrap; gap: 12px; }
+    }
+  </style>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-dot"></div>
+      <span class="nav-name">Lila Park</span>
+      <span class="nav-kr">이라 박</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-sub">Subscribe →</button>
+  </div>
+</nav>
+
+<!-- ── PAGE CONTENT ── -->
+<main class="page-wrap">
+
+  <div class="page-eyebrow">Legal</div>
+  <h1 class="page-title">Privacy Policy</h1>
+  <p class="page-meta">Last updated: March 2026</p>
+
+  <div class="policy-section">
+    <h2>1. Overview</h2>
+    <p>Lila Park (lilapark.xyz) is a wellness content site. This policy explains what information we collect, how we use it, and your rights regarding that information.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>2. Information We Collect</h2>
+    <p>We collect limited, anonymised analytics data to understand how visitors use the site — pages visited, referral source, and approximate location by country. We do not collect names, email addresses, or personal identification information unless you contact us directly. We do not use cookies for tracking or advertising purposes.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>3. Analytics</h2>
+    <p>This site may use privacy-respecting analytics tools to measure traffic and content performance. No personally identifiable information is stored or shared with third parties for advertising purposes.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>4. Affiliate Relationships</h2>
+    <p>Lila Park participates in the Amazon Associates Programme, an affiliate advertising programme that provides a means for sites to earn fees by linking to Amazon.com and affiliated sites. When you click an affiliate link and make a purchase, we may earn a small commission at no extra cost to you. This does not affect our editorial independence — we only recommend products we believe are relevant and useful.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>5. Third-Party Links</h2>
+    <p>This site contains links to third-party websites. We are not responsible for the privacy practices or content of those sites and encourage you to review their privacy policies.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>6. Pinterest API</h2>
+    <p>This site uses the Pinterest API to distribute content programmatically to Pinterest. No personal user data is collected or shared through this integration.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>7. Children's Privacy</h2>
+    <p>This site is intended for adults. We do not knowingly collect information from anyone under the age of 18.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>8. Changes to This Policy</h2>
+    <p>We may update this policy from time to time. The "last updated" date at the top of this page will reflect any changes.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>9. Contact</h2>
+    <p>If you have questions about this privacy policy, contact us at: <a href="mailto:hello@lilapark.xyz">hello@lilapark.xyz</a></p>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-name">Lila Park</div>
+      <div class="footer-kr">· 이라 박</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <a href="https://www.tiktok.com/@lilapark.xyz" target="_blank" rel="noopener" class="footer-tiktok" aria-label="Lila Park on TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.87a8.18 8.18 0 0 0 4.78 1.52V7c-.01 0-2.7-.1-3.01-2.31z"/></svg></a>
+    <div class="footer-copy">© 2026 Lila Park. Made with 💛</div>
+  </div>
+  <div style="max-width:720px; margin:0 auto; padding:24px 24px 0; border-top:1px solid rgba(20,19,14,0.08); margin-top:24px;">
+    <p style="font-size:0.72rem; color:#AEAC9C; line-height:1.7; text-align:center;">
+      <strong style="color:#64635A;">Educational content only.</strong> Nothing on this site is medical advice. Lila Park is an AI-powered wellness guide — not a doctor, therapist, or licensed health professional. Always consult a qualified healthcare provider before making changes to your health, sleep, or nutrition routine. For AI transparency, see <a href="/about" style="color:#5FA86A; text-decoration:none;">About Lila</a>.
+    </p>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var el = document.body;
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        el.style.transition = 'opacity 0.35s ease-out';
+        el.style.opacity = '1';
+      });
+    });
+  })();
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || link.target === '_blank') return;
+    e.preventDefault();
+    document.body.style.transition = 'opacity 0.22s ease';
+    document.body.style.opacity = '0';
+    setTimeout(function() { window.location.href = href; }, 230);
+  });
+</script>
+<script>
+  (function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (!navLinks) return;
+    var btn = document.createElement('button');
+    btn.className = 'nav-hamburger';
+    btn.setAttribute('aria-label', 'Open menu');
+    btn.innerHTML = '<span></span><span></span><span></span>';
+    var navInner = document.querySelector('.nav-inner');
+    if (navInner) navInner.appendChild(btn);
+    btn.addEventListener('click', function() {
+      var open = navLinks.classList.toggle('nav-open');
+      btn.classList.toggle('is-open', open);
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav')) {
+        navLinks.classList.remove('nav-open');
+        btn.classList.remove('is-open');
+      }
+    });
+    navLinks.addEventListener('click', function() {
+      navLinks.classList.remove('nav-open');
+      btn.classList.remove('is-open');
+    });
+  })();
+</script>
+</body>
+</html>
