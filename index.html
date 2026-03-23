@@ -815,6 +815,30 @@
       border: 0;
     }
 
+    .hero-play-btn {
+      position: absolute;
+      bottom: 52px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 20px;
+      padding: 6px 14px 6px 10px;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      z-index: 10;
+    }
+    .hero-play-btn:hover { background: rgba(0,0,0,0.72); transform: translateY(-1px); }
+    .hero-play-btn .play-icon { font-size: 0.85rem; }
+    .hero-play-btn.playing { background: rgba(74,163,110,0.75); }
+
     @keyframes input-glow {
       0%   { box-shadow: 0 0 0 0 rgba(74,163,110,0); border-color: var(--accent); }
       30%  { box-shadow: 0 0 0 8px rgba(74,163,110,0.25); border-color: var(--accent); }
@@ -875,6 +899,11 @@
       <div class="hero-photo-name">Lila Park</div>
       <div class="hero-photo-sub">Circadian wellness guide · Seoul → San Francisco</div>
     </div>
+
+    <button class="hero-play-btn" id="lila-play-btn" onclick="lilaPlay()">
+      <span class="play-icon">▶</span> Hear from Lila
+    </button>
+    <audio id="lila-audio" src="/audio/lila-welcome.mp3" preload="none"></audio>
 
   </div>
 
@@ -1151,6 +1180,26 @@
       }
     }
   </script>
+<script>
+  function lilaPlay() {
+    var audio = document.getElementById('lila-audio');
+    var btn = document.getElementById('lila-play-btn');
+    if (audio.paused) {
+      audio.play();
+      btn.innerHTML = '<span class="play-icon">◼</span> Playing...';
+      btn.classList.add('playing');
+      audio.onended = function() {
+        btn.innerHTML = '<span class="play-icon">▶</span> Hear from Lila';
+        btn.classList.remove('playing');
+      };
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+      btn.innerHTML = '<span class="play-icon">▶</span> Hear from Lila';
+      btn.classList.remove('playing');
+    }
+  }
+</script>
 <script>
   (function() {
     var el = document.body;
