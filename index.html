@@ -817,24 +817,23 @@
 
     .portrait-play {
       position: absolute;
-      bottom: 90px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 52px; height: 52px;
+      top: 16px;
+      right: 16px;
+      width: 44px; height: 44px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.15);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1.5px solid rgba(255,255,255,0.45);
+      border: 1.5px solid rgba(255,255,255,0.35);
       color: #fff;
-      font-size: 1.1rem;
+      font-size: 1rem;
       display: flex; align-items: center; justify-content: center;
       padding-left: 3px;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
       z-index: 10;
     }
-    .portrait-play:hover { background: rgba(255,255,255,0.28); transform: translateX(-50%) scale(1.06); }
+    .portrait-play:hover { background: rgba(255,255,255,0.28); transform: scale(1.06); }
     .portrait-play.playing { background: rgba(74,163,110,0.6); padding-left: 0; }
 
     @keyframes input-glow {
