@@ -506,15 +506,14 @@
     }
     .pgrid-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
     .pgrid-img {
-      height: 90px; display: flex; align-items: center; justify-content: center;
-      position: relative;
+      position: relative; aspect-ratio: 4/3; overflow: hidden;
+      background: var(--warm);
     }
-    .pgrid-img.c-sleep { background: linear-gradient(135deg, #1e1a2e 0%, #2a2640 50%, #3d3554 100%); }
-    .pgrid-img.c-brain { background: linear-gradient(135deg, #2e2518 0%, #4a3a28 50%, #5a4632 100%); }
-    .pgrid-img.c-stress { background: linear-gradient(135deg, #1e2a18 0%, #2e3a28 50%, #4a5a3e 100%); }
-    .pgrid-img.c-korean { background: linear-gradient(135deg, #e8dcc8 0%, #ddd0b8 50%, #d4c8ae 100%); }
-    .pgrid-img.c-env { background: linear-gradient(135deg, #1a1e2e 0%, #2a3040 50%, #3a4050 100%); }
-    .pgrid-icon { font-size: 1.6rem; opacity: 0.45; }
+    .pgrid-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .pgrid-card:hover .pgrid-img img { transform: scale(1.04); }
     .pgrid-tier {
       position: absolute; top: 6px; right: 6px;
       font-size: 0.5rem; font-weight: 700; letter-spacing: 0.04em;
@@ -851,91 +850,91 @@
 
       <!-- SLEEP -->
       <div class="pgrid-card" data-cat="sleep">
-        <div class="pgrid-img c-sleep"><div class="pgrid-icon">💊</div><span class="pgrid-tier ts">T2</span></div>
+        <div class="pgrid-img "><img src="products/prod-magnesium-glycinate.jpg" alt="Magnesium Glycinate"><span class="pgrid-tier ts">T2</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Sleep</div><div class="pgrid-name">Magnesium Glycinate (400mg)</div><div class="pgrid-desc">Most evidence-supported form. 200–400mg, 1hr before bed.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="sleep">
-        <div class="pgrid-img c-sleep"><div class="pgrid-icon">🌙</div><span class="pgrid-tier ts">T2</span></div>
+        <div class="pgrid-img "><img src="products/prod-glycine-powder.jpg" alt="Glycine Powder"><span class="pgrid-tier ts">T2</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Sleep</div><div class="pgrid-name">Glycine Powder (3g)</div><div class="pgrid-desc">Lowers core body temp, improves subjective sleep quality. Take 30 min before bed.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="sleep">
-        <div class="pgrid-img c-sleep"><div class="pgrid-icon">🫖</div><span class="pgrid-tier te">T4</span></div>
+        <div class="pgrid-img "><img src="products/prod-valerian-root.jpg" alt="Valerian Root Extract"><span class="pgrid-tier te">T4</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Sleep</div><div class="pgrid-name">Valerian Root Extract</div><div class="pgrid-desc">Traditional sleep herb with GABA-modulating compounds. Results vary individually.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="sleep">
-        <div class="pgrid-img c-sleep"><div class="pgrid-icon">🧪</div><span class="pgrid-tier ts">T2</span></div>
+        <div class="pgrid-img "><img src="products/prod-tart-cherry.jpg" alt="Tart Cherry Extract"><span class="pgrid-tier ts">T2</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Sleep</div><div class="pgrid-name">Tart Cherry Extract</div><div class="pgrid-desc">Natural melatonin source. RCTs show improved sleep duration in older adults.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
 
       <!-- BRAIN -->
       <div class="pgrid-card" data-cat="brain">
-        <div class="pgrid-img c-brain"><div class="pgrid-icon">🫚</div><span class="pgrid-tier ts">T2</span></div>
+        <div class="pgrid-img "><img src="products/prod-korean-ginseng.jpg" alt="Korean Red Ginseng"><span class="pgrid-tier ts">T2</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Brain &amp; Focus</div><div class="pgrid-name">Korean Red Ginseng</div><div class="pgrid-desc">Multiple RCTs for cognitive function. CheongKwanJang is gold standard.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="brain">
-        <div class="pgrid-img c-brain"><div class="pgrid-icon">🧠</div><span class="pgrid-tier te">T4</span></div>
+        <div class="pgrid-img "><img src="products/prod-mag-threonate.jpg" alt="Magnesium L-Threonate"><span class="pgrid-tier te">T4</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Brain &amp; Focus</div><div class="pgrid-name">Magnesium L-Threonate</div><div class="pgrid-desc">Only magnesium form shown to cross the blood-brain barrier. Early but promising.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="brain">
-        <div class="pgrid-img c-brain"><div class="pgrid-icon">🍄</div><span class="pgrid-tier te">T4</span></div>
+        <div class="pgrid-img "><img src="products/prod-lions-mane.jpg" alt="Lion's Mane Mushroom"><span class="pgrid-tier te">T4</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Brain &amp; Focus</div><div class="pgrid-name">Lion's Mane Mushroom</div><div class="pgrid-desc">NGF stimulation in animal studies. Human research promising but early.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="brain">
-        <div class="pgrid-img c-brain"><div class="pgrid-icon">🐟</div><span class="pgrid-tier ts">T2</span></div>
+        <div class="pgrid-img "><img src="products/prod-omega3.jpg" alt="Omega-3 EPA DHA"><span class="pgrid-tier ts">T2</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Brain &amp; Focus</div><div class="pgrid-name">Omega-3 (EPA/DHA)</div><div class="pgrid-desc">Strong evidence for neuroinflammation reduction. 1–2g EPA+DHA daily with food.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
 
       <!-- STRESS -->
       <div class="pgrid-card" data-cat="stress">
-        <div class="pgrid-img c-stress"><div class="pgrid-icon">🌿</div><span class="pgrid-tier ts">T2</span></div>
+        <div class="pgrid-img "><img src="products/prod-ashwagandha.jpg" alt="Ashwagandha KSM-66"><span class="pgrid-tier ts">T2</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Stress</div><div class="pgrid-name">Ashwagandha KSM-66</div><div class="pgrid-desc">Most-studied adaptogen for cortisol reduction. 300–600mg daily.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="stress">
-        <div class="pgrid-img c-stress"><div class="pgrid-icon">🍵</div><span class="pgrid-tier ts">T2</span></div>
+        <div class="pgrid-img "><img src="products/prod-l-theanine.jpg" alt="L-Theanine"><span class="pgrid-tier ts">T2</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Stress</div><div class="pgrid-name">L-Theanine (Suntheanine)</div><div class="pgrid-desc">Alpha brain waves without sedation. Stack with morning coffee.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="stress">
-        <div class="pgrid-img c-stress"><div class="pgrid-icon">🌸</div><span class="pgrid-tier ts">T2</span></div>
+        <div class="pgrid-img "><img src="products/prod-rhodiola.jpg" alt="Rhodiola Rosea"><span class="pgrid-tier ts">T2</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Stress</div><div class="pgrid-name">Rhodiola Rosea Extract</div><div class="pgrid-desc">Best for fatigue and cognitive flatness. Take in the morning.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="stress">
-        <div class="pgrid-img c-stress"><div class="pgrid-icon">🫐</div><span class="pgrid-tier tg">T3</span></div>
+        <div class="pgrid-img "><img src="products/prod-phosphatidylserine.jpg" alt="Phosphatidylserine"><span class="pgrid-tier tg">T3</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Stress</div><div class="pgrid-name">Phosphatidylserine (PS)</div><div class="pgrid-desc">Blunts cortisol response to exercise-induced stress. 100–300mg daily.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
 
       <!-- KOREAN KITCHEN -->
       <div class="pgrid-card" data-cat="korean">
-        <div class="pgrid-img c-korean"><div class="pgrid-icon">🫘</div><span class="pgrid-tier te">T4/T5</span></div>
+        <div class="pgrid-img "><img src="products/prod-jujube-dates.jpg" alt="Dried Jujube Dates"><span class="pgrid-tier te">T4/T5</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Korean Kitchen</div><div class="pgrid-name">Dried Jujube Dates (대추)</div><div class="pgrid-desc">Traditional sleep remedy. GABA-modulating compounds. Steep as tea.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="korean">
-        <div class="pgrid-img c-korean"><div class="pgrid-icon">🫖</div><span class="pgrid-tier tg">T5</span></div>
+        <div class="pgrid-img "><img src="products/prod-barley-tea.jpg" alt="Roasted Barley Tea"><span class="pgrid-tier tg">T5</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Korean Kitchen</div><div class="pgrid-name">Roasted Barley Tea (보리차)</div><div class="pgrid-desc">Caffeine-free Korean staple. Warm, nutty, naturally calming.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="korean">
-        <div class="pgrid-img c-korean"><div class="pgrid-icon">🥣</div><span class="pgrid-tier tg">T3</span></div>
+        <div class="pgrid-img "><img src="products/prod-doenjang.jpg" alt="Doenjang Soybean Paste"><span class="pgrid-tier tg">T3</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Korean Kitchen</div><div class="pgrid-name">Doenjang (Soybean Paste)</div><div class="pgrid-desc">Probiotic-rich. Isoflavones may support hormonal balance.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="korean">
-        <div class="pgrid-img c-korean"><div class="pgrid-icon">🍯</div><span class="pgrid-tier tg">T3</span></div>
+        <div class="pgrid-img "><img src="products/prod-korean-honey.jpg" alt="Raw Korean Honey"><span class="pgrid-tier tg">T3</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Korean Kitchen</div><div class="pgrid-name">Raw Korean Honey</div><div class="pgrid-desc">Anti-inflammatory, prebiotic. A spoonful before bed is traditional Korean practice.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
 
       <!-- SLEEP ENVIRONMENT -->
       <div class="pgrid-card" data-cat="environment">
-        <div class="pgrid-img c-env"><div class="pgrid-icon">❄️</div><span class="pgrid-tier tg">T3</span></div>
+        <div class="pgrid-img "><img src="products/prod-cooling-topper.jpg" alt="Cooling Mattress Topper"><span class="pgrid-tier tg">T3</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">Cooling Mattress Topper</div><div class="pgrid-desc">Drops surface temp 2–3°C. #1 intervention for night sweats.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="environment">
-        <div class="pgrid-img c-env"><div class="pgrid-icon">😴</div><span class="pgrid-tier ts">T2</span></div>
+        <div class="pgrid-img "><img src="products/prod-sleep-mask.jpg" alt="Blackout Sleep Mask"><span class="pgrid-tier ts">T2</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">Blackout Sleep Mask</div><div class="pgrid-desc">Cheapest circadian fix. Even small light leaks suppress melatonin.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="environment">
-        <div class="pgrid-img c-env"><div class="pgrid-icon">🔴</div><span class="pgrid-tier tg">T3</span></div>
+        <div class="pgrid-img "><img src="products/prod-blue-blockers.jpg" alt="Blue-Light Blocking Glasses"><span class="pgrid-tier tg">T3</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">Blue-Light Blocking Glasses</div><div class="pgrid-desc">Amber-lens glasses 2hrs before bed. Preserves melatonin onset.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
       <div class="pgrid-card" data-cat="environment">
-        <div class="pgrid-img c-env"><div class="pgrid-icon">💡</div><span class="pgrid-tier tg">T3</span></div>
+        <div class="pgrid-img "><img src="products/prod-bedside-lamp.jpg" alt="Warm-Tone Bedside Lamp"><span class="pgrid-tier tg">T3</span></div>
         <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">Warm-Tone Bedside Lamp</div><div class="pgrid-desc">2700K or below. Replaces overhead lighting in the evening routine.</div><a href="#" class="pgrid-link">View on Amazon →</a></div>
       </div>
 
