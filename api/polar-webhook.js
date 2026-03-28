@@ -6,21 +6,25 @@
  * 2. Adds buyer to Beehiiv newsletter
  *
  * Required env vars (set in Vercel project settings):
- *   POLAR_WEBHOOK_SECRET   — Polar Dashboard > Settings > Webhooks > Secret
- *   RESEND_API_KEY          — resend.com > API Keys
- *   BEEHIIV_API_KEY         — Beehiiv > Settings > API
- *   BEEHIIV_PUB_ID          — Beehiiv publication ID (pub_xxxxxxxx)
- *   PDF_DOWNLOAD_URL        — Stable URL to the hosted PDF
+ *   POLAR_WEBHOOK_SECRET   — Polar Dashboard > Webhooks > your endpoint secret
+ *   RESEND_API_KEY          — resend.com dashboard (free tier: 3,000/month)
+ *   BEEHIIV_API_KEY         — Beehiiv Settings > API
+ *   BEEHIIV_PUB_ID          — Beehiiv publication ID (format: pub_xxxxxxxx)
+ *   PDF_DOWNLOAD_URL        — Fallback if not in product metadata
  *
- * Polar webhook setup:
- *   URL: https://lilapark.xyz/api/polar-webhook
- *   Events: order.created
- *   Copy the webhook secret → add to Vercel env as POLAR_WEBHOOK_SECRET
- *
- * Payload structure (order.created):
+ * Polar webhook payload (order.created):
  *   data.order.customer.email
  *   data.order.customer.name
  *   data.order.product.name
+ *   data.order.product.metadata.download_url (optional)
+ *
+ * Setup steps:
+ *   1. Deploy to Vercel (auto on push to main)
+ *   2. Go to Polar Dashboard → Webhooks → Add endpoint
+ *   3. URL: https://lilapark.xyz/api/polar-webhook
+ *   4. Events: order.created
+ *   5. Copy the webhook secret → add to Vercel env as POLAR_WEBHOOK_SECRET
+ *   6. Set remaining env vars in Vercel project settings
  */
 
 import { createHmac, timingSafeEqual } from 'crypto';
@@ -44,60 +48,66 @@ function verifyWebhookSignature(payload, signature, secret) {
   return timingSafeEqual(Buffer.from(expected), Buffer.from(sig));
 }
 
-function buildDeliveryEmail(name, productName, downloadUrl) {
-  const firstName = (name || '').split(' ')[0] || 'there';
+function buildDeliveryEmail(productName, downloadUrl) {
   return `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="margin:0;padding:0;background:#1a2e1a;font-family:Georgia,'Times New Roman',serif;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#1a2e1a;">
 <tr><td align="center" style="padding:40px 20px;">
-<table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
   <!-- Header -->
-  <tr><td style="text-align:center;padding:0 0 8px;">
-    <span style="font-family:Georgia,serif;font-size:28px;font-weight:normal;font-style:italic;color:#8fbc8f;letter-spacing:1px;">Lila Park</span>
+  <tr><td style="text-align:center;padding:0 0 16px;">
+    <span style="font-family:Georgia,serif;font-size:14px;font-weight:normal;letter-spacing:0.3em;text-transform:uppercase;color:#f5f0e8;">LILA PARK</span>
   </td></tr>
-  <tr><td style="text-align:center;padding:0 0 32px;">
-    <span style="font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(143,188,143,0.5);">Your order is ready &#10022;</span>
+
+  <!-- Sage divider -->
+  <tr><td style="padding:0 0 24px;">
+    <div style="height:1px;background:#8fbc8f;opacity:0.4;max-width:80px;margin:0 auto;"></div>
   </td></tr>
 
   <!-- Card -->
-  <tr><td style="background:#243424;border-radius:16px;padding:36px 32px;">
+  <tr><td style="background:#243824;border-radius:8px;padding:36px 32px;">
 
-    <!-- Personal note -->
-    <p style="font-family:Georgia,serif;font-size:17px;line-height:1.7;color:#f5f0e8;margin:0 0 8px;">
-      Hi ${firstName},
+    <!-- Heading -->
+    <p style="font-family:Georgia,serif;font-size:22px;line-height:1.4;color:#f5f0e8;margin:0 0 24px;text-align:center;">
+      Your order is here &#10022;
     </p>
-    <p style="font-family:Georgia,serif;font-size:16px;line-height:1.7;color:rgba(245,240,232,0.8);margin:0 0 6px;">
-      Thank you for trusting me with something as personal as your sleep. The fact that you're here means you're done accepting exhaustion as normal &mdash; and that takes courage.
-    </p>
-    <p style="font-family:Georgia,serif;font-size:16px;line-height:1.7;color:rgba(245,240,232,0.8);margin:0 0 28px;">
-      Your copy of <strong style="color:#f5f0e8;">${productName}</strong> is ready. Everything you need is inside.
+
+    <!-- Personal note from Lila -->
+    <p style="font-family:Georgia,serif;font-size:16px;line-height:1.75;color:#b8c9b8;margin:0 0 28px;">
+      You made a quiet, important decision tonight. ${productName} is yours now &mdash; a guide built from Korean sleep wisdom and modern science, for the women who need it most. I hope it brings you back to rest.
     </p>
 
     <!-- Download button -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-    <tr><td align="center" style="padding:0 0 20px;">
-      <a href="${downloadUrl}" style="display:inline-block;background:#8fbc8f;color:#1a2e1a;font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:10px;letter-spacing:0.3px;">
+    <tr><td align="center" style="padding:0 0 16px;">
+      <a href="${downloadUrl}" style="display:inline-block;background:#8fbc8f;color:#1a2e1a;font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:4px;">
         Download ${productName} &rarr;
       </a>
     </td></tr>
     </table>
 
-    <p style="font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:13px;color:rgba(245,240,232,0.4);margin:0;text-align:center;">
-      This link is yours to keep. Bookmark it.
+    <!-- Bookmark note -->
+    <p style="font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:13px;color:#b8c9b8;opacity:0.7;margin:0;text-align:center;line-height:1.6;">
+      This link is yours to keep. Bookmark it or<br>come back to this email anytime.
     </p>
 
   </td></tr>
 
+  <!-- Divider -->
+  <tr><td style="padding:24px 0 0;">
+    <div style="height:1px;background:#8fbc8f;opacity:0.2;"></div>
+  </td></tr>
+
   <!-- Footer -->
-  <tr><td style="padding:28px 0 0;text-align:center;">
-    <p style="font-family:Georgia,serif;font-size:14px;font-style:italic;color:rgba(143,188,143,0.6);line-height:1.6;margin:0 0 16px;">
-      You're also now part of Lila's inner circle &mdash;<br>expect gentle wisdom in your inbox.
+  <tr><td style="padding:20px 0 0;text-align:center;">
+    <p style="font-family:Georgia,serif;font-size:14px;font-style:italic;color:#b8c9b8;opacity:0.6;line-height:1.6;margin:0 0 12px;">
+      You're now part of Lila's inner circle.<br>Expect gentle wisdom in your inbox.
     </p>
-    <p style="font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:11px;color:rgba(143,188,143,0.3);margin:0;">
-      &copy; 2026 Lila Park &middot; lilapark.xyz
+    <p style="font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:11px;color:#b8c9b8;opacity:0.35;margin:0;">
+      lilapark.xyz &middot; hello@lilapark.xyz
     </p>
   </td></tr>
 
@@ -108,7 +118,7 @@ function buildDeliveryEmail(name, productName, downloadUrl) {
 </html>`;
 }
 
-async function sendDeliveryEmail(email, name, productName, downloadUrl) {
+async function sendDeliveryEmail(email, productName, downloadUrl) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
@@ -116,10 +126,10 @@ async function sendDeliveryEmail(email, name, productName, downloadUrl) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Lila Park <lila@lilapark.xyz>',
+      from: 'Lila Park <hello@lilapark.xyz>',
       to: [email],
-      subject: `Your copy of ${productName} is ready`,
-      html: buildDeliveryEmail(name, productName, downloadUrl),
+      subject: `Your 3am Protocol is here \u2726`,
+      html: buildDeliveryEmail(productName, downloadUrl),
     }),
   });
 
@@ -146,9 +156,6 @@ async function addToBeehiiv(email, pubId, productName) {
         utm_source: 'lila-park-purchase',
         utm_medium: 'product',
         utm_campaign: '3am-protocol',
-        custom_fields: [
-          { name: 'purchased_product', value: productName },
-        ],
       }),
     }
   );
@@ -167,7 +174,7 @@ export default async function handler(req, res) {
   }
 
   const buf = await buffer(req);
-  const signature = req.headers['x-polar-signature'] || '';
+  const signature = req.headers['webhook-signature'] || '';
   const secret = process.env.POLAR_WEBHOOK_SECRET;
 
   if (!secret) {
@@ -199,9 +206,9 @@ export default async function handler(req, res) {
   }
 
   const email = order.customer?.email;
-  const name = order.customer?.name || '';
   const productName = order.product?.name || 'The 3am Protocol';
-  const downloadUrl = process.env.PDF_DOWNLOAD_URL;
+  const downloadUrl =
+    order.product?.metadata?.download_url || process.env.PDF_DOWNLOAD_URL;
   const pubId = process.env.BEEHIIV_PUB_ID;
 
   if (!email) {
@@ -215,10 +222,13 @@ export default async function handler(req, res) {
   }
 
   // Send email (critical) and add to Beehiiv (best-effort) in parallel
-  const emailPromise = sendDeliveryEmail(email, name, productName, downloadUrl);
+  const emailPromise = sendDeliveryEmail(email, productName, downloadUrl);
   const beehiivPromise = pubId
-    ? addToBeehiiv(email, pubId, productName).catch(err => {
-        console.error('Beehiiv subscription failed (non-blocking):', err.message);
+    ? addToBeehiiv(email, pubId, productName).catch((err) => {
+        console.error(
+          'Beehiiv subscription failed (non-blocking):',
+          err.message
+        );
         return { error: err.message };
       })
     : Promise.resolve({ skipped: 'no_pub_id' });
