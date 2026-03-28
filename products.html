@@ -13,6 +13,7 @@
     </style>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <script defer src="https://analytics.melis.ai/script.js" data-website-id="10343747-2b25-435a-9fa3-0100b42b9f9c"></script>
   <title>Products — Lila Park</title>
   <!-- SEO -->
   <meta name="description" content="Fix your sleep in 28 days using circadian biology and Korean saenghwal practices. Science-backed. Practical. $17." />
@@ -30,56 +31,537 @@
   <meta name="twitter:title" content="The 3am Protocol — 28-Day Deep Sleep Programme | Lila Park" />
   <meta name="twitter:description" content="Fix your sleep in 28 days using circadian biology and Korean saenghwal practices. Science-backed. Practical. $17." />
   <meta name="twitter:image" content="https://lilapark.xyz/og-image.jpg" />
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --accent:       #5FA86A;
-      --accent-mid:   #8DC096;
-      --accent-light: #C4DFC8;
-      --accent-dim:   rgba(95, 168, 106, 0.10);
-      --accent-hover: #4D9559;
-      --bg:       #FAFAF7;
-      --surface:  #FFFFFF;
-      --warm:     #F3F0E8;
-      --border:   rgba(20, 19, 14, 0.08);
-      --border-h: rgba(20, 19, 14, 0.16);
-      --text-1:   #18180F;
-      --text-2:   #64635A;
-      --text-3:   #AEAC9C;
+      --accent: #5FA86A; --accent-hover: #4D9559; --accent-dim: rgba(95,168,106,0.10);
+      --bg: #FAFAF7; --surface: #FFFFFF; --warm: #F3F0E8;
+      --border: rgba(20,19,14,0.08); --text-1: #18180F; --text-2: #64635A; --text-3: #AEAC9C;
     }
-
-    html { font-size: 15px; scroll-behavior: smooth; scrollbar-gutter: stable; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg); color: var(--text-1);
-      line-height: 1.7; -webkit-font-smoothing: antialiased;
-      overflow-x: clip;
-    }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-1); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
-    img { display: block; }
 
-    /* ── NAV ── */
+    /* NAV — floating, transparent over forest */
     .nav {
-      position: sticky; top: 0; z-index: 100; height: 58px;
-      background: rgba(250,250,247,0.92); backdrop-filter: blur(16px);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 54px;
+      background: rgba(250,250,247,0.15); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.3s;
+    }
+    .nav.scrolled { background: rgba(250,250,247,0.92); border-bottom-color: var(--border); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 8px; }
+    .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+    .nav-name { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: #fff; transition: color 0.3s; }
+    .nav.scrolled .nav-name { color: var(--text-1); }
+    .nav-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.78rem; color: rgba(255,255,255,0.5); transition: color 0.3s; }
+    .nav.scrolled .nav-kr { color: var(--text-3); }
+    .nav-links { display: flex; gap: 22px; list-style: none; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.7); transition: color 0.3s; }
+    .nav.scrolled .nav-links a { color: var(--text-2); }
+    .nav-links a.active { font-weight: 600; color: #fff; }
+    .nav.scrolled .nav-links a.active { color: var(--text-1); }
+
+    /* ═══ FOREST PORTAL — full viewport ═══ */
+    .portal {
+      position: relative;
+      height: 100vh; min-height: 640px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    /* Layered CSS animation — smooth, no camera shake */
+    .portal-bg {
+      position: absolute; inset: -30px;
+      background: url('forest-backdrop.jpg') center/cover no-repeat;
+      filter: blur(3px) saturate(1.15);
+      transform: scale(1.06);
+      animation: forest-breathe 12s ease-in-out infinite alternate;
+    }
+    /* Second layer: slightly offset timing for depth */
+    .portal-bg-layer2 {
+      position: absolute; inset: -30px;
+      background: url('forest-backdrop.jpg') center/cover no-repeat;
+      filter: blur(8px) saturate(1.2) brightness(1.05);
+      transform: scale(1.1);
+      opacity: 0.3;
+      mix-blend-mode: soft-light;
+      animation: forest-sway 18s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes forest-breathe {
+      0% { transform: scale(1.06) translate(0, 0); filter: blur(3px) saturate(1.15) brightness(1.0); }
+      50% { transform: scale(1.07) translate(-3px, -1px); filter: blur(3.5px) saturate(1.2) brightness(1.02); }
+      100% { transform: scale(1.06) translate(1px, 0.5px); filter: blur(3px) saturate(1.15) brightness(1.0); }
+    }
+    @keyframes forest-sway {
+      0% { transform: scale(1.10) translate(0, 0); opacity: 0.3; }
+      50% { transform: scale(1.12) translate(4px, 2px); opacity: 0.35; }
+      100% { transform: scale(1.10) translate(-2px, 1px); opacity: 0.28; }
+    }
+    .portal-overlay {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(95,168,106,0.06) 0%, transparent 60%),
+        linear-gradient(to bottom, rgba(20,19,14,0.52) 0%, rgba(20,19,14,0.38) 30%, rgba(20,19,14,0.40) 60%, rgba(20,19,14,0.60) 100%);
+    }
+
+    /* ── Light effects ── */
+
+    /* God rays — bold diagonal light shafts */
+    .god-ray {
+      position: absolute;
+      top: -40%;
+      height: 180%;
+      pointer-events: none;
+    }
+    .god-ray:nth-child(1) {
+      left: 5%; width: 280px;
+      background: linear-gradient(180deg, rgba(255,244,190,0.45) 0%, rgba(255,244,190,0.15) 30%, rgba(255,244,190,0.03) 55%, transparent 70%);
+      filter: blur(35px);
+      transform: rotate(15deg);
+      animation: ray-sweep-1 14s ease-in-out infinite alternate;
+    }
+    .god-ray:nth-child(2) {
+      left: 32%; width: 200px;
+      background: linear-gradient(180deg, rgba(255,250,220,0.38) 0%, rgba(255,250,220,0.12) 35%, transparent 65%);
+      filter: blur(30px);
+      transform: rotate(6deg);
+      animation: ray-sweep-2 18s ease-in-out 3s infinite alternate-reverse;
+    }
+    .god-ray:nth-child(3) {
+      left: 58%; width: 240px;
+      background: linear-gradient(180deg, rgba(255,240,180,0.40) 0%, rgba(255,240,180,0.12) 30%, transparent 65%);
+      filter: blur(40px);
+      transform: rotate(-9deg);
+      animation: ray-sweep-3 16s ease-in-out 1s infinite alternate;
+    }
+    @keyframes ray-sweep-1 {
+      0%   { opacity: 0.3; transform: rotate(15deg) translateX(0); }
+      50%  { opacity: 0.65; transform: rotate(12deg) translateX(30px); }
+      100% { opacity: 0.25; transform: rotate(17deg) translateX(-15px); }
+    }
+    @keyframes ray-sweep-2 {
+      0%   { opacity: 0.2; transform: rotate(6deg) translateX(0); }
+      50%  { opacity: 0.55; transform: rotate(3deg) translateX(-20px); }
+      100% { opacity: 0.25; transform: rotate(8deg) translateX(12px); }
+    }
+    @keyframes ray-sweep-3 {
+      0%   { opacity: 0.25; transform: rotate(-9deg) translateX(0); }
+      50%  { opacity: 0.6; transform: rotate(-7deg) translateX(20px); }
+      100% { opacity: 0.2; transform: rotate(-11deg) translateX(-10px); }
+    }
+
+    /* Bokeh orbs — bigger, brighter, more visible */
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .bokeh:nth-child(1) {
+      width: 200px; height: 200px; top: 12%; left: 15%;
+      background: radial-gradient(circle, rgba(255,248,190,0.40) 0%, rgba(255,248,190,0.12) 35%, transparent 65%);
+      filter: blur(15px);
+      animation: bokeh-float-1 16s ease-in-out infinite alternate;
+    }
+    .bokeh:nth-child(2) {
+      width: 130px; height: 130px; top: 28%; left: 58%;
+      background: radial-gradient(circle, rgba(255,255,220,0.45) 0%, rgba(255,255,220,0.14) 35%, transparent 65%);
+      filter: blur(12px);
+      animation: bokeh-float-2 12s ease-in-out 2s infinite alternate-reverse;
+    }
+    .bokeh:nth-child(3) {
+      width: 160px; height: 160px; top: 42%; left: 72%;
+      background: radial-gradient(circle, rgba(240,255,210,0.32) 0%, rgba(240,255,210,0.08) 35%, transparent 65%);
+      filter: blur(16px);
+      animation: bokeh-float-3 20s ease-in-out 5s infinite alternate;
+    }
+    .bokeh:nth-child(4) {
+      width: 100px; height: 100px; top: 20%; left: 42%;
+      background: radial-gradient(circle, rgba(255,252,230,0.50) 0%, rgba(255,252,230,0.15) 35%, transparent 65%);
+      filter: blur(10px);
+      animation: bokeh-float-4 14s ease-in-out 1s infinite alternate-reverse;
+    }
+    .bokeh:nth-child(5) {
+      width: 80px; height: 80px; top: 52%; left: 22%;
+      background: radial-gradient(circle, rgba(255,250,200,0.35) 0%, rgba(255,250,200,0.10) 35%, transparent 65%);
+      filter: blur(12px);
+      animation: bokeh-float-5 18s ease-in-out 3s infinite alternate;
+    }
+    .bokeh:nth-child(6) {
+      width: 250px; height: 250px; top: 5%; left: 45%;
+      background: radial-gradient(circle, rgba(255,248,200,0.25) 0%, rgba(255,248,200,0.06) 35%, transparent 65%);
+      filter: blur(25px);
+      animation: bokeh-float-6 22s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes bokeh-float-1 {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.4; }
+      50%  { transform: translate(40px, 20px) scale(1.15); opacity: 0.65; }
+      100% { transform: translate(-15px, 8px) scale(0.95); opacity: 0.35; }
+    }
+    @keyframes bokeh-float-2 {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.45; }
+      50%  { transform: translate(-25px, 15px) scale(1.2); opacity: 0.7; }
+      100% { transform: translate(20px, -10px) scale(0.9); opacity: 0.4; }
+    }
+    @keyframes bokeh-float-3 {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.35; }
+      50%  { transform: translate(-30px, -15px) scale(1.1); opacity: 0.6; }
+      100% { transform: translate(12px, 10px) scale(1.05); opacity: 0.35; }
+    }
+    @keyframes bokeh-float-4 {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.5; }
+      50%  { transform: translate(22px, -14px) scale(1.3); opacity: 0.75; }
+      100% { transform: translate(-16px, 10px) scale(0.85); opacity: 0.45; }
+    }
+    @keyframes bokeh-float-5 {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.3; }
+      50%  { transform: translate(20px, 25px) scale(1.15); opacity: 0.55; }
+      100% { transform: translate(-8px, -12px) scale(1); opacity: 0.3; }
+    }
+    @keyframes bokeh-float-6 {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.25; }
+      50%  { transform: translate(-25px, 12px) scale(1.08); opacity: 0.5; }
+      100% { transform: translate(15px, -8px) scale(0.95); opacity: 0.2; }
+    }
+
+    /* Canopy glow — strong warm wash from top-left */
+    .canopy-glow {
+      position: absolute; top: -20%; left: -5%; right: 15%;
+      height: 70%;
+      background: radial-gradient(ellipse at 30% 0%, rgba(255,238,180,0.30) 0%, rgba(255,238,180,0.08) 40%, transparent 65%);
+      pointer-events: none;
+      animation: glow-breathe 10s ease-in-out infinite alternate;
+    }
+    @keyframes glow-breathe {
+      0%   { opacity: 0.4; transform: scale(1) translateX(0); }
+      50%  { opacity: 0.7; transform: scale(1.04) translateX(12px); }
+      100% { opacity: 0.35; transform: scale(1.02) translateX(-5px); }
+    }
+
+    /* Firefly sparkles — bright flickers with glow */
+    .sparkle {
+      position: absolute;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,252,210,0.95);
+      box-shadow: 0 0 8px 3px rgba(255,248,180,0.6), 0 0 20px 6px rgba(255,244,160,0.25);
+      pointer-events: none;
+      animation: sparkle-life linear infinite;
+    }
+    @keyframes sparkle-life {
+      0%   { opacity: 0; transform: translate(0, 0) scale(0.4); }
+      12%  { opacity: 1; transform: translate(4px, -6px) scale(1.1); }
+      35%  { opacity: 0.5; transform: translate(-3px, -18px) scale(0.7); }
+      55%  { opacity: 0.9; transform: translate(6px, -30px) scale(1.2); }
+      78%  { opacity: 0.3; transform: translate(-2px, -42px) scale(0.6); }
+      100% { opacity: 0; transform: translate(4px, -58px) scale(0.3); }
+    }
+
+    /* Floating dust motes — warm glowing particles */
+    .particle {
+      position: absolute;
+      width: 3px; height: 3px;
+      background: rgba(255,252,230,0.6);
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255,248,200,0.4);
+      animation: float-up linear infinite;
+      pointer-events: none;
+    }
+    @keyframes float-up {
+      0%   { opacity: 0; transform: translateY(0) translateX(0); }
+      10%  { opacity: 0.8; }
+      50%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-280px) translateX(50px); }
+    }
+
+    /* Audio toggle */
+    .audio-toggle {
+      position: absolute; top: 70px; right: 28px; z-index: 50;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 24px; padding: 8px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.8);
+      cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .audio-toggle:hover { background: rgba(255,255,255,0.25); }
+    .audio-bars { display: flex; gap: 2px; align-items: flex-end; height: 12px; }
+    .audio-bar {
+      width: 2px; background: rgba(255,255,255,0.7); border-radius: 1px;
+      transition: height 0.3s;
+    }
+    .audio-toggle.playing .audio-bar { animation: bar-dance 0.8s ease-in-out infinite alternate; }
+    .audio-bar:nth-child(1) { height: 4px; animation-delay: 0s; }
+    .audio-bar:nth-child(2) { height: 8px; animation-delay: 0.15s; }
+    .audio-bar:nth-child(3) { height: 5px; animation-delay: 0.3s; }
+    .audio-bar:nth-child(4) { height: 10px; animation-delay: 0.1s; }
+    @keyframes bar-dance {
+      0% { height: 3px; } 100% { height: 12px; }
+    }
+
+    .portal-content {
+      position: relative; z-index: 10;
+      width: 100%; max-width: 1100px;
+      padding: 0 28px;
+    }
+    .portal-header {
+      text-align: center; margin-bottom: 32px;
+    }
+    .portal-tagline {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
+      margin-bottom: 10px;
+    }
+    .portal-title {
+      font-family: 'Fraunces', serif; font-size: 2.4rem;
+      font-weight: 700; line-height: 1.1; color: #fff;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .portal-title em { font-style: italic; }
+    .portal-sub {
+      font-size: 0.88rem; color: rgba(255,255,255,0.6);
+      max-width: 380px; margin: 0 auto;
+    }
+
+    /* Glassmorphic product cards */
+    .portal-cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+      max-width: 880px; margin: 0 auto;
+    }
+    .glass-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 18px; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+    }
+    .gc-img {
+      height: 160px; background-size: cover; background-position: center;
+      position: relative;
+    }
+    .gc-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 50%);
+    }
+    .gc-tag {
+      position: absolute; top: 10px; left: 10px; z-index: 2;
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 6px;
+    }
+    .gc-tag.live { background: var(--accent); color: #fff; }
+    .gc-tag.soon { background: rgba(255,255,255,0.8); color: var(--text-2); }
+
+    .gc-body { padding: 18px 20px 20px; }
+    .gc-title {
+      font-family: 'Fraunces', serif; font-size: 1.2rem;
+      font-weight: 700; line-height: 1.2; color: #fff;
+      margin-bottom: 6px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    }
+    .gc-title em { font-style: italic; }
+    .gc-desc {
+      font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.55;
+      margin-bottom: 14px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    .gc-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .gc-price {
+      font-family: 'Fraunces', serif; font-size: 1.5rem;
+      font-weight: 700; color: #fff;
+    }
+    .gc-price-note { font-size: 0.62rem; color: rgba(255,255,255,0.35); }
+    .gc-cta {
+      padding: 10px 22px; border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem; font-weight: 700; border: none; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .gc-cta.buy { background: rgba(255,255,255,0.9); color: var(--text-1); }
+    .gc-cta.buy:hover { background: #fff; }
+    .gc-cta.coming {
+      background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.2); cursor: default;
+    }
+    .gc-features {
+      list-style: none; margin-bottom: 14px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px 10px;
+    }
+    .gc-features li {
+      font-size: 0.68rem; color: rgba(255,255,255,0.5); padding: 2px 0;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .gc-features .chk { color: var(--accent); font-size: 0.62rem; font-weight: 700; }
+
+    /* Guarantee — glass strip */
+    .portal-guarantee {
+      max-width: 880px; margin: 20px auto 0;
+      background: rgba(255,255,255,0.08); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 12px 20px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.74rem; color: rgba(255,255,255,0.55);
+    }
+    .portal-guarantee strong { color: rgba(255,255,255,0.8); }
+
+    /* Scroll indicator */
+    .scroll-down {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      z-index: 10; text-align: center;
+      animation: bob 2.5s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+    .scroll-down span {
+      display: block; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35);
+      margin-bottom: 4px;
+    }
+    .scroll-arrow { font-size: 1rem; color: rgba(255,255,255,0.3); }
+
+    /* ═══ EVIDENCE STRIP ═══ */
+    .evidence-strip {
+      padding: 44px 0;
+      background: linear-gradient(135deg, #F8F5EE 0%, #F0EDE4 100%);
+      border-top: 1px solid rgba(95,168,106,0.12);
       border-bottom: 1px solid var(--border);
     }
-    .nav-inner {
-      max-width: 1060px; margin: 0 auto; padding: 0 24px;
-      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    .ev-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
     }
-    .nav-logo { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
-    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: dot-pulse 3s ease-in-out infinite; }
-    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
-    .nav-name  { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
-    .nav-kr    { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: var(--text-3); padding-left: 2px; }
-    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
-    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-2); transition: color .15s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--text-1); }
-    .nav-links a.active { font-weight: 600; }
+    .ev-item { text-align: center; }
+    .ev-emoji { font-size: 1.4rem; margin-bottom: 6px; }
+    .ev-num {
+      font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700;
+      color: var(--accent); line-height: 1;
+    }
+    .ev-label {
+      font-size: 0.72rem; color: var(--text-2); margin-top: 6px; line-height: 1.4;
+    }
+    .ev-footer {
+      text-align: center; margin-top: 22px;
+      font-size: 0.78rem; color: var(--text-2); line-height: 1.6;
+      max-width: 620px; margin-left: auto; margin-right: auto;
+    }
+    .ev-footer strong { color: var(--accent); font-weight: 600; }
+
+    /* ═══ CATALOGUE ═══ */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .catalogue { padding: 56px 0 64px; }
+    .cat-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 28px; gap: 24px; flex-wrap: wrap;
+    }
+    .cat-header-left {}
+    .cat-eye {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+    }
+    .cat-title {
+      font-family: 'Fraunces', serif; font-size: 1.6rem;
+      font-weight: 700; line-height: 1.15;
+    }
+    .cat-title em { font-style: italic; color: var(--accent); }
+    .cat-subtitle {
+      font-size: 0.82rem; color: var(--text-2); margin-top: 6px; max-width: 440px; line-height: 1.6;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-size: 0.76rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 18px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-2); cursor: pointer; transition: all .15s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Product grid */
+    .product-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    }
+    .pgrid-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .pgrid-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+    .pgrid-img {
+      height: 160px; position: relative; background: #f0ede4;
+    }
+    .pgrid-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .pgrid-body { padding: 10px 12px 12px; }
+    .pgrid-cat { font-size: 0.52rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+    .pgrid-name { font-family: 'Fraunces', serif; font-size: 0.82rem; font-weight: 600; line-height: 1.2; margin-bottom: 3px; }
+    .pgrid-desc { font-size: 0.68rem; color: var(--text-2); line-height: 1.45; margin-bottom: 8px; }
+    .pgrid-link { font-size: 0.72rem; font-weight: 600; color: var(--accent); }
+
+    .cat-count {
+      text-align: center; margin-top: 24px;
+      font-size: 0.75rem; color: var(--text-3);
+    }
+    .cat-note {
+      text-align: center; margin-top: 10px;
+      font-size: 0.68rem; color: var(--text-3);
+    }
+    .cat-note a { color: var(--accent); text-decoration: underline; }
+
+    /* ═══ FAQ ═══ */
+    .faq { padding: 48px 0 56px; border-top: 1px solid var(--border); }
+    .faq-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; text-align: center; margin-bottom: 24px; }
+    .faq-list { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 5px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); overflow: hidden; }
+    .faq-q { padding: 14px 18px; font-size: 0.84rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q:hover { color: var(--accent); }
+    .faq-ch { font-size: 0.7rem; color: var(--text-3); transition: transform .2s; }
+    .faq-item.open .faq-ch { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 0 18px 14px; font-size: 0.8rem; color: var(--text-2); line-height: 1.7; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ═══ NEWSLETTER ═══ */
+    .nl { background: var(--accent); padding: 52px 0; }
+    .nl-inner { max-width: 440px; margin: 0 auto; text-align: center; padding: 0 24px; }
+    .nl-headline { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .nl-headline em { font-style: italic; }
+    .nl-sub { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-bottom: 18px; }
+    .nl-form { display: flex; gap: 8px; max-width: 360px; margin: 0 auto 8px; }
+    .nl-input { flex: 1; padding: 10px 14px; border-radius: 20px; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; }
+    .nl-btn { padding: 10px 18px; border-radius: 20px; border: none; background: #18180F; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
+    .nl-note { font-size: 0.65rem; color: rgba(255,255,255,0.4); }
+
+    /* FOOTER */
+    .footer { background: #18180F; padding: 28px 0; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .footer-name { font-family: 'Fraunces', serif; font-size: 0.9rem; font-weight: 600; color: #fff; }
+    .footer-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.75rem; color: rgba(255,255,255,0.28); }
+    .footer-links { display: flex; gap: 18px; list-style: none; }
+    .footer-links a { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+    .footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.2); }
+    .footer-tiktok { color: rgba(255,255,255,0.35); transition: color 0.15s; }
+    .footer-tiktok:hover { color: rgba(255,255,255,0.7); }
+
+    /* Nav subscribe button */
     .nav-sub {
       background: var(--accent); color: #fff; border: none;
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -89,379 +571,7 @@
     }
     .nav-sub:hover { background: var(--accent-hover); }
 
-    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
-
-    /* ── PAGE HERO ── */
-    .page-hero {
-      padding: 64px 0 56px;
-      text-align: center;
-    }
-    .page-hero-eye {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
-    }
-    .page-hero-title {
-      font-family: 'Fraunces', serif; font-size: 2.8rem;
-      font-weight: 700; line-height: 1.12; color: var(--text-1);
-      margin-bottom: 18px;
-    }
-    .page-hero-title em { font-style: italic; color: var(--accent); }
-    .page-hero-sub {
-      font-size: 0.98rem; color: var(--text-2); line-height: 1.75;
-      max-width: 560px; margin: 0 auto 32px;
-    }
-
-    /* trust badges */
-    .trust-row {
-      display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
-    }
-    .trust-badge {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 0.78rem; color: var(--text-3); font-weight: 500;
-    }
-    .trust-badge span { font-size: 0.9rem; }
-
-    /* ── FEATURED PRODUCT ── */
-    .featured-section { padding: 0 0 64px; }
-    .featured-card {
-      background: #141410;
-      border-radius: 24px; overflow: hidden;
-      display: grid; grid-template-columns: 1fr 480px;
-      min-height: 420px;
-      position: relative;
-    }
-    .featured-body {
-      padding: 56px 48px; display: flex; flex-direction: column; justify-content: center;
-    }
-    .featured-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(95,168,106,0.15); border: 1px solid rgba(95,168,106,0.35);
-      padding: 5px 12px; border-radius: 20px; margin-bottom: 20px; width: fit-content;
-    }
-    .featured-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-    .featured-badge span { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-    .featured-title {
-      font-family: 'Fraunces', serif; font-size: 2.2rem;
-      font-weight: 700; line-height: 1.15; color: #fff; margin-bottom: 14px;
-    }
-    .featured-title em { font-style: italic; color: var(--accent); }
-    .featured-desc {
-      font-size: 0.92rem; color: rgba(255,255,255,0.6);
-      line-height: 1.75; margin-bottom: 28px; max-width: 400px;
-    }
-    .featured-includes {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
-    }
-    .feat-tag {
-      font-size: 0.72rem; font-weight: 600;
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-      padding: 4px 12px; border-radius: 20px; color: rgba(255,255,255,0.65);
-    }
-    .featured-footer {
-      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-    }
-    .featured-price {
-      font-family: 'Fraunces', serif; font-size: 1.8rem;
-      font-weight: 700; color: #fff;
-    }
-    .featured-price-orig {
-      font-size: 1rem; color: rgba(255,255,255,0.35);
-      text-decoration: line-through; margin-left: 6px;
-    }
-    .featured-cta {
-      background: var(--accent); color: #fff; border: none;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.9rem; font-weight: 700;
-      padding: 13px 28px; border-radius: 24px; cursor: pointer;
-      transition: background .15s; white-space: nowrap;
-      text-decoration: none; display: inline-block;
-    }
-    .featured-cta:hover { background: var(--accent-hover); }
-    .featured-img-col {
-      position: relative; overflow: hidden;
-    }
-    .featured-img-col img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center top;
-      opacity: 0.85;
-    }
-    .featured-img-col::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(90deg, #141410 0%, transparent 40%);
-    }
-
-    /* ── FILTER TABS ── */
-    .filter-row {
-      display: flex; align-items: center; gap: 8px;
-      padding: 0 0 32px; flex-wrap: wrap;
-    }
-    .filter-tab {
-      font-size: 0.82rem; font-weight: 600;
-      padding: 8px 18px; border-radius: 20px;
-      border: 1px solid var(--border); background: var(--surface);
-      color: var(--text-2); cursor: pointer; transition: all .15s;
-    }
-    .filter-tab:hover { border-color: var(--accent-light); color: var(--accent); }
-    .filter-tab.active {
-      background: var(--accent); border-color: var(--accent);
-      color: #fff;
-    }
-
-    /* ── FREE ENTRY BANNER ── */
-    .free-entry-banner {
-      display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: center;
-      background: var(--accent-dim); border: 1.5px solid var(--accent-mid);
-      border-radius: 16px; padding: 32px 36px; margin-bottom: 40px;
-    }
-    .feb-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-    .feb-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; color: var(--text-1); margin-bottom: 10px; }
-    .feb-desc { font-size: 0.88rem; color: var(--text-2); line-height: 1.65; margin-bottom: 14px; }
-    .feb-includes { display: flex; flex-wrap: wrap; gap: 8px; }
-    .feb-includes span { font-size: 0.72rem; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; color: var(--text-2); }
-    .feb-right { text-align: center; }
-    .feb-price { font-family: 'Fraunces', serif; font-size: 2.4rem; font-weight: 700; color: var(--accent); line-height: 1; }
-    .feb-note { font-size: 0.75rem; color: var(--text-3); margin-top: 6px; margin-bottom: 4px; }
-    @media (max-width: 700px) { .free-entry-banner { grid-template-columns: 1fr; } .feb-right { text-align: left; } }
-
-    /* ── PRODUCTS GRID ── */
-    .products-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-      margin-bottom: 80px;
-    }
-    .product-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 18px; overflow: hidden;
-      display: flex; flex-direction: column;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .product-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
-
-    .product-img-wrap {
-      position: relative; aspect-ratio: 4/3; overflow: hidden;
-    }
-    .product-img-wrap img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .3s; background: #e0dbd0;
-    }
-    .product-card:hover .product-img-wrap img { transform: scale(1.03); }
-    .product-type-badge {
-      position: absolute; top: 14px; left: 14px;
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 20px;
-    }
-    .badge-program { background: var(--accent); color: #fff; }
-    .badge-guide { background: rgba(255,255,255,0.92); color: var(--accent-hover); border: 1px solid var(--accent-light); }
-    .badge-bundle { background: #141410; color: var(--accent); }
-    .badge-soon { background: rgba(20,19,14,0.08); color: var(--text-2); border: 1px solid var(--border); }
-    .product-btn-disabled { background: var(--warm); color: var(--text-3); cursor: default; border: 1px solid var(--border); }
-    .product-btn-disabled:hover { background: var(--warm); }
-
-    .product-body { padding: 22px 22px 20px; flex: 1; display: flex; flex-direction: column; }
-    .product-domain {
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
-    }
-    .product-name {
-      font-family: 'Fraunces', serif; font-size: 1.12rem; font-weight: 600;
-      line-height: 1.25; color: var(--text-1); margin-bottom: 10px;
-    }
-    .product-desc {
-      font-size: 0.83rem; color: var(--text-2); line-height: 1.65;
-      margin-bottom: 16px; flex: 1;
-    }
-    .product-includes {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px;
-    }
-    .prod-tag {
-      font-size: 0.68rem; font-weight: 500;
-      background: var(--warm); border: 1px solid var(--border);
-      padding: 3px 9px; border-radius: 8px; color: var(--text-2);
-    }
-    .product-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 16px; border-top: 1px solid var(--border);
-    }
-    .product-price {
-      font-family: 'Fraunces', serif; font-size: 1.25rem;
-      font-weight: 700; color: var(--text-1);
-    }
-    .product-price-note { font-size: 0.72rem; color: var(--text-3); margin-top: 1px; }
-    .product-btn {
-      font-size: 0.8rem; font-weight: 700;
-      padding: 8px 18px; border-radius: 20px; border: none; cursor: pointer;
-      transition: all .15s;
-    }
-    .product-btn-primary {
-      background: var(--accent); color: #fff;
-    }
-    .product-btn-primary:hover { background: var(--accent-hover); }
-    .product-btn-outline {
-      background: transparent; color: var(--text-1);
-      border: 1.5px solid var(--border-h);
-    }
-    .product-btn-outline:hover { border-color: var(--accent-light); color: var(--accent); }
-
-    /* ── BUNDLE CALLOUT ── */
-    .bundle-callout {
-      background: var(--warm); border: 1px solid var(--border);
-      border-radius: 20px; padding: 48px 48px;
-      display: grid; grid-template-columns: 1fr auto; gap: 40px;
-      align-items: center; margin-bottom: 80px;
-    }
-    .bundle-eye {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
-    }
-    .bundle-title {
-      font-family: 'Fraunces', serif; font-size: 1.8rem;
-      font-weight: 700; line-height: 1.2; color: var(--text-1);
-      margin-bottom: 12px;
-    }
-    .bundle-title em { font-style: italic; color: var(--accent); }
-    .bundle-desc {
-      font-size: 0.9rem; color: var(--text-2); line-height: 1.7;
-      max-width: 480px;
-    }
-    .bundle-right { text-align: center; flex-shrink: 0; }
-    .bundle-price-label { font-size: 0.72rem; color: var(--text-3); margin-bottom: 4px; }
-    .bundle-price-orig {
-      font-size: 0.95rem; color: var(--text-3); text-decoration: line-through;
-      margin-bottom: 4px;
-    }
-    .bundle-price {
-      font-family: 'Fraunces', serif; font-size: 2.6rem;
-      font-weight: 700; color: var(--text-1); line-height: 1;
-      margin-bottom: 8px;
-    }
-    .bundle-save {
-      display: inline-block; background: var(--accent-dim);
-      border: 1px solid var(--accent-light); color: var(--accent-hover);
-      font-size: 0.72rem; font-weight: 700;
-      padding: 3px 10px; border-radius: 10px; margin-bottom: 16px;
-    }
-    .bundle-cta {
-      display: block; width: 100%;
-      background: var(--accent); color: #fff; border: none;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.88rem; font-weight: 700;
-      padding: 13px 28px; border-radius: 24px; cursor: pointer;
-      transition: background .15s; text-decoration: none; text-align: center;
-    }
-    .bundle-cta:hover { background: var(--accent-hover); }
-
-    /* ── TESTIMONIALS ── */
-    .testimonials-section {
-      background: #141410; padding: 72px 0;
-    }
-    .test-header { text-align: center; margin-bottom: 48px; }
-    .test-eye {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
-    }
-    .test-title {
-      font-family: 'Fraunces', serif; font-size: 1.7rem;
-      font-weight: 600; color: #fff;
-    }
-    .test-title em { font-style: italic; color: var(--accent); }
-    .test-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-    }
-    .test-card {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 28px 24px;
-      display: flex; flex-direction: column;
-    }
-    .test-stars { color: var(--accent); font-size: 0.9rem; margin-bottom: 14px; letter-spacing: 2px; }
-    .test-quote {
-      font-family: 'Fraunces', serif; font-size: 0.98rem;
-      font-style: italic; color: rgba(255,255,255,0.8);
-      line-height: 1.65; margin-bottom: 20px; flex: 1;
-    }
-    .test-author { display: flex; align-items: center; gap: 10px; }
-    .test-avatar {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(95,168,106,0.2); border: 1px solid rgba(95,168,106,0.3);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.9rem; flex-shrink: 0;
-    }
-    .test-name { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.75); }
-    .test-product { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
-
-    /* ── GUARANTEE ── */
-    .guarantee-section { padding: 72px 0; }
-    .guarantee-card {
-      background: var(--warm); border: 1px solid var(--border);
-      border-radius: 20px; padding: 48px;
-      display: grid; grid-template-columns: 80px 1fr; gap: 32px; align-items: center;
-    }
-    .guarantee-icon {
-      width: 80px; height: 80px; border-radius: 20px;
-      background: var(--accent-dim); border: 1px solid var(--accent-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.2rem; flex-shrink: 0;
-    }
-    .guarantee-title {
-      font-family: 'Fraunces', serif; font-size: 1.4rem;
-      font-weight: 600; color: var(--text-1); margin-bottom: 10px;
-    }
-    .guarantee-body { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
-
-    /* ── FAQ ── */
-    .faq-section { padding: 0 0 80px; }
-    .faq-title {
-      font-family: 'Fraunces', serif; font-size: 1.5rem;
-      font-weight: 600; color: var(--text-1); margin-bottom: 32px;
-    }
-    .faq-list { display: flex; flex-direction: column; gap: 4px; }
-    .faq-item {
-      border: 1px solid var(--border); border-radius: 12px;
-      overflow: hidden; background: var(--surface);
-    }
-    .faq-q {
-      padding: 18px 22px; font-size: 0.92rem; font-weight: 600;
-      color: var(--text-1); cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center;
-      user-select: none;
-    }
-    .faq-q:hover { color: var(--accent); }
-    .faq-chevron { font-size: 0.8rem; color: var(--text-3); transition: transform .2s; }
-    .faq-item.open .faq-chevron { transform: rotate(180deg); }
-    .faq-a {
-      display: none; padding: 0 22px 18px;
-      font-size: 0.88rem; color: var(--text-2); line-height: 1.75;
-    }
-    .faq-item.open .faq-a { display: block; }
-
-    /* ── NEWSLETTER ── */
-    .newsletter-section { background: var(--accent); padding: 72px 0; }
-    .nl-inner { max-width: 560px; margin: 0 auto; padding: 0 24px; text-align: center; }
-    .nl-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
-    .nl-headline { font-family: 'Fraunces', serif; font-size: 2.0rem; font-weight: 700; line-height: 1.2; color: #fff; margin-bottom: 12px; }
-    .nl-headline em { font-style: italic; }
-    .nl-sub { font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 28px; }
-    .nl-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto 12px; }
-    .nl-input { flex: 1; padding: 12px 16px; border-radius: 20px; border: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; outline: none; background: rgba(255,255,255,0.95); }
-    .nl-btn { padding: 12px 22px; border-radius: 20px; border: none; background: #18180F; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: opacity .15s; }
-    .nl-btn:hover { opacity: 0.85; }
-    .nl-note { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
-
-    /* ── FOOTER ── */
-    .footer { background: #18180F; padding: 36px 0; }
-    .footer-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    .footer-left { display: flex; align-items: center; gap: 6px; }
-    .footer-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: #fff; }
-    .footer-kr { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: rgba(255,255,255,0.35); }
-    .footer-links { display: flex; gap: 24px; list-style: none; }
-    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.45); transition: color .15s; }
-    .footer-links a:hover { color: rgba(255,255,255,0.8); }
-    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
-
-    /* ── PAGE TRANSITIONS ── */
-    body.page-exit {
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-  
-    /* ── HAMBURGER NAV ── */
+    /* Hamburger menu */
     .nav-hamburger {
       display: none;
       flex-direction: column;
@@ -477,11 +587,12 @@
       display: block;
       width: 22px;
       height: 2px;
-      background: var(--text-1);
+      background: #fff;
       border-radius: 2px;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.3s;
       transform-origin: center;
     }
+    .nav.scrolled .nav-hamburger span { background: var(--text-1); }
     .nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -491,7 +602,7 @@
       .nav-sub { display: none !important; }
       .nav-links {
         position: absolute !important;
-        top: 58px !important;
+        top: 54px !important;
         left: 0 !important; right: 0 !important;
         background: rgba(250,250,247,0.98) !important;
         backdrop-filter: blur(16px) !important;
@@ -508,53 +619,21 @@
       .nav-links li { border-bottom: 1px solid var(--border); width: 100%; }
       .nav-links li:last-child { border-bottom: none; }
       .nav-links a { display: block; width: 100%; padding: 12px 0; font-size: 0.95rem !important; color: var(--text-1) !important; }
+      .portal-cards { grid-template-columns: 1fr; max-width: 440px; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .cat-header { flex-direction: column; align-items: flex-start; }
     }
-
-    /* ── COMMON SMALL SCREEN FIXES ── */
-    @media (max-width: 600px) {
+    @media (max-width: 540px) {
+      .portal-title { font-size: 1.8rem; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
       .nl-form { flex-direction: column; }
-      .nl-input, .nl-btn { width: 100%; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .footer-links { flex-wrap: wrap; gap: 12px; }
-      .wrap { padding: 0 16px; }
-      .bridge-strip { flex-direction: column; gap: 12px; }
-      .sub-input-row { flex-direction: column; }
-      .sub-btn { width: 100%; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
     }
-    /* ── PRODUCTS PAGE RESPONSIVE ── */
-    @media (max-width: 860px) {
-      .featured-card { grid-template-columns: 1fr !important; }
-      .bundle-callout { grid-template-columns: 1fr !important; }
-    }
-    @media (max-width: 680px) {
-      .page-hero-title { font-size: 2rem; }
-      .products-grid { grid-template-columns: 1fr 1fr; }
-      .test-grid { grid-template-columns: 1fr !important; }
-      .guarantee-card { grid-template-columns: 1fr !important; }
-    }
-    @media (max-width: 480px) {
-      .products-grid { grid-template-columns: 1fr; }
-      .trust-badges { flex-wrap: wrap; gap: 8px; }
-      .trust-row {
-        display: grid; grid-template-columns: 1fr 1fr;
-        gap: 10px 8px; max-width: 300px; margin: 0 auto; text-align: left;
-      }
-      .trust-badge { justify-content: flex-start; }
-    }
-    </style>
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <script defer src="/_vercel/insights/script.js"></script>
-  <script defer src="https://analytics.melis.ai/script.js" data-website-id="10343747-2b25-435a-9fa3-0100b42b9f9c"></script>
+  </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav class="nav">
+<nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
       <div class="nav-dot"></div>
@@ -565,307 +644,348 @@
       <li><a href="journal.html">Journal</a></li>
       <li><a href="products.html" class="active">Products</a></li>
       <li><a href="about.html">About</a></li>
+      <li><button class="nav-sub" onclick="beehiivSubscribe(this)">Subscribe</button></li>
     </ul>
-    <button class="nav-sub">Subscribe →</button>
   </div>
 </nav>
 
-<!-- ── PAGE HERO ── -->
-<section class="page-hero">
-  <div class="wrap">
-    <div class="page-hero-eye">Resonance Protocols</div>
-    <h2 class="page-hero-title">Stop chasing the next hack.<br><em>Start sleeping like your nervous system designed you to.</em></h2>
-    <p class="page-hero-sub">
-      Every protocol here is built from peer-reviewed circadian science and Korean saenghwal practice — designed for high performers who've read the books, tracked the data, and still can't sleep. The core insight: <strong>consistency beats heroics.</strong> Every time.
-    </p>
-    <div class="trust-row">
-      <div class="trust-badge"><span>🔬</span> Peer-reviewed sources cited</div>
-      <div class="trust-badge"><span>↩️</span> 30-day money-back guarantee</div>
-      <div class="trust-badge"><span>🔒</span> Instant digital access</div>
-      <div class="trust-badge"><span>♾️</span> Lifetime updates included</div>
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- FOREST PORTAL                                          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="portal" id="portal">
+  <div class="portal-bg"></div>
+  <div class="portal-bg-layer2"></div>
+  <div class="portal-overlay"></div>
+
+  <!-- God rays — sweeping light shafts -->
+  <div class="god-ray"></div>
+  <div class="god-ray"></div>
+  <div class="god-ray"></div>
+
+  <!-- Bokeh orbs — glowing light circles -->
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+
+  <!-- Canopy glow -->
+  <div class="canopy-glow"></div>
+
+  <!-- Firefly sparkles -->
+  <div class="sparkle" style="left:18%;top:35%;animation-duration:6s;animation-delay:0s;"></div>
+  <div class="sparkle" style="left:42%;top:28%;animation-duration:7s;animation-delay:1.5s;"></div>
+  <div class="sparkle" style="left:65%;top:42%;animation-duration:5.5s;animation-delay:3s;width:3px;height:3px;"></div>
+  <div class="sparkle" style="left:80%;top:30%;animation-duration:8s;animation-delay:0.5s;"></div>
+  <div class="sparkle" style="left:30%;top:55%;animation-duration:6.5s;animation-delay:4s;width:3px;height:3px;"></div>
+  <div class="sparkle" style="left:55%;top:50%;animation-duration:7.5s;animation-delay:2s;"></div>
+  <div class="sparkle" style="left:12%;top:48%;animation-duration:5s;animation-delay:5.5s;width:3px;height:3px;"></div>
+  <div class="sparkle" style="left:72%;top:22%;animation-duration:9s;animation-delay:1s;"></div>
+  <div class="sparkle" style="left:88%;top:55%;animation-duration:6s;animation-delay:3.5s;width:2px;height:2px;"></div>
+  <div class="sparkle" style="left:25%;top:20%;animation-duration:7s;animation-delay:6s;"></div>
+
+  <!-- Floating dust motes -->
+  <div class="particle" style="left:12%;top:65%;animation-duration:8s;animation-delay:0s;width:2.5px;height:2.5px;"></div>
+  <div class="particle" style="left:28%;top:72%;animation-duration:10s;animation-delay:2s;"></div>
+  <div class="particle" style="left:45%;top:68%;animation-duration:9s;animation-delay:4s;width:3px;height:3px;"></div>
+  <div class="particle" style="left:62%;top:75%;animation-duration:11s;animation-delay:1s;"></div>
+  <div class="particle" style="left:78%;top:70%;animation-duration:8.5s;animation-delay:3s;width:2px;height:2px;"></div>
+  <div class="particle" style="left:35%;top:80%;animation-duration:12s;animation-delay:5s;"></div>
+  <div class="particle" style="left:55%;top:73%;animation-duration:9.5s;animation-delay:0.5s;width:2px;height:2px;"></div>
+  <div class="particle" style="left:85%;top:78%;animation-duration:10s;animation-delay:6s;"></div>
+  <div class="particle" style="left:20%;top:85%;animation-duration:11s;animation-delay:7s;width:2.5px;height:2.5px;"></div>
+  <div class="particle" style="left:70%;top:82%;animation-duration:9s;animation-delay:2.5s;"></div>
+
+  <!-- Audio control -->
+  <button class="audio-toggle" id="audioToggle" onclick="toggleAudio()">
+    <div class="audio-bars">
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
     </div>
-    <p style="margin-top:24px; font-size:0.82rem; color:var(--text-3);">Want everything? <a href="#bundle" style="display:inline-block; margin-top:6px; padding:8px 16px; background:var(--accent-dim); border:1px solid var(--accent-light); border-radius:20px; color:var(--accent); font-weight:600; font-size:0.82rem; text-decoration:none;">Finally Sleep — The Complete Library $197 →</a></p>
-  </div>
-</section>
+    <span id="audioLabel">Forest sounds</span>
+  </button>
 
-<!-- ── FEATURED PRODUCT ── -->
-<section class="featured-section">
-  <div class="wrap">
-    <div class="featured-card">
-      <div class="featured-body">
-        <div class="featured-badge">
-          <div class="featured-badge-dot"></div>
-          <span>Coming soon · 28-Day Program</span>
-        </div>
-        <h2 class="featured-title">Deep Sleep in <em>28 Days</em></h2>
-        <p class="featured-desc">
-          The evidence-based protocol for high performers who've tried everything. You're not broken — you're over-optimised. The fix isn't another habit: it's circadian timing, Korean evening ritual, and the one principle every sleep researcher agrees on. Consistency beats heroics.
-        </p>
-        <div class="featured-includes">
-          <div class="feat-tag">28 daily protocols</div>
-          <div class="feat-tag">Light & temp guides</div>
-          <div class="feat-tag">Circadian nutrition plan</div>
-          <div class="feat-tag">Sleep staging tracker</div>
-          <div class="feat-tag">Korean evening rituals</div>
-        </div>
-        <div class="featured-footer">
-          <div>
-            <div class="featured-price" style="font-size:1.2rem; color:rgba(255,255,255,0.5);">Coming soon</div>
-          </div>
-          <span class="featured-cta" style="background:rgba(255,255,255,0.15); cursor:default;">Notify me →</span>
-        </div>
-      </div>
-      <div class="featured-img-col">
-        <img src="thumb-cant-catch-up-sleep.jpg" alt="Deep Sleep in 28 Days" onerror="this.style.background='#2a2015'" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── PRODUCTS GRID ── -->
-<section>
-  <div class="wrap">
-
-    <div class="filter-row">
-      <div class="filter-tab active">All</div>
-      <div class="filter-tab">Free</div>
-      <div class="filter-tab">Quick Protocols</div>
-      <div class="filter-tab">Programs</div>
-      <div class="filter-tab">Korean Wellness</div>
-    </div>
-
-    <!-- ENTRY PRODUCT -->
-    <div class="free-entry-banner">
-      <div class="feb-left">
-        <div class="feb-tag">Start here · Most popular</div>
-        <div class="feb-title">The 3am Protocol</div>
-        <p class="feb-desc">Stop waking in the night — in 7 days. The cortisol-adenosine correction method that most sleep guides completely miss. If you wake between 2–4am, this is where to start.</p>
-        <div class="feb-includes">
-          <span>20-page PDF</span><span>7-day plan</span><span>Cortisol correction guide</span><span>Evening prep checklist</span>
-        </div>
-      </div>
-      <div class="feb-right">
-        <div class="feb-price">$17</div>
-        <div class="feb-note">One-time · Instant PDF download</div>
-        <a href="product-single.html" class="product-btn product-btn-primary" style="width:100%; margin-top:12px; display:block; text-align:center;">Get the protocol →</a>
-      </div>
+  <div class="portal-content">
+    <div class="portal-header">
+      <div class="portal-tagline">Evidence-based Korean wellness</div>
+      <h1 class="portal-title">Reset your rhythm.<br><em>Feel like yourself again.</em></h1>
+      <p class="portal-sub">Protocols rooted in research and Korean tradition — for women who want real answers.</p>
     </div>
 
-    <div class="products-grid">
+    <div class="portal-cards">
 
-      <!-- Lights Out in 7 — $37 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="lila-kbeauty-styled.jpg" alt="Lights Out in 7" onerror="this.style.background='#c4dfc8';this.style.height='220px'" />
-          <div class="product-type-badge badge-soon">Coming soon</div>
+      <!-- 3am Protocol -->
+      <div class="glass-card">
+        <div class="gc-img" style="background-image:url('product-3am-v2.jpg');">
+          <div class="gc-tag live">Available now</div>
         </div>
-        <div class="product-body">
-          <div class="product-domain">Korean Wellness · Evening Ritual</div>
-          <div class="product-name">Lights Out in 7</div>
-          <p class="product-desc">The Korean jeonyeok evening ritual that replaces melatonin. Ondol warmth sequencing, ssuk steam, jeongseong wind-down — the ancestral practice your nervous system has been waiting for. Fall asleep before 10:30 without willpower.</p>
-          <div class="product-includes">
-            <div class="prod-tag">7-step ritual system</div>
-            <div class="prod-tag">Ssuk & hanbang guide</div>
-            <div class="prod-tag">Jeonyeok wind-down cards</div>
-          </div>
-          <div class="product-footer">
+        <div class="gc-body">
+          <h2 class="gc-title">The 3am <em>Protocol</em></h2>
+          <p class="gc-desc">Why you keep waking at 3am — and the 7-day circadian fix built on cortisol science and Korean evening ritual.</p>
+          <ul class="gc-features">
+            <li><span class="chk">✓</span> Cortisol-adenosine correction</li>
+            <li><span class="chk">✓</span> 7-day implementation plan</li>
+            <li><span class="chk">✓</span> Korean evening wind-down</li>
+            <li><span class="chk">✓</span> Light exposure guide</li>
+            <li><span class="chk">✓</span> Printable checklist</li>
+            <li><span class="chk">✓</span> 47 sources cited</li>
+          </ul>
+          <div class="gc-bottom">
             <div>
-              <div class="product-price">$37</div>
-              <div class="product-price-note">One-time · Lifetime access</div>
+              <div class="gc-price">$17</div>
+              <div class="gc-price-note">Instant PDF</div>
             </div>
-            <button class="product-btn product-btn-disabled" disabled>Coming soon</button>
+            <button class="gc-cta buy">Get it now →</button>
           </div>
         </div>
       </div>
 
-      <!-- Sleep Through the Change — $147 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="thumb-breathwork.jpg" alt="Sleep Through the Change" onerror="this.style.background='#c4dfc8';this.style.height='220px'" />
-          <div class="product-type-badge badge-soon">Coming soon</div>
+      <!-- Korean Wellness System -->
+      <div class="glass-card">
+        <div class="gc-img" style="background-image:url('product-system-v2.jpg');">
+          <div class="gc-tag soon">Coming soon</div>
         </div>
-        <div class="product-body">
-          <div class="product-domain">Hormonal Rest · Perimenopause</div>
-          <div class="product-name">Sleep Through the Change</div>
-          <p class="product-desc">Perimenopause disrupts your entire circadian architecture — and no mainstream protocol was built for that. This is the first hormone-aware, ritual-led sleep program for women 38–52. Not generic advice. Built for what's actually happening in your body.</p>
-          <div class="product-includes">
-            <div class="prod-tag">6-week phased program</div>
-            <div class="prod-tag">Hormonal rhythm guide</div>
-            <div class="prod-tag">Temperature regulation kit</div>
-          </div>
-          <div class="product-footer">
+        <div class="gc-body">
+          <h2 class="gc-title">The Korean <em>Wellness System</em></h2>
+          <p class="gc-desc">Sleep, stress, energy, hormonal balance — 8 modules, both $17 guides included, plus templates and a GP guide.</p>
+          <ul class="gc-features">
+            <li><span class="chk">✓</span> Both $17 guides included</li>
+            <li><span class="chk">✓</span> Supplement protocol</li>
+            <li><span class="chk">✓</span> Circadian nutrition plan</li>
+            <li><span class="chk">✓</span> 14-day ritual system</li>
+            <li><span class="chk">✓</span> Tracking templates</li>
+            <li><span class="chk">✓</span> 120+ sources cited</li>
+          </ul>
+          <div class="gc-bottom">
             <div>
-              <div class="product-price">$147</div>
-              <div class="product-price-note">One-time · Lifetime access</div>
+              <div class="gc-price">$97</div>
+              <div class="gc-price-note">Lifetime updates</div>
             </div>
-            <button class="product-btn product-btn-disabled" disabled>Coming soon</button>
+            <button class="gc-cta coming">Coming Soon</button>
           </div>
         </div>
       </div>
 
-      <!-- Resonance Tracking Templates — $27 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="prod-templates.jpg" alt="Resonance Tracking Templates" onerror="this.style.background='#c4dfc8';this.style.height='220px'" />
-          <div class="product-type-badge badge-soon">Coming soon</div>
-        </div>
-        <div class="product-body">
-          <div class="product-domain">Tracking & Planning</div>
-          <div class="product-name">Resonance Tracking Templates</div>
-          <p class="product-desc">Sleep timing tracker, HRV baseline log, circadian nutrition planner, and morning-evening anchor sheets — structured so you can see your patterns in one week, not one month. Notion + Google Sheets versions included.</p>
-          <div class="product-includes">
-            <div class="prod-tag">12 templates</div>
-            <div class="prod-tag">Notion + Sheets</div>
-            <div class="prod-tag">Setup walkthroughs</div>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$27</div>
-              <div class="product-price-note">One-time · Lifetime access</div>
-            </div>
-            <button class="product-btn product-btn-disabled" disabled>Coming soon</button>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /products-grid -->
-
-    <!-- BUNDLE CALLOUT -->
-    <div class="bundle-callout" id="bundle">
-      <div>
-        <div class="bundle-eye">Best value · One framework, every stage</div>
-        <h2 class="bundle-title"><em>Finally Sleep</em> — The Complete Library</h2>
-        <p class="bundle-desc">
-          One price. Every protocol. The 3am Protocol (free entry) + Lights Out in 7 + Deep Sleep in 28 Days + Sleep Through the Change + Resonance Tracking Templates. Whether you're 35 or 52, whether you're waking at 3am or just can't wind down — there's a protocol in here that fits where you are right now.
-        </p>
-      </div>
-      <div class="bundle-right">
-        <div class="bundle-price-label">Everything, together</div>
-        <div class="bundle-price-orig">$308 if bought separately</div>
-        <div class="bundle-price" style="font-size:1.8rem; color:var(--text-3);">Coming soon</div>
-        <div class="bundle-save">Save $111 · 36% off when live</div>
-        <span class="bundle-cta" style="background:var(--accent-light); color:var(--accent-hover); cursor:default;">Notify me when available</span>
-      </div>
     </div>
 
+    <div class="portal-guarantee">
+      <span>↩️</span>
+      <span><strong>30-day money-back guarantee.</strong> Try the protocols. Not worth it? Full refund, same day.</span>
+    </div>
+  </div>
+
+  <div class="scroll-down">
+    <span>Lila's picks below</span>
+    <div class="scroll-arrow">↓</div>
   </div>
 </section>
 
-<!-- ── TESTIMONIALS ── -->
-<section class="testimonials-section">
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- EVIDENCE STRIP                                          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="evidence-strip">
   <div class="wrap">
-    <div class="test-header">
-      <div class="test-eye">Results</div>
-      <h2 class="test-title">What people are <em>actually saying</em></h2>
+    <div class="ev-grid">
+      <div class="ev-item">
+        <div class="ev-emoji">📚</div>
+        <div class="ev-num">47</div>
+        <div class="ev-label">Peer-reviewed sources<br>in The 3am Protocol</div>
+      </div>
+      <div class="ev-item">
+        <div class="ev-emoji">🔬</div>
+        <div class="ev-num">5</div>
+        <div class="ev-label">Evidence tiers — from<br>meta-analyses to tradition</div>
+      </div>
+      <div class="ev-item">
+        <div class="ev-emoji">🚫</div>
+        <div class="ev-num">0</div>
+        <div class="ev-label">Paid sponsorships. Every<br>recommendation is earned</div>
+      </div>
+      <div class="ev-item">
+        <div class="ev-emoji">🤖</div>
+        <div class="ev-num">100%</div>
+        <div class="ev-label">AI-transparent. Every<br>claim is source-verifiable</div>
+      </div>
     </div>
-    <div class="test-grid">
-
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-quote">"I've read every sleep book. This is the first thing I've read that gives me the mechanism, not just the rule. I finally understand <em>why</em> consistent wake time matters more than total hours — and my sleep is the best it's been in a decade."</div>
-        <div class="test-author">
-          <div class="test-avatar">🌙</div>
-          <div>
-            <div class="test-name">Camille R.</div>
-            <div class="test-product">The 3am Protocol</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-quote">"Deep Sleep in 28 Days gave me a framework, not a checklist. Week 2 was the turning point — the morning light protocol sounds stupidly simple and I kept dismissing it, but the HRV data doesn't lie. My recovery scores went from 40s to 70s."</div>
-        <div class="test-author">
-          <div class="test-avatar">☀️</div>
-          <div>
-            <div class="test-name">James T.</div>
-            <div class="test-product">Deep Sleep in 28 Days</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-quote">"My glucose was spiking after every meal and I had no idea. The CGM protocol in Metabolic Foundations was genuinely eye-opening. More useful than three years of general 'eat better' advice. The food-order section alone was worth the price."</div>
-        <div class="test-author">
-          <div class="test-avatar">🔬</div>
-          <div>
-            <div class="test-name">Preethi S.</div>
-            <div class="test-product">Metabolic Foundations</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <p class="ev-footer">Every recommendation is graded <strong>T1</strong> (systematic reviews) through <strong>T5</strong> (traditional practice) — the same hierarchy used by clinical researchers. You see the tier so you can judge the strength yourself.</p>
   </div>
 </section>
 
-<!-- ── GUARANTEE ── -->
-<section class="guarantee-section">
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- FILTERABLE CATALOGUE                                    -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="catalogue">
   <div class="wrap">
-    <div class="guarantee-card">
-      <div class="guarantee-icon">↩️</div>
-      <div>
-        <div class="guarantee-title">30-Day No-Questions Money-Back Guarantee</div>
-        <p class="guarantee-body">
-          Every product comes with a full 30-day refund. If you read the material, apply the protocols for at least two weeks, and don't feel it was worth the investment — email hello@lilapark.ai and you'll get a full refund, same day. No forms, no hoops. Evidence-based content should earn your trust, not demand it upfront.
-        </p>
+    <div class="cat-header">
+      <div class="cat-header-left">
+        <div class="cat-eye">Curated by Lila</div>
+        <h2 class="cat-title">The products I <em>actually recommend</em></h2>
+        <p class="cat-subtitle">Every item here is referenced in my articles and guides. Each is graded by evidence tier — no sponsorships, no filler. If it's here, I'd recommend it to a friend.</p>
+      </div>
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="supplement">Supplements</button>
+        <button class="filter-btn" data-filter="sleep">Sleep Environment</button>
+        <button class="filter-btn" data-filter="skincare">Korean Skincare</button>
+        <button class="filter-btn" data-filter="ritual">Wellness &amp; Ritual</button>
+        <button class="filter-btn" data-filter="food">Korean Foods</button>
       </div>
     </div>
+
+    <div class="product-grid" id="productGrid">
+
+      <!-- SUPPLEMENTS -->
+      <div class="pgrid-card" data-cat="supplement">
+        <div class="pgrid-img"><img src="prod-ashwagandha.jpg" alt="Ashwagandha KSM-66" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Supplements</div><div class="pgrid-name">Ashwagandha KSM-66</div><div class="pgrid-desc">HPA axis cortisol support</div><a href="https://www.amazon.com/s?k=ashwagandha+KSM-66+600mg&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="supplement">
+        <div class="pgrid-img"><img src="prod-magnesium.jpg" alt="Magnesium Glycinate" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Supplements</div><div class="pgrid-name">Magnesium Glycinate</div><div class="pgrid-desc">Most bioavailable form for sleep</div><a href="https://www.amazon.com/s?k=magnesium+glycinate+400mg&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="supplement">
+        <div class="pgrid-img"><img src="prod-rhodiola.jpg" alt="Rhodiola Rosea Extract" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Supplements</div><div class="pgrid-name">Rhodiola Rosea Extract</div><div class="pgrid-desc">Fatigue and cognitive support</div><a href="https://www.amazon.com/s?k=rhodiola+rosea+extract+standardised&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="supplement">
+        <div class="pgrid-img"><img src="prod-schisandra.jpg" alt="Schisandra Berry" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Supplements</div><div class="pgrid-name">Schisandra Berry (Omija)</div><div class="pgrid-desc">Korean evening adaptogen</div><a href="https://www.amazon.com/s?k=schisandra+berry+extract&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="supplement">
+        <div class="pgrid-img"><img src="prod-maca.jpg" alt="Maca Root Gelatinised" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Supplements</div><div class="pgrid-name">Maca Root Gelatinised</div><div class="pgrid-desc">Hormonal balance and energy</div><a href="https://www.amazon.com/s?k=maca+root+gelatinised+organic&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="supplement">
+        <div class="pgrid-img"><img src="prod-melatonin.jpg" alt="Melatonin 5mg" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Supplements</div><div class="pgrid-name">Melatonin 5mg</div><div class="pgrid-desc">Circadian resetting, not nightly use</div><a href="https://www.amazon.com/s?k=melatonin+5mg+sleep&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="supplement">
+        <div class="pgrid-img"><img src="prod-vitamin-d.jpg" alt="Vitamin D3" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Supplements</div><div class="pgrid-name">Vitamin D3</div><div class="pgrid-desc">Foundation supplement, take with fat in morning</div><a href="https://www.amazon.com/s?k=vitamin+d3+5000iu&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="supplement">
+        <div class="pgrid-img"><img src="prod-probiotic.jpg" alt="Women's Probiotic" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Supplements</div><div class="pgrid-name">Women's Probiotic</div><div class="pgrid-desc">Gut-brain axis sleep support</div><a href="https://www.amazon.com/s?k=women+probiotic+supplement&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+
+      <!-- SLEEP ENVIRONMENT -->
+      <div class="pgrid-card" data-cat="sleep">
+        <div class="pgrid-img"><img src="prod-cooling-mattress.jpg" alt="Cooling Mattress Topper" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">Cooling Mattress Topper</div><div class="pgrid-desc">#1 intervention for night sweats</div><a href="https://www.amazon.com/s?k=cooling+mattress+topper+queen&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="sleep">
+        <div class="pgrid-img"><img src="prod-cooling-pillow.jpg" alt="Cooling Gel Pillow" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">Cooling Gel Pillow</div><div class="pgrid-desc">Keeps head cool</div><a href="https://www.amazon.com/s?k=cooling+pillow+gel+memory+foam&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="sleep">
+        <div class="pgrid-img"><img src="prod-sleep-mask.jpg" alt="100% Blackout Sleep Mask" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">100% Blackout Sleep Mask</div><div class="pgrid-desc">Even small light suppresses melatonin</div><a href="https://www.amazon.com/s?k=sleep+mask+100+percent+blackout&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="sleep">
+        <div class="pgrid-img"><img src="prod-white-noise.jpg" alt="White Noise Machine" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">White Noise Machine</div><div class="pgrid-desc">No blue light, no notifications</div><a href="https://www.amazon.com/s?k=white+noise+machine+sleep&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="sleep">
+        <div class="pgrid-img"><img src="prod-weighted-blanket.jpg" alt="Weighted Blanket" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">Weighted Blanket</div><div class="pgrid-desc">Deep pressure triggers oxytocin</div><a href="https://www.amazon.com/s?k=weighted+blanket+15+lbs+cotton&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="sleep">
+        <div class="pgrid-img"><img src="prod-sunrise-lamp.jpg" alt="Sunrise Alarm Lamp" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Sleep Environment</div><div class="pgrid-name">Sunrise Alarm Lamp</div><div class="pgrid-desc">Gradual light mimics dawn</div><a href="https://www.amazon.com/s?k=sunrise+alarm+clock+wake+up+light&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+
+      <!-- KOREAN SKINCARE -->
+      <div class="pgrid-card" data-cat="skincare">
+        <div class="pgrid-img"><img src="prod-snail-mucin.jpg" alt="COSRX Snail Mucin 96%" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Korean Skincare</div><div class="pgrid-name">COSRX Snail Mucin 96%</div><div class="pgrid-desc">Perimenopause hydration hero</div><a href="https://www.amazon.com/s?k=COSRX+snail+mucin+96+essence&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="skincare">
+        <div class="pgrid-img"><img src="prod-toner-pads.jpg" alt="Anua Niacinamide Toner Pads" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Korean Skincare</div><div class="pgrid-name">Anua Niacinamide Toner Pads</div><div class="pgrid-desc">Gentle exfoliation + brightening</div><a href="https://www.amazon.com/s?k=Anua+niacinamide+toner+pads&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="skincare">
+        <div class="pgrid-img"><img src="prod-mugwort.jpg" alt="Anua Mugwort Calming Essence" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Korean Skincare</div><div class="pgrid-name">Anua Mugwort Calming Essence</div><div class="pgrid-desc">Ssuk hanbang staple</div><a href="https://www.amazon.com/s?k=Anua+mugwort+calming+essence&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="skincare">
+        <div class="pgrid-img"><img src="prod-gua-sha.jpg" alt="Jade Roller + Gua Sha Set" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Korean Skincare</div><div class="pgrid-name">Jade Roller + Gua Sha Set</div><div class="pgrid-desc">Lymphatic drainage evening ritual</div><a href="https://www.amazon.com/s?k=jade+roller+gua+sha+set&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+
+      <!-- WELLNESS & RITUAL -->
+      <div class="pgrid-card" data-cat="ritual">
+        <div class="pgrid-img"><img src="prod-diffuser.jpg" alt="Aromatherapy Diffuser" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Wellness &amp; Ritual</div><div class="pgrid-name">Aromatherapy Diffuser</div><div class="pgrid-desc">Olfactory anchor for wind-down</div><a href="https://www.amazon.com/s?k=essential+oil+diffuser+bedroom&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="ritual">
+        <div class="pgrid-img"><img src="prod-meditation-cushion.jpg" alt="Meditation Cushion" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Wellness &amp; Ritual</div><div class="pgrid-name">Meditation Cushion</div><div class="pgrid-desc">Dedicated seat makes the habit stick</div><a href="https://www.amazon.com/s?k=meditation+cushion+zafu&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+
+      <!-- KOREAN FOODS -->
+      <div class="pgrid-card" data-cat="food">
+        <div class="pgrid-img"><img src="prod-jujube.jpg" alt="Dried Jujube (Daechu)" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Korean Foods</div><div class="pgrid-name">Dried Jujube (Daechu)</div><div class="pgrid-desc">Traditional Korean sleep remedy</div><a href="https://www.amazon.com/s?k=dried+jujube+dates+korean&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="food">
+        <div class="pgrid-img"><img src="prod-barley-tea.jpg" alt="Barley Tea (Boricha)" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Korean Foods</div><div class="pgrid-name">Barley Tea (Boricha)</div><div class="pgrid-desc">Caffeine-free Korean evening staple</div><a href="https://www.amazon.com/s?k=roasted+barley+tea+korean+boricha&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+      <div class="pgrid-card" data-cat="food">
+        <div class="pgrid-img"><img src="prod-black-sesame.jpg" alt="Black Sesame Seeds" onerror="this.style.display='none'"></div>
+        <div class="pgrid-body"><div class="pgrid-cat">Korean Foods</div><div class="pgrid-name">Black Sesame Seeds</div><div class="pgrid-desc">Loaded with magnesium and tryptophan</div><a href="https://www.amazon.com/s?k=black+sesame+seeds+organic&tag=lilapark-20" target="_blank" rel="nofollow sponsored" class="pgrid-link">View on Amazon →</a></div>
+      </div>
+
+    </div>
+
+    <div class="cat-count" id="catCount">Showing 25 products</div>
+    <p class="cat-note">This page contains affiliate links. If you purchase through these links, I may earn a small commission at no extra cost to you. I only recommend products I personally use and believe in.</p>
   </div>
 </section>
 
-<!-- ── FAQ ── -->
-<section class="faq-section">
-  <div class="wrap" style="max-width: 720px;">
+<!-- ═══ FAQ ═══ -->
+<section class="faq">
+  <div class="wrap">
     <h2 class="faq-title">Common questions</h2>
     <div class="faq-list">
       <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-          Is this AI-generated content? <span class="faq-chevron">▾</span>
-        </div>
-        <div class="faq-a">Yes — and that's disclosed clearly because it matters. Lila Park is an AI wellness educator built on peer-reviewed research. Every claim in these guides is backed by a primary source citation you can verify. The advantage of AI is consistency and depth: Lila synthesises hundreds of papers without fatigue, financial incentives, or confirmation bias. The limitation is that she's not your doctor and can't give you personalised medical advice. She'll always tell you when something needs a professional.</div>
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Should I start with the $17 guide or wait for the full system? <span class="faq-ch">▾</span></div>
+        <div class="faq-a">If you have one specific problem — waking at 3am — start with The 3am Protocol. It's focused and implementable in 7 days. The Korean Wellness System (coming soon) is for women dealing with multiple symptoms and includes everything.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-          How is this different from free wellness content? <span class="faq-chevron">▾</span>
-        </div>
-        <div class="faq-a">Free wellness content is typically optimised for engagement, not accuracy. It extrapolates headlines from studies, removes nuance, and rarely distinguishes between strong and weak evidence. Lila's guides are built differently: every claim is traceable to a primary source, evidence quality is explicitly graded, and uncertainty is flagged rather than hidden. You're also getting structured protocols, not just information — the difference between understanding a concept and knowing what to do tomorrow morning.</div>
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does Lila choose these products? <span class="faq-ch">▾</span></div>
+        <div class="faq-a">Every product is something referenced in my articles and guides. Each is graded from T1 (systematic reviews) to T5 (traditional practice) so you see exactly how strong the research is. Nothing is included for commercial reasons — if a product doesn't appear in the guides, it doesn't appear here.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-          Do I get lifetime access and updates? <span class="faq-chevron">▾</span>
-        </div>
-        <div class="faq-a">Yes to both. You get permanent access to the current version, and all future updates to that product are included automatically. When new research strengthens or contradicts a recommendation, the guide gets updated — and you get the updated version without paying again. This is particularly important in a field like sleep and metabolic science, where the evidence base shifts meaningfully every two to three years.</div>
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is this AI-generated content? <span class="faq-ch">▾</span></div>
+        <div class="faq-a">Yes — disclosed because transparency matters. Lila is an AI wellness educator built on peer-reviewed research. Every claim is source-cited and verifiable.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-          Can I use these alongside my doctor's advice? <span class="faq-chevron">▾</span>
-        </div>
-        <div class="faq-a">Yes — and Lila actively encourages this. These guides are designed to help you understand the evidence so you can have better, more specific conversations with your actual medical team. They're not a replacement for professional medical care. If you have any chronic conditions, medication interactions to consider, or specific clinical concerns, please involve your doctor before making significant changes to your sleep, diet, or exercise protocols.</div>
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I use these alongside my doctor's advice? <span class="faq-ch">▾</span></div>
+        <div class="faq-a">Absolutely. The GP Conversation Guide (in the full system) gives you the exact questions to ask your doctor about HRT, supplements, and sleep interventions.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── NEWSLETTER ── -->
-<section class="newsletter-section">
+<section class="nl">
   <div class="nl-inner">
-    <div class="nl-eyebrow">Free weekly reading</div>
-    <h2 class="nl-headline">Get the newsletter<br>every <em>Sunday morning</em></h2>
-    <p class="nl-sub">Sleep, food, energy, and Korean wellness wisdom — now with citations. Free, always.</p>
+    <h2 class="nl-headline">The Sunday <em>Reset</em></h2>
+    <p class="nl-sub">Sleep, energy, Korean wellness wisdom — with citations. Free, always.</p>
     <div class="nl-form">
       <input class="nl-input" type="email" placeholder="your@email.com" />
-      <button class="nl-btn">Subscribe free</button>
+      <button class="nl-btn" onclick="beehiivSubscribe(this)">Subscribe free</button>
     </div>
-    <div class="nl-note">Free · Unsubscribe anytime · No spam, ever</div>
+    <div class="nl-note">Free · No spam · Unsubscribe anytime</div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-left">
+    <div style="display:flex;align-items:center;gap:6px;">
       <div class="footer-name">Lila Park</div>
       <div class="footer-kr">· 이라 박</div>
     </div>
@@ -880,32 +1000,101 @@
   </div>
 </footer>
 
+<script>
+// ── Nav scroll effect ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
 
-  <script>
-        // Seamless subscribe — Beehiiv in background, on-page success state
-    function beehiivSubscribe(inputEl) {
-      var form = inputEl.closest('.subscribe-form, .nl-form, .sub-input-row, form, .nl-inner');
-      var input = form ? form.querySelector('input[type="email"]') : null;
-      var email = (input ? input.value.trim() : '') || '';
-      if (!email || !email.includes('@')) {
-        if (input) { input.focus(); input.style.outline = '2px solid #e57373'; setTimeout(function(){ input.style.outline = ''; }, 1500); }
-        return;
-      }
-      var fd = new FormData();
-      fd.append('form_id', '2a23d822-bfed-4c59-9d87-cd5eac674bdd');
-      fd.append('form[email]', email);
-      fd.append('referrer', document.referrer || '');
-      fetch('https://subscribe-forms.beehiiv.com/api/submit', { method: 'POST', body: fd }).catch(function(){});
-      if (input) input.value = '';
-      var btn = inputEl;
-      btn.textContent = "✓ You're in — check your inbox!";
-      btn.disabled = true;
-      btn.style.background = '#5fa86a';
-      btn.style.color = '#fff';
-      btn.style.opacity = '1';
-      setTimeout(function(){ btn.textContent = 'Subscribe'; btn.disabled = false; btn.style.background = ''; btn.style.color = ''; }, 5000);
-    }
-  </script>
+// ── Filter logic ──
+const filters = document.getElementById('filters');
+const grid = document.getElementById('productGrid');
+const countEl = document.getElementById('catCount');
+const cards = grid.querySelectorAll('.pgrid-card');
+
+filters.addEventListener('click', (e) => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  filters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const f = btn.dataset.filter;
+  let shown = 0;
+  cards.forEach(c => {
+    const match = f === 'all' || c.dataset.cat === f;
+    c.style.display = match ? '' : 'none';
+    if (match) shown++;
+  });
+  countEl.textContent = `Showing ${shown} product${shown !== 1 ? 's' : ''}`;
+});
+
+// ── Ambient forest audio (real audio file) ──
+const forestAudio = new Audio('audio/forest-ambient-v2.mp3');
+forestAudio.loop = true;
+forestAudio.volume = 0.4;
+let audioPlaying = false;
+
+function toggleAudio() {
+  const toggle = document.getElementById('audioToggle');
+  const label = document.getElementById('audioLabel');
+  if (!audioPlaying) {
+    forestAudio.play().catch(() => {});
+    audioPlaying = true;
+    toggle.classList.add('playing');
+    label.textContent = 'Playing';
+  } else {
+    forestAudio.pause();
+    audioPlaying = false;
+    toggle.classList.remove('playing');
+    label.textContent = 'Forest sounds';
+  }
+}
+
+// ── Auto-play: try immediately, fallback to first interaction ──
+forestAudio.play().then(() => {
+  audioPlaying = true;
+  document.getElementById('audioToggle').classList.add('playing');
+  document.getElementById('audioLabel').textContent = 'Playing';
+}).catch(() => {
+  let autoPlayTriggered = false;
+  function autoPlayAudio() {
+    if (autoPlayTriggered || audioPlaying) return;
+    autoPlayTriggered = true;
+    toggleAudio();
+    ['mousemove', 'click', 'touchstart', 'scroll', 'keydown'].forEach(evt =>
+      document.removeEventListener(evt, autoPlayAudio)
+    );
+  }
+  ['mousemove', 'click', 'touchstart', 'scroll', 'keydown'].forEach(evt =>
+    document.addEventListener(evt, autoPlayAudio, { once: false, passive: true })
+  );
+});
+
+// ── Beehiiv subscribe (seamless, no redirect) ──
+function beehiivSubscribe(inputEl) {
+  var form = inputEl.closest('.nl-inner, .nl-form, form');
+  var input = form ? form.querySelector('input[type="email"]') : null;
+  var email = (input ? input.value.trim() : '') || '';
+  if (!email || !email.includes('@')) {
+    if (input) { input.focus(); input.style.outline = '2px solid #e57373'; setTimeout(function(){ input.style.outline = ''; }, 1500); }
+    return;
+  }
+  var fd = new FormData();
+  fd.append('form_id', '2a23d822-bfed-4c59-9d87-cd5eac674bdd');
+  fd.append('form[email]', email);
+  fd.append('referrer', document.referrer || '');
+  fetch('https://subscribe-forms.beehiiv.com/api/submit', { method: 'POST', body: fd }).catch(function(){});
+  if (input) input.value = '';
+  var btn = inputEl;
+  btn.textContent = "✓ You're in — check your inbox!";
+  btn.disabled = true;
+  btn.style.background = '#5fa86a';
+  btn.style.color = '#fff';
+  btn.style.opacity = '1';
+  setTimeout(function(){ btn.textContent = 'Subscribe free'; btn.disabled = false; btn.style.background = ''; btn.style.color = ''; }, 5000);
+}
+</script>
+<!-- Page transitions -->
 <script>
   (function() {
     var el = document.body;
@@ -927,6 +1116,7 @@
     setTimeout(function() { window.location.href = href; }, 230);
   });
 </script>
+<!-- Hamburger menu (mobile) -->
 <script>
   (function() {
     var navLinks = document.querySelector('.nav-links');
@@ -954,5 +1144,6 @@
     });
   })();
 </script>
+
 </body>
 </html>
