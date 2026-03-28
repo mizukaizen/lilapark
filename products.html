@@ -283,32 +283,6 @@
       100% { opacity: 0; transform: translateY(-280px) translateX(50px); }
     }
 
-    /* Audio toggle */
-    .audio-toggle {
-      position: absolute; top: 70px; right: 28px; z-index: 50;
-      background: rgba(255,255,255,0.15); backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 24px; padding: 8px 16px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.8);
-      cursor: pointer; transition: all 0.2s;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .audio-toggle:hover { background: rgba(255,255,255,0.25); }
-    .audio-bars { display: flex; gap: 2px; align-items: flex-end; height: 12px; }
-    .audio-bar {
-      width: 2px; background: rgba(255,255,255,0.7); border-radius: 1px;
-      transition: height 0.3s;
-    }
-    .audio-toggle.playing .audio-bar { animation: bar-dance 0.8s ease-in-out infinite alternate; }
-    .audio-bar:nth-child(1) { height: 4px; animation-delay: 0s; }
-    .audio-bar:nth-child(2) { height: 8px; animation-delay: 0.15s; }
-    .audio-bar:nth-child(3) { height: 5px; animation-delay: 0.3s; }
-    .audio-bar:nth-child(4) { height: 10px; animation-delay: 0.1s; }
-    @keyframes bar-dance {
-      0% { height: 3px; } 100% { height: 12px; }
-    }
-
     .portal-content {
       position: relative; z-index: 10;
       width: 100%; max-width: 1100px;
@@ -697,17 +671,6 @@
   <div class="particle" style="left:20%;top:85%;animation-duration:11s;animation-delay:7s;width:2.5px;height:2.5px;"></div>
   <div class="particle" style="left:70%;top:82%;animation-duration:9s;animation-delay:2.5s;"></div>
 
-  <!-- Audio control -->
-  <button class="audio-toggle" id="audioToggle" onclick="toggleAudio()">
-    <div class="audio-bars">
-      <div class="audio-bar"></div>
-      <div class="audio-bar"></div>
-      <div class="audio-bar"></div>
-      <div class="audio-bar"></div>
-    </div>
-    <span id="audioLabel">Forest sounds</span>
-  </button>
-
   <div class="portal-content">
     <div class="portal-header">
       <div class="portal-tagline">Evidence-based Korean wellness</div>
@@ -1026,48 +989,6 @@ filters.addEventListener('click', (e) => {
     if (match) shown++;
   });
   countEl.textContent = `Showing ${shown} product${shown !== 1 ? 's' : ''}`;
-});
-
-// ── Ambient forest audio (real audio file) ──
-const forestAudio = new Audio('audio/forest-ambient-v2.mp3');
-forestAudio.loop = true;
-forestAudio.volume = 0.4;
-let audioPlaying = false;
-
-function toggleAudio() {
-  const toggle = document.getElementById('audioToggle');
-  const label = document.getElementById('audioLabel');
-  if (!audioPlaying) {
-    forestAudio.play().catch(() => {});
-    audioPlaying = true;
-    toggle.classList.add('playing');
-    label.textContent = 'Playing';
-  } else {
-    forestAudio.pause();
-    audioPlaying = false;
-    toggle.classList.remove('playing');
-    label.textContent = 'Forest sounds';
-  }
-}
-
-// ── Auto-play: try immediately, fallback to first interaction ──
-forestAudio.play().then(() => {
-  audioPlaying = true;
-  document.getElementById('audioToggle').classList.add('playing');
-  document.getElementById('audioLabel').textContent = 'Playing';
-}).catch(() => {
-  let autoPlayTriggered = false;
-  function autoPlayAudio() {
-    if (autoPlayTriggered || audioPlaying) return;
-    autoPlayTriggered = true;
-    toggleAudio();
-    ['mousemove', 'click', 'touchstart', 'scroll', 'keydown'].forEach(evt =>
-      document.removeEventListener(evt, autoPlayAudio)
-    );
-  }
-  ['mousemove', 'click', 'touchstart', 'scroll', 'keydown'].forEach(evt =>
-    document.addEventListener(evt, autoPlayAudio, { once: false, passive: true })
-  );
 });
 
 // ── Beehiiv subscribe (seamless, no redirect) ──
