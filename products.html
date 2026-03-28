@@ -703,7 +703,7 @@
               <div class="gc-price">$17</div>
               <div class="gc-price-note">Instant PDF</div>
             </div>
-            <a href="https://buy.polar.sh/polar_cl_FtNMfrqeb8cnHzkEZ6wwlqba4etjseccE6bb80jgVtC" class="gc-cta buy" data-polar-checkout data-polar-checkout-theme="dark" onclick="if(window.PolarEmbedCheckout){event.preventDefault();window.PolarEmbedCheckout.open(this.href);}else{window.open(this.href,'_blank');return false;}">Get it now →</a>
+            <a href="https://buy.polar.sh/polar_cl_FtNMfrqeb8cnHzkEZ6wwlqba4etjseccE6bb80jgVtC" class="gc-cta buy" data-polar-checkout data-polar-checkout-theme="dark">Get it now →</a>
           </div>
         </div>
       </div>
@@ -1112,8 +1112,21 @@ function beehiivSubscribe(inputEl) {
       btn.classList.remove('is-open');
     });
   })();
-</script>
-<script src="https://cdn.polar.sh/embed.js"></script>
 
+  // Polar checkout popup — self-contained, no external CDN dependency
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('a[href*="buy.polar.sh"]');
+    if (!btn) return;
+    var url = btn.getAttribute('href');
+    if (!url) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var w = 520, h = 700;
+    var left = Math.round((screen.width - w) / 2);
+    var top = Math.round((screen.height - h) / 2);
+    var popup = window.open(url, 'polar-checkout', 'width='+w+',height='+h+',left='+left+',top='+top+',resizable=yes,scrollbars=yes');
+    if (!popup || popup.closed) window.open(url, '_blank');
+  });
+</script>
 </body>
 </html>
