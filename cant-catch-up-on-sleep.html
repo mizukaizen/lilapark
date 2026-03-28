@@ -605,6 +605,31 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="https://analytics.melis.ai/script.js" data-website-id="10343747-2b25-435a-9fa3-0100b42b9f9c"></script>
+<script>
+window.openPolarCheckout = function(url) {
+  var modal = document.getElementById('polar-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'polar-modal';
+    modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;backdrop-filter:blur(4px);';
+    modal.innerHTML = '<div style="position:relative;width:100%;max-width:520px;height:88vh;border-radius:16px;overflow:hidden;margin:0 16px;box-shadow:0 24px 80px rgba(0,0,0,0.6);"><button id="polar-close" style="position:absolute;top:10px;right:10px;z-index:10;background:rgba(0,0,0,0.5);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;line-height:1;">&#x2715;</button><iframe id="polar-iframe" src="" style="width:100%;height:100%;border:none;border-radius:16px;"></iframe></div>';
+    document.body.appendChild(modal);
+    document.getElementById('polar-close').addEventListener('click', window.closePolarCheckout);
+    modal.addEventListener('click', function(e) { if (e.target === modal) window.closePolarCheckout(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') window.closePolarCheckout(); });
+  }
+  document.getElementById('polar-iframe').src = url;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+};
+window.closePolarCheckout = function() {
+  var modal = document.getElementById('polar-modal');
+  if (modal) modal.style.display = 'none';
+  var iframe = document.getElementById('polar-iframe');
+  if (iframe) iframe.src = '';
+  document.body.style.overflow = '';
+};
+</script>
 </head>
 <body>
 <!-- ── NAV ── -->
@@ -846,7 +871,7 @@
       <div class="sidebar-cta-eye">Free 7-Day Protocol</div>
       <div class="sidebar-cta-title">The 3am Protocol</div>
       <div class="sidebar-cta-sub">Stop waking in the night — in 7 days. The cortisol-adenosine correction method, free as a PDF. No email required to start.</div>
-      <a href="https://buy.polar.sh/polar_cl_j2D0PnqkSF0xKXy05MSyRmky5Dn5TtjunH5Tr1FdcyI" target="_blank" rel="noopener" class="sidebar-cta-btn">Get the free protocol →</a>
+      <a href="https://buy.polar.sh/polar_cl_j2D0PnqkSF0xKXy05MSyRmky5Dn5TtjunH5Tr1FdcyI" target="_blank" rel="noopener" class="sidebar-cta-btn" onclick="event.preventDefault(); openPolarCheckout(this.href);">Get the free protocol →</a>
     </div>
 
     <!-- related mini -->
@@ -1037,21 +1062,6 @@
       btn.classList.remove('is-open');
     });
   })();
-
-  // Polar checkout popup — self-contained, no external CDN dependency
-  document.addEventListener('click', function(e) {
-    var btn = e.target.closest('a[href*="buy.polar.sh"]');
-    if (!btn) return;
-    var url = btn.getAttribute('href');
-    if (!url) return;
-    e.preventDefault();
-    e.stopPropagation();
-    var w = 520, h = 700;
-    var left = Math.round((screen.width - w) / 2);
-    var top = Math.round((screen.height - h) / 2);
-    var popup = window.open(url, 'polar-checkout', 'width='+w+',height='+h+',left='+left+',top='+top+',resizable=yes,scrollbars=yes');
-    if (!popup || popup.closed) window.open(url, '_blank');
-  });
 </script>
 </body>
 </html>
