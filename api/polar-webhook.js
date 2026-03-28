@@ -2,12 +2,12 @@
  * Polar Webhook Handler — Post-Purchase Delivery
  *
  * Handles order.created events from Polar:
- * 1. Sends branded delivery email via Resend with PDF download link
+ * 1. Sends branded delivery email via Brevo with PDF download link
  * 2. Adds buyer to Beehiiv newsletter
  *
  * Required env vars (set in Vercel project settings):
  *   POLAR_WEBHOOK_SECRET   — Polar Dashboard > Webhooks > your endpoint secret
- *   RESEND_API_KEY          — resend.com dashboard (free tier: 3,000/month)
+ *   BREVO_API_KEY           — Brevo dashboard > API Keys
  *   BEEHIIV_API_KEY         — Beehiiv Settings > API
  *   BEEHIIV_PUB_ID          — Beehiiv publication ID (format: pub_xxxxxxxx)
  *   PDF_DOWNLOAD_URL        — Fallback if not in product metadata
@@ -118,24 +118,25 @@ function buildDeliveryEmail(productName, downloadUrl) {
 </html>`;
 }
 
-async function sendDeliveryEmail(email, productName, downloadUrl) {
-  const res = await fetch('https://api.resend.com/emails', {
+async function sendDeliveryEmail(email, name, productName, downloadUrl) {
+  const res = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-      'Content-Type': 'application/json',
+      'accept': 'application/json',
+      'api-key': process.env.BREVO_API_KEY,
+      'content-type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Lila Park <hello@lilapark.xyz>',
-      to: [email],
-      subject: `Your 3am Protocol is here \u2726`,
-      html: buildDeliveryEmail(productName, downloadUrl),
+      sender: { name: 'Lila Park', email: 'hello@lilapark.xyz' },
+      to: [{ email, name: name || email }],
+      subject: `Your Korean Calm Reset is here \u2726`,
+      htmlContent: buildDeliveryEmail(productName, downloadUrl),
     }),
   });
 
   if (!res.ok) {
     const body = await res.text();
-    throw new Error(`Resend API error ${res.status}: ${body}`);
+    throw new Error(`Brevo API error ${res.status}: ${body}`);
   }
   return res.json();
 }
@@ -206,7 +207,8 @@ export default async function handler(req, res) {
   }
 
   const email = order.customer?.email;
-  const productName = order.product?.name || 'The 3am Protocol';
+  const name = order.customer?.name || '';
+  const productName = order.product?.name || 'The Korean Calm Reset';
   const downloadUrl =
     order.product?.metadata?.download_url || process.env.PDF_DOWNLOAD_URL;
   const pubId = process.env.BEEHIIV_PUB_ID;
@@ -222,7 +224,7 @@ export default async function handler(req, res) {
   }
 
   // Send email (critical) and add to Beehiiv (best-effort) in parallel
-  const emailPromise = sendDeliveryEmail(email, productName, downloadUrl);
+  const emailPromise = sendDeliveryEmail(email, name, productName, downloadUrl);
   const beehiivPromise = pubId
     ? addToBeehiiv(email, pubId, productName).catch((err) => {
         console.error(
@@ -242,7 +244,7 @@ export default async function handler(req, res) {
     console.log('Delivery complete:', {
       email,
       product: productName,
-      resend: emailResult,
+      brevo: emailResult,
       beehiiv: beehiivResult,
     });
 
