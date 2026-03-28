@@ -1108,6 +1108,21 @@
       btn.classList.remove('is-open');
     });
   })();
+
+  // Polar checkout popup — self-contained, no external CDN dependency
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('a[href*="buy.polar.sh"]');
+    if (!btn) return;
+    var url = btn.getAttribute('href');
+    if (!url) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var w = 520, h = 700;
+    var left = Math.round((screen.width - w) / 2);
+    var top = Math.round((screen.height - h) / 2);
+    var popup = window.open(url, 'polar-checkout', 'width='+w+',height='+h+',left='+left+',top='+top+',resizable=yes,scrollbars=yes');
+    if (!popup || popup.closed) window.open(url, '_blank');
+  });
 </script>
 </body>
 </html>
